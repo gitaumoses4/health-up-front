@@ -2,9 +2,11 @@ import {Route, Switch} from 'react-router';
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import Home from '../views/Home';
+import Register from '../views/Register';
 
 const routes = {
-  '/': Home
+  '/': Home,
+  '/register': Register
 };
 
 const App = () => (

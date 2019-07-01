@@ -37,6 +37,7 @@
     "eol-last": 2,
     "no-unused-vars": 0,
     "no-underscore-dangle": 0,
+    "react/no-unescaped-entities": 0,
     "no-alert": 1,
     "react/jsx-indent": [
       "error",
