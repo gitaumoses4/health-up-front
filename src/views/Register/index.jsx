@@ -1,9 +1,12 @@
 import React from 'react';
 import AccountPageWrapper from '../../components/AccountPage';
+import T from '../../utils/Translation';
+import SignUpForm from '../../components/SignUpForm';
 
-const Register = AccountPageWrapper(
-  'Welcome to Health Up',
-  'Enter your personal details and start your journey with us',
-  'Create Account'
-);
+const Register = AccountPageWrapper({
+  header: T.welcome_message,
+  message: T.registration_message,
+  title: T.create_account,
+  form: SignUpForm
+});
 export default Register;

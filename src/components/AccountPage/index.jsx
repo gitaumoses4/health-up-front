@@ -4,12 +4,24 @@ import background from '../../assets/images/background.svg';
 import logo from '../../assets/images/logo.svg';
 import './AccountPage.scss';
 
-const AccountPageWrapper = (header, message, title) => {
+const AccountPageWrapper = ({header, message, title, form: FormElement}) => {
   class AccountPage extends React.Component{
+
+    goBack = () => {
+      const { history } = this.props;
+      history.goBack();
+    };
+
     render() {
       return (
         <div className="account-page">
           <div className="background">
+            <span
+              onClick={this.goBack}
+              className="back"
+              role="presentation">
+              <i className="fas fa-arrow-left" />
+            </span>
             <img src={background} alt="" className="image" />
             <div className="banner">
               <h3>{header}</h3>
@@ -20,6 +32,11 @@ const AccountPageWrapper = (header, message, title) => {
             <div className="header">
               <img src={logo} alt="" />
               <h3>{title}</h3>
+            </div>
+            <div className="form">
+              {
+                FormElement ? <FormElement /> : null
+              }
             </div>
           </div>
         </div>

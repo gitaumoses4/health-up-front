@@ -7,6 +7,7 @@ import Button from '../../components/Button';
 import twitter from '../../assets/images/twitter.png';
 import instagram from '../../assets/images/instagram.png';
 import snapchat from '../../assets/images/snapchat.png';
+import T from '../../utils/Translation';
 
 const socialMediaLinks = [
   {
@@ -29,23 +30,23 @@ class Home extends Component{
         <div className="nav">
           <div className="logo">
             <img src={logo} alt="" />
-            <span>Health Up</span>
+            <span>{T.health_up}</span>
           </div>
           <div className="buttons">
             <Button link="/register">
-              Register
+              {T.register}
             </Button>
             <Button secondary link="/login">
-              Login
+              {T.login}
             </Button>
           </div>
         </div>
         <div className="container">
           <div className="banner">
             <div className="info">
-              <h4 className="title">VISION</h4>
+              <h4 className="title">{T.vision.toUpperCase()}</h4>
               <p className="text">
-                Achieving the objectives of Vision 2030 in the health aspect
+                {T.vision_statement}
               </p>
             </div>
             <img src={banner2} alt="" />
@@ -53,28 +54,26 @@ class Home extends Component{
           <div className="banner">
             <img src={banner1} alt="" />
             <div className="info">
-              <h4 className="title">OBJECTIVES</h4>
+              <h4 className="title">{T.objectives}</h4>
               <p className="text">
                 <ol>
-                  <li>To protect the healthy person from the disease</li>
-                  <li>Providing the paramedic with the individual's health status</li>
-                  <li>A complete health file for each person</li>
+                  <li>{T.objective_statement_1}</li>
+                  <li>{T.objective_statement_2}</li>
+                  <li>{T.objective_statement_3}</li>
                 </ol>
               </p>
             </div>
           </div>
           <div className="info-banner">
-            <h4 className="title">Preventive</h4>
+            <h4 className="title">{T.preventive}</h4>
             <p className="content">
-              Our goal is to protect the healthy person from all genetic diseases and others by reminding him to do the necessary
-              tests and avoid what may cause the disease
+              {T.preventive_message}
             </p>
           </div>
           <div className="info-banner">
-            <h4 className="title">Safe</h4>
+            <h4 className="title">{T.safe}</h4>
             <p className="content">
-              Our site is characterized by providing the paramedic with the state of health of the injured easily
-              to be able to carry out the emergency operation properly
+              {T.safe_message}
             </p>
           </div>
         </div>

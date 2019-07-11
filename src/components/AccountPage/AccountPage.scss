@@ -1,9 +1,24 @@
 .account-page {
   display: grid;
+  position: relative;
+  height: 100vh;
+  grid-template-rows: auto;
   grid-template-columns: 600px 1fr;
 
+  .back {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1)
+    }
+  }
+
   .background {
-    height: 100vh;
     display: grid;
     align-items: center;
     justify-content: center;
@@ -16,6 +31,7 @@
     .banner {
       text-align: center;
       width: 100%;
+      color: white;
 
       h3 {
         font-size: 2em;
@@ -28,7 +44,29 @@
   }
 
   .content {
-    height: 100vh;
     overflow-y: scroll;
+    display: grid;
+    justify-content: center;
+    padding: 1em;
+    grid-template-rows: auto 1fr;
+
+    .header {
+      display: grid;
+      justify-content: center;
+      justify-items: center;
+
+      h3 {
+        font-size: 1.5em;
+        font-weight: 300;
+      }
+
+      img {
+        height: 120px;
+      }
+    }
+
+    .form {
+
+    }
   }
 }

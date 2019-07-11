@@ -1,5 +1,5 @@
 {
-  "name": "school-results",
+  "name": "health-up-front",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,6 +8,7 @@
     "classnames": "^2.2.6",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-cypress": "^2.2.1",
+    "lodash": "^4.17.14",
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
