@@ -4,16 +4,14 @@ import PropTypes from 'prop-types';
 import './Button.scss';
 import classNames from 'classnames';
 
-const Button = ({ children, disabled, onClick, secondary, link, ...otherProps }) => {
+const Button = ({ children, disabled, secondary, link }) => {
   return (
     <button
-      type="button" onClick={onClick} className={classNames({
+      type="button" className={classNames({
         secondary: secondary,
         button: true,
         disabled
-      })}
-      {...otherProps}
-    >
+      })}>
       {
         link ? (
           <Link to={link}>{children}</Link>

@@ -1,8 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { connect } from 'react-redux';
 import Validator from './validator';
-import {submitForm} from './actions';
 
 export const FormContext = React.createContext({
   values: {},
@@ -14,7 +12,8 @@ class Form extends React.Component{
 
   constructor(props){
     super(props);
-    this.validator = new Validator(this, this.rules());
+    this.validator = new Validator(this, props.rules);
+    const { state: parentState = {} } = this.props;
     const defaultState = {
       values: {},
       errors: {},
@@ -28,28 +27,11 @@ class Form extends React.Component{
       onFocus: this.onFocus,
       updateRules: this.updateRules,
     };
-    this.state = {...defaultState};
+    this.state = _.merge({}, defaultState, parentState);
   }
 
 
-  componentWillReceiveProps (nextProps){
-    this.setState({
-      errors: nextProps.errors
-    });
-  }
-
-  onSubmit(){
-    const { submit } = this.props;
-    const { values } = this.state;
-    submit(values, this.onSuccess, this.onFailure);
-  }
-
-  onSuccess(data){
-
-  }
-
-  onFailure(data){
-
+  componentDidUpdate(prevProps, prevState, snapshot) {
   }
 
   updateRules = (name, rules, messages) => {
@@ -94,47 +76,20 @@ class Form extends React.Component{
     return optionalFields.includes(name);
   };
 
-
-  rules(){
-
-  }
-
-  renderForm(){
-
-  }
+  onSubmit = (e) => {
+    e.preventDefault();
+  };
 
   render() {
+    const { children, className = '' } = this.props;
     return (
-      <form
-        onSubmit={(e) => {e.preventDefault(); this.onSubmit();}}
-        className="form-element">
+      <form onSubmit={this.onSubmit} className={`form-element ${className}`}>
         <FormContext.Provider value={this.state}>
-          { this.renderForm() }
+          { children }
         </FormContext.Provider>
       </form>
     );
   }
 }
-
-export const connectForm = (Form) => ({
-  endpoint, baseURL, method = 'post', name,
-  mapStateToProps = (state) => {},
-  mapDispatchToProps = {}
-}) => {
-  const formName = name || Form.name;
-  Form.formConfig = {
-    endpoint: `${baseURL}${endpoint}`,
-    method: method,
-    name: formName,
-  };
-
-  return connect((state) => ({
-    ...state.forms[formName],
-    ...mapStateToProps(state)
-  }), {
-    submit: submitForm(Form.formConfig),
-    ...mapDispatchToProps
-  })(Form);
-};
 
 export default Form;

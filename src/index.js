@@ -10,6 +10,9 @@ import './index.scss';
 const language = process.env.REACT_APP_LANGUAGE;
 document.querySelector('html').setAttribute('dir', language === 'ar' ? 'rtl': 'ltr');
 
+const language = process.env.REACT_APP_LANGUAGE;
+document.querySelector('html').setAttribute('dir', language === 'ar' ? 'rtl': 'ltr');
+
 const routes = () => (
   <Provider store={store}>
     <App />
