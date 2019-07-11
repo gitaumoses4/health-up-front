@@ -3,10 +3,12 @@ import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import Home from '../views/Home';
 import Register from '../views/Register';
+import Login from '../views/Login';
 
 const routes = {
   '/': Home,
-  '/register': Register
+  '/register': Register,
+  '/login': Login
 };
 
 const App = () => (

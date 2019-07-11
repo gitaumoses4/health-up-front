@@ -54,7 +54,7 @@ class Input extends React.Component{
                     onFocus={onFocus}
                     error={errors[name]}
                     placeholder={label || otherProps.placeholder}
-                    value={values[name] || null}
+                    value={values[name] || ''}
                     {...otherProps} />
                   <span className={errorClasses}>{errors[name]}</span>
                 </div>

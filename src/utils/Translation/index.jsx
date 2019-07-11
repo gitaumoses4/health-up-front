@@ -4,7 +4,7 @@ import strings from './strings';
 
 const lang = process.env.REACT_APP_LANGUAGE || 'en';
 
-export const Translation = (text) => {
+const translate = (text) => {
   const languages = {
     en: 0,
     ar: 1
@@ -15,21 +15,22 @@ export const Translation = (text) => {
   return string;
 };
 
-Translation.propTypes = {
+translate.propTypes = {
   text: PropTypes.string,
   func: PropTypes.string
 };
 
-Translation.defaultProps = {
+translate.defaultProps = {
   text: '',
   func: null
 };
 
-export default Object.keys(strings)
+const T = Object.keys(strings)
   .reduce((acc, cur) => {
     return {
       ...acc,
-      [cur]: Translation(cur)
+      [cur]: translate(cur)
     };
   }, {});
 
+export default T;

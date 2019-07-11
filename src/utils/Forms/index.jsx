@@ -12,39 +12,44 @@ class Form extends React.Component{
 
   constructor(props){
     super(props);
-    this.validator = props.validator || new Validator(this);
+    this.validator = new Validator(this, props.rules);
     const { state: parentState = {} } = this.props;
     const defaultState = {
       values: {},
       errors: {},
       valid: false,
       rules: {},
+      fulfilled: {},
       messages: {},
       optionalFields: [],
       onChange : this.onChange,
       onBlur: this.onBlur,
       onFocus: this.onFocus,
-      updateRules: this.updateRules
+      updateRules: this.updateRules,
     };
     this.state = _.merge({}, defaultState, parentState);
   }
 
+
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.validator.form = this;
   }
 
   updateRules = (name, rules, messages) => {
     this.setState((state) => {
       return {
         rules: { ...state.rules, [name]: rules},
-        messages: {...state.messages, [name]: messages}
+        messages: {...state.messages, [name]: messages},
+        fulfilled: {
+          ...state.fulfilled,
+          [name]: rules.reduce((acc, cur) => ({...acc, [cur]: false}), {})
+        }
       };
     });
   };
 
   onChange = ({ target: { name, value}}) => {
     this.setState(({ values }) => {
-      return {...values, [name]: value};
+      return {values: {...values, [name]: value}};
     },() => this.validator.validate(name));
   };
 
@@ -54,6 +59,16 @@ class Form extends React.Component{
 
   onFocus = (e) => {
 
+  };
+
+  updateState = (state) => {
+    if(state){
+      if(state.constructor === Function){
+        this.setState((curState) => state(curState));
+      }else{
+        this.setState(state);
+      }
+    }
   };
 
   isOptional = (name) => {
@@ -66,9 +81,9 @@ class Form extends React.Component{
   };
 
   render() {
-    const { children } = this.props;
+    const { children, className = '' } = this.props;
     return (
-      <form onSubmit={this.onSubmit} className="form-element">
+      <form onSubmit={this.onSubmit} className={`form-element ${className}`}>
         <FormContext.Provider value={this.state}>
           { children }
         </FormContext.Provider>

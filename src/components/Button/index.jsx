@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import './Button.scss';
 import classNames from 'classnames';
 
-const Button = ({ children, secondary, link }) => {
+const Button = ({ children, disabled, secondary, link }) => {
   return (
     <button
       type="button" className={classNames({
         secondary: secondary,
-        button: true
+        button: true,
+        disabled
       })}>
       {
         link ? (
