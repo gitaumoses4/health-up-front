@@ -6,6 +6,7 @@ import Input from '../../utils/Forms/Input';
 import T from '../../utils/Translation';
 import Button from '../Button';
 import './LoginForm.scss';
+import WithLoading from '../WithLoading';
 
 class LoginForm extends Form {
 
@@ -58,7 +59,10 @@ LoginForm.propTypes = {};
 
 LoginForm.defaultProps = {};
 
-export default connectForm(LoginForm)({
+export default connectForm(
+  WithLoading(LoginForm, 'submitting')
+)({
   baseURL: process.env.REACT_APP_BASE_URL,
-  endpoint: 'users/login'
+  endpoint: 'users/login',
+  name: 'LOGIN_FORM'
 });
