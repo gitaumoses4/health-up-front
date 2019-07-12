@@ -9,4 +9,5 @@ const Register = AccountPageWrapper({
   title: T.create_account,
   form: SignUpForm
 });
+
 export default Register;

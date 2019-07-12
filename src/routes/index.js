@@ -4,11 +4,13 @@ import {BrowserRouter} from 'react-router-dom';
 import Home from '../views/Home';
 import Register from '../views/Register';
 import Login from '../views/Login';
+import Dashboard from '../views/Dashboard';
 
 const routes = {
   '/': Home,
   '/register': Register,
-  '/login': Login
+  '/login': Login,
+  '/dashboard': Dashboard
 };
 
 const App = () => (

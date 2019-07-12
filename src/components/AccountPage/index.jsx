@@ -13,6 +13,7 @@ const AccountPageWrapper = ({header, message, title, form: FormElement}) => {
     };
 
     render() {
+      const { history } = this.props;
       return (
         <div className="account-page">
           <div className="background">
@@ -35,7 +36,7 @@ const AccountPageWrapper = ({header, message, title, form: FormElement}) => {
             </div>
             <div className="form">
               {
-                FormElement ? <FormElement /> : null
+                FormElement ? <FormElement history={history} /> : null
               }
             </div>
           </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
+import 'toastr/build/toastr.css';
 import {Provider} from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/store';
