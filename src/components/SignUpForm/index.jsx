@@ -5,6 +5,7 @@ import Input from '../../utils/Forms/Input';
 import Button from '../Button';
 import T from '../../utils/Translation';
 import './SignUpForm.scss';
+import WithLoading from '../WithLoading';
 
 class SignUpForm extends Form {
 
@@ -19,11 +20,16 @@ class SignUpForm extends Form {
     };
   }
 
-  onSuccess(){
+  onSuccess = () => {
     const { history } = this.props;
     toast.success(T.registration_success);
-    history.push('/home');
-  }
+    history.push('/dashboard');
+  };
+
+  onFailure = () => {
+    const { message } = this.props;
+    toast.error(message);
+  };
 
   renderForm(){
     const { valid } = this.state;
@@ -58,7 +64,10 @@ SignUpForm.propTypes = {
 
 };
 
-export default connectForm(SignUpForm)({
+export default connectForm(
+  WithLoading(SignUpForm, 'submitting')
+)({
   endpoint: 'users/register',
   baseURL: process.env.REACT_APP_BASE_URL,
+  name: 'SIGN_UP_FORM'
 });
