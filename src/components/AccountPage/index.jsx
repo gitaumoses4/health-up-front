@@ -8,8 +8,7 @@ const AccountPageWrapper = ({header, message, title, form: FormElement}) => {
   class AccountPage extends React.Component{
 
     goBack = () => {
-      const { history } = this.props;
-      history.goBack();
+      window.location.replace('/');
     };
 
     render() {

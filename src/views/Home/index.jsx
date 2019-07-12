@@ -12,16 +12,12 @@ import T from '../../utils/Translation';
 const socialMediaLinks = [
   {
     icon: twitter,
-    link: 'https://twitter.com/@healthup'
+    link: 'https://twitter.com/@healthupup'
   },
   {
     icon: instagram,
-    link: 'https://instagram.com/healthup'
+    link: 'https://instagram.com/healthupup'
   },
-  {
-    icon: snapchat,
-    link: 'https://snapchat.com/healtup'
-  }
 ];
 class Home extends Component{
   render(){
