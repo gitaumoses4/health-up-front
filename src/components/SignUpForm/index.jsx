@@ -1,49 +1,55 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Form, { FormContext } from '../../utils/Forms';
+import React from 'react';
+import toast from 'toastr';
+import Form, {connectForm} from '../../utils/Forms';
 import Input from '../../utils/Forms/Input';
 import Button from '../Button';
-import Translation from '../../utils/Translation';
+import T from '../../utils/Translation';
 import './SignUpForm.scss';
 
-class SignUpForm extends Component {
-  rules = {
-    required: {
-      message: Translation.not_empty,
-    },
-    email: {
-      message: Translation.valid_email
-    }
-  };
+class SignUpForm extends Form {
 
-  render() {
+  rules(){
+    return {
+      required: {
+        message: T.not_empty,
+      },
+      email: {
+        message: T.valid_email
+      }
+    };
+  }
+
+  onSuccess(){
+    const { history } = this.props;
+    toast.success(T.registration_success);
+    history.push('/home');
+  }
+
+  renderForm(){
+    const { valid } = this.state;
     return (
-      <Form state={this.state} className="signup-form" rules={this.rules}>
-        <FormContext.Consumer>
-          {({ valid }) => {
-            return (
-              <React.Fragment>
-                <Input
-                  name="name"
-                  placeholder={Translation.name}
-                  rules={['required']}
-                />
-                <Input
-                  name="email"
-                  rules={['required', 'email']}
-                  placeholder={Translation.email}
-                />
-                <Input
-                  name="password"
-                  placeholder={Translation.password} />
-                <Button disabled={!valid}>
-                  {Translation.sign_up}
-                </Button>
-              </React.Fragment>
-            );
-          }}
-        </FormContext.Consumer>
-      </Form>
+      <div className="signup-form">
+        <Input
+          name="name"
+          placeholder={T.name}
+          rules={['required']}
+        />
+        <Input
+          name="email"
+          rules={['required', 'email']}
+          placeholder={T.email}
+        />
+        <Input
+          name="password"
+          type="password"
+          placeholder={T.password} />
+        <Button
+          type="submit"
+          disabled={!valid}
+        >
+          {T.sign_up}
+        </Button>
+      </div>
     );
   }
 }
@@ -52,4 +58,7 @@ SignUpForm.propTypes = {
 
 };
 
-export default SignUpForm;
+export default connectForm(SignUpForm)({
+  endpoint: 'users/register',
+  baseURL: process.env.REACT_APP_BASE_URL,
+});
