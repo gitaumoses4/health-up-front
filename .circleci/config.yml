@@ -36,6 +36,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - *attach_workspace
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
@@ -46,6 +47,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      - *persist_to_workspace
 
   test_and_report:
     <<: *defaults
@@ -54,6 +56,7 @@ jobs:
       - run:
           name: Generate .env file
           command: |
+            pwd
             chmod +x .circleci/load_env_variables.sh
             .circleci/load_env_variables.sh test
       - *install_npm_packages
