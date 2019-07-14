@@ -7,6 +7,7 @@ import classNames from 'classnames';
 const Button = ({ children, disabled, onClick, secondary, link, ...otherProps }) => {
   return (
     <button
+      disabled={disabled}
       type="button" onClick={onClick} className={classNames({
         secondary: secondary,
         button: true,
