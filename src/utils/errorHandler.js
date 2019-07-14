@@ -1,5 +1,4 @@
 export default (error) => {
-  console.log(error);
   const { response } = error;
   const data = response ? response.data : {};
 
