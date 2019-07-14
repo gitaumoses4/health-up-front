@@ -1,0 +1,43 @@
+@import "../../index";
+
+.button {
+  outline: none;
+  background: $accent;
+  border: none;
+  padding: 0.7em 3em;
+  margin: 0.5em;
+  color: white;
+  border-radius: 1em;
+  transition: 0.5s all;
+  cursor: pointer;
+
+  a {
+    color: white;
+  }
+
+  &:hover {
+    background: darken($accent, 10)
+  }
+
+  &.secondary {
+    background: transparent;
+    color: black;
+    a {
+      color: black;
+    }
+
+    &:hover {
+      box-shadow: none;
+      color: $accent;
+    }
+  }
+
+  &.disabled {
+    cursor: default;
+    opacity: 0.3;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

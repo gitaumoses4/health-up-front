@@ -1,0 +1,119 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:carbon
+  working_directory: ~/health-up-frontend
+
+attach_workspace: &attach_workspace
+  attach_workspace:
+    at: ~/health-up-frontend
+
+persist_to_workspace: &persist_to_workspace
+  persist_to_workspace:
+    root: .
+    paths: .
+
+install_npm_packages: &install_npm_packages
+  run:
+    name: Install NPM packages
+    command: sudo npm install -g yarn && rm -rf package-lock.json && yarn install
+
+
+filters: &filters
+  filters:
+    branches:
+      only:
+        - master
+
+
+jobs:
+  checkout_code:
+    <<: *defaults
+    steps:
+      - checkout
+      - *attach_workspace
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - *install_npm_packages
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - *persist_to_workspace
+
+  test_and_report:
+    <<: *defaults
+    steps:
+      - *attach_workspace
+      - run:
+          name: Generate .env file
+          command: |
+            pwd
+            chmod +x .circleci/load_env_variables.sh
+            .circleci/load_env_variables.sh test
+      - *install_npm_packages
+      - run:
+          name: Run Tests suites
+          command: |
+            yarn test --coverage
+
+  build:
+    <<: *defaults
+    steps:
+      - setup_remote_docker
+      - *attach_workspace
+      - *install_npm_packages
+      - run:
+          name: Generate .env file
+          command: |
+            chmod +x .circleci/load_env_variables.sh
+            .circleci/load_env_variables.sh
+      - run:
+          name: Build Application artifacts
+          command: yarn run build
+
+  deployment:
+    <<: *defaults
+    steps:
+      - checkout
+      - *install_npm_packages
+      - run:
+          name: Generate .env file
+          command: |
+            chmod +x .circleci/load_env_variables.sh
+            .circleci/load_env_variables.sh
+      - run:
+          name: Make deployment script executable
+          command: |
+            chmod +x .circleci/deploy.sh
+      - run:
+          name: Build and Deploy Application
+          command: |
+            .circleci/deploy.sh main
+
+
+workflows:
+  version: 2
+  test-build-deploy:
+    jobs:
+      - checkout_code
+      - test_and_report:
+          requires:
+            - checkout_code
+      - build:
+          requires:
+            - checkout_code
+      - deployment:
+          requires:
+            - checkout_code
+            - test_and_report
+            - build
+          <<: *filters
