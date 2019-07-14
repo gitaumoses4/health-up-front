@@ -3,8 +3,9 @@ yarn build
 
 cd ./build/
 
+echo $PRODUCTION_HOST;
 function createHost(){
-    host="$REACT_APP_PRODUCTION_HOST/$1 --user $REACT_APP_PRODUCTION_CREDENTIALS";
+    host="$PRODUCTION_HOST/$1 --user $PRODUCTION_CREDENTIALS";
 }
 export -f createHost
 
