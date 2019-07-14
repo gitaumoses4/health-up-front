@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 yarn build
 
-cd ../build/
+cd ./build/
 
 function createHost(){
-    host="$REACT_APP_PRODUCTION_HOST/$1 --user $REACT_APP_PRODUCTION_CREDENTIALS";
+    host="$PRODUCTION_HOST/$1 --user $PRODUCTION_CREDENTIALS";
 }
+
+echo "Production Host: $PRODUCTION_HOST";
+
 export -f createHost
 
 function uploadFiles(){
