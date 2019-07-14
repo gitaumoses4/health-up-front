@@ -62,7 +62,7 @@ LoginForm.defaultProps = {};
 export default connectForm(
   WithLoading(LoginForm, 'submitting')
 )({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: process.env.REACT_APP_API_URL,
   endpoint: 'users/login',
   name: 'LOGIN_FORM'
 });

@@ -68,6 +68,6 @@ export default connectForm(
   WithLoading(SignUpForm, 'submitting')
 )({
   endpoint: 'users/register',
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: process.env.REACT_APP_API_URL,
   name: 'SIGN_UP_FORM'
 });
