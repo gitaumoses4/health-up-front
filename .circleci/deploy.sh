@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 yarn build
 
-cd ../build/
+cd ./build/
 
 function createHost(){
     host="$REACT_APP_PRODUCTION_HOST/$1 --user $REACT_APP_PRODUCTION_CREDENTIALS";

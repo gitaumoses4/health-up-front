@@ -64,6 +64,7 @@ jobs:
           name: Run Tests suites
           command: |
             yarn test --coverage
+
   build:
     <<: *defaults
     steps:
@@ -78,21 +79,27 @@ jobs:
       - run:
           name: Build Application artifacts
           command: yarn run build
-      - *persist_to_workspace
 
   deployment:
     <<: *defaults
     steps:
-      - setup_remote_docker
-      - *attach_workspace
+      - checkout
+      - *install_npm_packages
+      - run:
+          name: Generate .env file
+          command: |
+            pwd
+            chmod +x .circleci/load_env_variables.sh
+            .circleci/load_env_variables.sh main
       - run:
           name: Make deployment script executable
           command: |
-            chmod +x ./circleci/deploy.sh
+            chmod +x .circleci/deploy.sh
       - run:
           name: Build and Deploy Application
           command: |
-            ./circleci/deploy.sh main
+            yarn run build
+            .circleci/deploy.sh main
 
 
 workflows:
