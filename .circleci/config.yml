@@ -88,11 +88,11 @@ jobs:
       - run:
           name: Make deployment script executable
           command: |
-            chmod +x ./circleci/build.sh
+            chmod +x ./circleci/deploy.sh
       - run:
           name: Build and Deploy Application
           command: |
-            ./circleci/build.sh main
+            ./circleci/deploy.sh main
 
 
 workflows:
