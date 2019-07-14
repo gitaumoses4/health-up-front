@@ -1,6 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Health Up 
 
-## Available Scripts
+[![CircleCI](https://circleci.com/gh/gitaumoses4/health-up-front/tree/develop.svg?style=svg)](https://circleci.com/gh/gitaumoses4/health-up-front/tree/develop)
 
 In the project directory, you can run:
 
