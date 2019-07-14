@@ -1,0 +1,48 @@
+@import "../../../index";
+
+.form-input {
+  display: grid;
+  align-items: start;
+  margin: 10px 0;
+
+  input {
+    min-width: 300px;
+    width: calc(100% - 2em);
+    padding: 0 1em;
+    outline: none;
+    background: #dadada;
+    height: 4em;
+    border: 1px solid #ddd;
+
+    &:focus {
+      border: 1px solid $accent;
+    }
+  }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .error {
+    font-size: 0.8em;
+    color: red;
+    margin-bottom: 5px;
+    height: 0.8em;
+    transform: translateY(-5px);
+    margin-top: 5px;
+    opacity: 0;
+  }
+
+  &.error {
+
+    input {
+      border: 1px solid red;
+    }
+
+    .error {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

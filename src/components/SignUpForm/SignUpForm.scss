@@ -1,0 +1,12 @@
+.signup-form {
+  display: grid;
+  justify-content: center;
+  align-items: start;
+  align-content: start;
+
+  button {
+    margin-top: 20px;
+    justify-self: center;
+    height: 4em;
+  }
+}

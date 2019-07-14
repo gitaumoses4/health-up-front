@@ -1,0 +1,74 @@
+.account-page {
+  display: grid;
+  height: 100vh;
+  position: relative;
+  grid-template-columns: 600px 1fr;
+
+  .back {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateX(-10px);
+    }
+  }
+
+  .background {
+    position: relative;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    .image {
+      position: fixed;
+      z-index: -1;
+    }
+
+    .banner {
+      text-align: center;
+      width: 100%;
+      color: white;
+
+      h3 {
+        font-size: 2em;
+      }
+
+      p {
+        font-size: 2em;
+        display: none;
+      }
+    }
+  }
+
+  .content {
+    overflow-y: scroll;
+    display: grid;
+    justify-content: center;
+    padding: 1em;
+    grid-template-rows: auto 1fr;
+
+    .header {
+      display: grid;
+      justify-content: center;
+      justify-items: center;
+
+      h3 {
+        font-size: 1.5em;
+        font-weight: 300;
+      }
+
+      img {
+        height: 120px;
+      }
+    }
+
+    .form {
+      display: grid;
+      align-self: start;
+    }
+  }
+}
