@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 yarn build
 
-cd ./build/
+cd ../build/
 
 function createHost(){
-    host="ftp://ftp.healthupsa.com/$1 --user qcitteam751022:UP123up!";
+    host="$REACT_APP_PRODUCTION_HOST/$1 --user $REACT_APP_PRODUCTION_CREDENTIALS";
 }
 export -f createHost
 
