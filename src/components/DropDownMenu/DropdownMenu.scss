@@ -1,0 +1,40 @@
+.dropdown-menu {
+  position: relative;
+
+  .trigger {
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    margin-top: 1em;
+    background: white;
+    width: 100%;
+    border: 1px solid #ccc;
+    opacity: 0;
+    transform: translateY(-5px);
+    box-shadow: 0 0 3px 3px rgba(0,0,0,.05);
+
+
+    &.open {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .menu {
+      display: grid;
+
+      .item {
+        cursor: pointer;
+        height: 3em;
+        display: grid;
+        align-items: center;
+        padding: 0 0.5em;
+
+        &:hover {
+          background: #eee;
+        }
+      }
+    }
+  }
+}

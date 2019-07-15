@@ -12,15 +12,15 @@ import T from '../../utils/Translation';
 const socialMediaLinks = [
   {
     icon: twitter,
-    link: 'https://twitter.com/@healthupup'
+    link: 'https://twitter.com/@healthupup',
   },
   {
     icon: instagram,
-    link: 'https://instagram.com/healthupup'
+    link: 'https://instagram.com/healthupup',
   },
 ];
-class Home extends Component{
-  render(){
+class Home extends Component {
+  render() {
     return (
       <div className="home-page">
         <div className="nav">
@@ -76,7 +76,7 @@ class Home extends Component{
         <div className="footer">
           <div className="socialMedia">
             {
-              socialMediaLinks.map(({ link, icon}) => (
+              socialMediaLinks.map(({ link, icon }) => (
                 <a href={link} className="item" key={link}>
                   <img src={icon} alt="" />
                 </a>

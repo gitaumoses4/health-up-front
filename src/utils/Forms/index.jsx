@@ -1,20 +1,20 @@
 import React from 'react';
-import _ from 'lodash';
-import { connect } from 'react-redux';
 import Validator from './validator';
-import {submitForm} from './actions';
+import connectResource from '../ResourceComponent';
 
 export const FormContext = React.createContext({
   values: {},
   errors: {},
-  valid: false
+  valid: false,
 });
 
-class Form extends React.Component{
-
-  constructor(props){
+class Form extends React.Component {
+  constructor(props) {
     super(props);
     this.validator = new Validator(this, this.rules());
+  }
+
+  componentWillMount() {
     const defaultState = {
       values: {},
       errors: {},
@@ -23,55 +23,84 @@ class Form extends React.Component{
       fulfilled: {},
       messages: {},
       optionalFields: [],
-      onChange : this.onChange,
+      onChange: this.onChange,
       onBlur: this.onBlur,
       onFocus: this.onFocus,
       updateRules: this.updateRules,
+      clearRules: this.clearRules,
     };
-    this.state = {...defaultState};
+    this.setState(state => ({
+      ...state,
+      ...defaultState,
+    }));
   }
 
-
-  componentWillReceiveProps (nextProps){
-    this.setState({
-      errors: nextProps.errors
+  componentDidMount() {
+    const { rules } = this.state;
+    Object.keys(rules).forEach((rule) => {
+      this.validator.validate(rule);
     });
   }
 
-  onSubmit(){
-    const { submit } = this.props;
-    const { values } = this.state;
-    submit(values, this.onSuccess, this.onFailure);
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      errors: nextProps.errors,
+    });
   }
 
-  onSuccess(data){
+  onSubmit() {
+    const { createResource } = this.props;
+    if (createResource) createResource(this.createData());
+  }
+
+  onSuccess(data) {
 
   }
 
-  onFailure(data){
+  onFailure(data) {
 
   }
+
 
   updateRules = (name, rules, messages) => {
-    this.setState((state) => {
-      return {
-        rules: { ...state.rules, [name]: rules},
-        messages: {...state.messages, [name]: messages},
-        fulfilled: {
-          ...state.fulfilled,
-          [name]: rules.reduce((acc, cur) => ({...acc, [cur]: false}), {})
-        }
-      };
+    this.setState(state => ({
+      rules: { ...state.rules, [name]: rules },
+      messages: { ...state.messages, [name]: messages },
+      fulfilled: {
+        ...state.fulfilled,
+        [name]: rules.reduce((acc, cur) => ({ ...acc, [cur]: false }), {}),
+      },
+    }), () => {
+      const { values } = this.state;
+      if (values[name]) {
+        this.validator.validate(name);
+      }
     });
   };
 
-  onChange = ({ target: { name, value}}) => {
-    this.setState(({ values }) => {
-      return {values: {...values, [name]: value}};
-    },() => this.validator.validate(name));
+  clearRules = (name, callback) => {
+    const {
+      rules, messages, fulfilled, values, errors,
+    } = this.state;
+    const current = {
+      rules, messages, fulfilled, values, errors,
+    };
+    delete current.rules[name];
+    delete current.messages[name];
+    delete current.fulfilled[name];
+    delete current.values[name];
+    delete current.errors[name];
+
+    this.setState({ ...current });
   };
 
-  onBlur = ({ target: { name, value }}) => {
+  onChange = ({ target: { name, value } }) => {
+    this.setState(({ values }) => (
+      { values: { ...values, [name]: value } }
+    ), () => this.validator.validate(name));
+  };
+
+  onBlur = ({ target: { name, value } }) => {
     this.validator.validate(name);
   };
 
@@ -80,10 +109,10 @@ class Form extends React.Component{
   };
 
   updateState = (state) => {
-    if(state){
-      if(state.constructor === Function){
-        this.setState((curState) => state(curState));
-      }else{
+    if (state) {
+      if (state.constructor === Function) {
+        this.setState(curState => state(curState));
+      } else {
         this.setState(state);
       }
     }
@@ -94,19 +123,23 @@ class Form extends React.Component{
     return optionalFields.includes(name);
   };
 
+  createData() {
+    const { values } = this.state;
+    return { data: values, successCallback: this.onSuccess, errorCallback: this.onFailure };
+  }
 
-  rules(){
+  rules() {
 
   }
 
-  renderForm(){
+  renderForm() {
 
   }
 
   render() {
     return (
       <form
-        onSubmit={(e) => {e.preventDefault(); this.onSubmit();}}
+        onSubmit={(e) => { e.preventDefault(); this.onSubmit(); }}
         className="form-element">
         <FormContext.Provider value={this.state}>
           { this.renderForm() }
@@ -116,25 +149,8 @@ class Form extends React.Component{
   }
 }
 
-export const connectForm = (Form) => ({
-  endpoint, baseURL, method = 'post', name,
-  mapStateToProps = (state) => {},
-  mapDispatchToProps = {}
-}) => {
-  const formName = name || Form.name;
-  Form.formConfig = {
-    endpoint: `${baseURL}${endpoint}`,
-    method: method,
-    name: formName,
-  };
-
-  return connect((state) => ({
-    ...state.forms[formName],
-    ...mapStateToProps(state)
-  }), {
-    submit: submitForm(Form.formConfig),
-    ...mapDispatchToProps
-  })(Form);
-};
+export const connectForm = Component => resource => connectResource(Component)(
+  { resources: [resource], setToProps: true },
+);
 
 export default Form;

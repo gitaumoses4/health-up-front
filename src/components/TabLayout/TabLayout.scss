@@ -1,0 +1,42 @@
+.tab-layout {
+
+  .tabs {
+    display: flex;
+    flex-direction: row;
+
+    .tab {
+      display: grid;
+      min-width: 200px;
+      border: 1px solid #ccc;
+      min-height: 100px;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      justify-items: center;
+      margin: 0 1em;
+      cursor: pointer;
+
+      img {
+        height: 40px;
+      }
+
+      .title {
+        white-space: nowrap;
+      }
+
+      &:hover {
+        box-shadow: 0 0 4px 2px rgba(0,0,0,.1);
+      }
+
+      &.active {
+        box-shadow: 0 0 4px 2px rgba(0,0,0,.1);
+        background: white;
+      }
+    }
+  }
+
+  .tab-content {
+    width: 100%;
+    margin: 1em 1em;
+  }
+}

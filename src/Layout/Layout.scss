@@ -1,0 +1,16 @@
+.layout-wrapper {
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  .layout-body {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+
+    .content {
+      max-width: 1300px;
+      padding: 2em;
+      width: 100%;
+      justify-self: center;
+    }
+  }
+}

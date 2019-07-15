@@ -1,10 +1,9 @@
 import { all } from 'redux-saga/effects';
-import {watchFormSubmission} from '../../utils/Forms/middleware';
-import forms from '../forms';
+import resourceSaga from '../resources/resourceSaga';
 
-function * rootSaga() {
+function* rootSaga() {
   yield all([
-    ...forms.map(form => watchFormSubmission(form)())
+    ...resourceSaga,
   ]);
 }
 

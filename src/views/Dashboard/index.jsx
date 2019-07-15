@@ -1,18 +1,33 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
-import T from '../../utils/Translation';
+import React, { Component } from 'react';
+import Layout from '../../Layout';
+import accountTypes from '../../utils/accountTypes';
+import UserDashboard from './accounts/UserDashboard';
 
-const Dashboard = (props) => {
-  return (
-    <div className="dashboard-page">
-      <h1>{T.welcome_message}</h1>
-      <Link to="/login">
-        Logout
-      </Link>
-    </div>
-  );
-};
+class Dashboard extends Component {
+  componentDidMount() {
+  }
+
+  renderDashboard = ({ user: { accountType } }) => {
+    switch (accountType) {
+    case accountTypes.normal_user:
+      return <UserDashboard />;
+    default:
+      return null;
+    }
+  };
+
+  render() {
+    const { user: { data: { user } } } = this.props;
+    const DashboardContent = this.renderDashboard;
+    return (
+      <Layout {...this.props}>
+        <div className="dashboard-page">
+          <DashboardContent user={user} />
+        </div>
+      </Layout>
+    );
+  }
+}
 
 Dashboard.propTypes = {};
 

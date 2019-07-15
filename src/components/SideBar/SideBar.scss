@@ -1,0 +1,44 @@
+@import "../../index";
+
+.side-bar {
+  padding: 3em 0;
+  display: grid;
+  background: white;
+  height: 100vh;
+  align-content: start;
+  grid-gap: 1em;
+  border-right: 1px solid #ddd;
+
+  &__item {
+    height: 3em;
+    display: grid;
+    align-items: center;
+    background: rgba(204, 204, 204, 0.51);
+    padding: 0 1em;
+    cursor: pointer;
+    border: 1px solid #ccc;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    &.active {
+      background: rgba(198, 198, 198, 0.73);
+      position: relative;
+
+      &:before {
+        content: '';
+        background: $accent;
+        width: 10px;
+        height: 100%;
+        left: -1px;
+        position: absolute;
+      }
+    }
+
+    &:hover {
+      border: 1px solid $accent;
+    }
+  }
+}

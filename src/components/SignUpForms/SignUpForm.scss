@@ -2,7 +2,13 @@
   display: grid;
   justify-content: center;
   align-items: start;
+  margin: 1em 0;
   align-content: start;
+
+
+  input, select {
+    width: 400px;
+  }
 
   button {
     margin-top: 20px;

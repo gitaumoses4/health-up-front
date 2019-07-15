@@ -6,7 +6,7 @@ const Login = AccountPageWrapper({
   header: T.welcome_back,
   message: T.login_message,
   title: T.sign_in,
-  form: LoginForm
+  form: LoginForm,
 });
 
 

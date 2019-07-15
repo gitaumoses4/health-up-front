@@ -5,10 +5,11 @@ import rootReducer from '../reducers';
 import rootSaga from '../middleware';
 
 const token = localStorage.getItem('jwt-token');
-if( token ) {
-  axios.defaults.headers.common['Authorization'] = token;
+if (token) {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
 
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 const sagaMiddleware = createSagaMiddleware();
 const tool = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

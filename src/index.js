@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'toastr/build/toastr.css';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/store';
 import App from './routes';
 import './index.scss';
 
 const language = process.env.REACT_APP_LANGUAGE;
-document.querySelector('html').setAttribute('dir', language === 'ar' ? 'rtl': 'ltr');
+document.querySelector('html').setAttribute('dir', language === 'ar' ? 'rtl' : 'ltr');
 
 const routes = () => (
   <Provider store={store}>

@@ -1,13 +1,13 @@
 import React from 'react';
 import AccountPageWrapper from '../../components/AccountPage';
 import T from '../../utils/Translation';
-import SignUpForm from '../../components/SignUpForm';
+import SignUpForm from '../../components/SignUpForms';
 
 const Register = AccountPageWrapper({
   header: T.welcome_message,
   message: T.registration_message,
   title: T.create_account,
-  form: SignUpForm
+  form: SignUpForm,
 });
 
 export default Register;

@@ -4,12 +4,12 @@ import './WithLoading.scss';
 import Loader from 'react-loader-spinner';
 
 const WithLoading = (Component, prop = 'loading', LoadingElement) => {
-  class Loading extends React.Component{
-    render(){
+  class Loading extends React.Component {
+    render() {
       const { props } = this;
       const loading = props[prop];
       return (
-        <div className={`loading-component ${loading ? 'loading': ''}`}>
+        <div className={`loading-component ${loading ? 'loading' : ''}`}>
           <div className="loading-component__content">
             {
               <Component {...this.props} />
