@@ -49,4 +49,7 @@ export default {
   mobile_number: ['Mobile Number'],
   emergency_phone_1: ['Other Emergency Number 1'],
   emergency_phone_2: ['Other Emergency Number 2'],
+  select: ['Select', 'اختر'],
+  normal_user: ['Normal', 'فرد'],
+  profile_completion: ['Profile Completion'],
 };

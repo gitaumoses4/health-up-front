@@ -1,3 +1,5 @@
+@import "../../index";
+
 .account-page {
   display: grid;
   height: 100vh;
@@ -47,7 +49,6 @@
   .content {
     overflow-y: scroll;
     display: grid;
-    justify-content: center;
     padding: 1em;
     grid-template-rows: auto 1fr;
 
@@ -69,6 +70,28 @@
     .form {
       display: grid;
       align-self: start;
+    }
+  }
+}
+
+@include mobile{
+  .account-page {
+    grid-template-columns: 1fr;
+    background: rgba(255, 255, 255,.7);
+
+    .back {
+      font-size: 20px;
+      color: black;
+    }
+
+    .background {
+      .banner {
+        display: none;
+      }
+    }
+
+    .content {
+      padding: 1em;
     }
   }
 }

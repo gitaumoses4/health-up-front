@@ -4,11 +4,8 @@
   align-items: start;
   margin: 1em 0;
   align-content: start;
+  grid-template-columns: minmax(200px, 300px);
 
-
-  input, select {
-    width: 400px;
-  }
 
   button {
     margin-top: 20px;

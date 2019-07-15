@@ -11,6 +11,14 @@
   transition: 0.5s all;
   cursor: pointer;
 
+  @include mobile {
+    padding: 0.5em 2em;
+
+    &.secondary {
+      padding: 0.5em 1em;
+    }
+  }
+
   a {
     color: white;
   }

@@ -1,15 +1,24 @@
+@import "../../index";
+
 .personal-info-form {
   display: grid;
 
   .fieldset {
     display: grid;
-    padding: 1em;
-    grid-template-columns: repeat(auto-fill, minmax(auto, 400px));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
     grid-column-gap: 2em;
     justify-content: start;
   }
 
   button {
-    justify-self: end;
+    justify-self: center;
+  }
+}
+
+
+@include mobile {
+  .personal-info-form {
+    .fieldset {
+    }
   }
 }

@@ -26,14 +26,14 @@ class Input extends React.Component {
     const InputField = this.switchInput();
 
     const {
-      label, type, name, messages = {}, rules = [], ...otherProps
+      label, type, name, messages = {}, rules = [], required, ...otherProps
     } = this.props;
     return (
       <FormContext.Consumer>
         {
           ({
             values,
-            errors,
+            errors = {},
             rules: parentRules, optionalFields,
             onChange, onBlur,
             clearRules, onFocus, updateRules,
@@ -46,7 +46,7 @@ class Input extends React.Component {
               'form-input': true,
               error: errors[name],
             });
-            if (!optionalFields.includes(name)) {
+            if (optionalFields !== '*' && !optionalFields.includes(name) && !required) {
               if (!rules.includes('required')) {
                 rules.push('required');
               }

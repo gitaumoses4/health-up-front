@@ -1,16 +1,75 @@
+@import "../index";
+
 .layout-wrapper {
   display: grid;
   grid-template-rows: auto 1fr;
 
   .layout-body {
     display: grid;
-    grid-template-columns: 300px 1fr;
 
     .content {
       max-width: 1300px;
+      margin-left: 300px;
       padding: 2em;
-      width: 100%;
+      width: calc(100% - 4em - 300px);
       justify-self: center;
+    }
+  }
+
+  &__sidebar {
+    pointer-events: all;
+  }
+
+  &.sidebarOpen {
+    .layout-body {
+      .content {
+        margin-left: 150px;
+        width: calc(100% - 4em - 150px);
+      }
+    }
+  }
+}
+
+@include mobile {
+  .layout-wrapper {
+    .layout-body {
+      grid-template-columns: 1fr;
+
+      .content {
+        padding: 1em;
+        margin: 0;
+        width: calc(100% - 4em );
+      }
+    }
+
+    &.sidebarOpen {
+      .layout-wrapper__sidebar {
+        background: rgba(0,0,0,0.2);
+        pointer-events: all;
+        .side-bar {
+          transform: translateX(0);
+        }
+      }
+      .layout-body {
+        .content {
+          margin: 0;
+          width: calc(100% - 4em);
+        }
+      }
+    }
+
+    &__sidebar {
+      position: fixed;
+      z-index: 1000;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0);
+      pointer-events: none;
+
+      .side-bar {
+        width: 70%;
+        transform: translateX(-110%);
+      }
     }
   }
 }

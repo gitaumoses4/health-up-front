@@ -1,7 +1,12 @@
+@import "../../index";
+
 .nav-bar {
   height: 80px;
+  border-bottom: 1px solid #eee;
   background: white;
   display: grid;
+  position: sticky;
+  top: 0;
   align-items: center;
   padding: 0 2em;
   z-index: 80;
@@ -23,15 +28,41 @@
   .logo {
     display: grid;
     align-items: center;
-    grid-template-columns: auto auto;
+    grid-auto-flow: column;
     grid-gap: 1em;
+
+    .hamburger{
+      cursor: pointer;
+    }
   }
 
   .user-profile {
     justify-self: end;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-auto-flow: column;
     grid-gap: 1em;
     align-items: center;
+  }
+}
+
+
+@include mobile{
+  .nav-bar {
+    padding: 0 1em;
+
+    img {
+      height: 30px;
+    }
+
+    .user-profile {
+      img {
+        display: none;
+      }
+    }
+
+    .logo {
+      .hamburger {
+      }
+    }
   }
 }
