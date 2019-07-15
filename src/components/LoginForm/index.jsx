@@ -9,13 +9,11 @@ import './LoginForm.scss';
 import WithLoading from '../WithLoading';
 
 class LoginForm extends Form {
-  rules() {
-    return {
-      required: {
-        message: T.not_empty,
-      },
-    };
-  }
+  rules = () => ({
+    required: {
+      message: T.not_empty,
+    },
+  });
 
 
   onSuccess = ({ token }) => {

@@ -17,15 +17,16 @@ const getMethod = (type) => {
     return 'put';
   case 'delete':
     return 'delete';
+  default:
+    return '';
   }
-  return '';
 };
 
 export const resourceRequest = (name, type) => (params = {}) => {
   const {
     data,
-    successCallback = (_) => {},
-    errorCallback = (_) => {},
+    successCallback = () => {},
+    errorCallback = () => {},
     endpoint,
     method, ...otherProps
   } = params;

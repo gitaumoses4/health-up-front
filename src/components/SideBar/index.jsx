@@ -31,14 +31,14 @@ class SideBar extends Component {
     if (!found) {
       found = Object.keys(items).find(item => items[item].active);
     }
-    this.setState(({ items }) => ({
+    this.setState(({ items: prevItems }) => ({
       items: {
-        ...items,
+        ...prevItems,
         [found]: {
-          ...items[found],
+          ...prevItems[found],
           active: true,
-        }, 
-      }, 
+        },
+      },
     }));
   }
 

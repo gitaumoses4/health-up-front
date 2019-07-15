@@ -50,7 +50,7 @@ class Form extends React.Component {
 
   onSubmit() {
     const { createResource } = this.props;
-    createResource && createResource(this.createData());
+    if (createResource) createResource(this.createData());
   }
 
   onSuccess(data) {
@@ -95,7 +95,9 @@ class Form extends React.Component {
   };
 
   onChange = ({ target: { name, value } }) => {
-    this.setState(({ values }) => ({ values: { ...values, [name]: value } }), () => this.validator.validate(name));
+    this.setState(({ values }) => (
+      { values: { ...values, [name]: value } }
+    ), () => this.validator.validate(name));
   };
 
   onBlur = ({ target: { name, value } }) => {
@@ -147,6 +149,8 @@ class Form extends React.Component {
   }
 }
 
-export const connectForm = Component => resource => connectResource(Component)({ resources: [resource], setToProps: true });
+export const connectForm = Component => resource => connectResource(Component)(
+  { resources: [resource], setToProps: true },
+);
 
 export default Form;

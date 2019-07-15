@@ -32,7 +32,11 @@ class Input extends React.Component {
       <FormContext.Consumer>
         {
           ({
-            values, errors, rules: parentRules, optionalFields, onChange, onBlur, clearRules, onFocus, updateRules,
+            values,
+            errors,
+            rules: parentRules, optionalFields,
+            onChange, onBlur,
+            clearRules, onFocus, updateRules,
           }) => {
             const errorClasses = classNames({
               error: true,

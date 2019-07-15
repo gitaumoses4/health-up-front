@@ -10,16 +10,14 @@ import Input from '../../utils/Forms/Input';
 import accountTypes from '../../utils/accountTypes';
 
 class SignUpForm extends Form {
-  rules() {
-    return {
-      required: {
-        message: T.not_empty,
-      },
-      email: {
-        message: T.valid_email,
-      },
-    };
-  }
+  rules = () => ({
+    required: {
+      message: T.not_empty,
+    },
+    email: {
+      message: T.valid_email,
+    },
+  });
 
   onSuccess = () => {
     const { history } = this.props;
@@ -35,7 +33,8 @@ class SignUpForm extends Form {
   renderForm() {
     const { valid, values: { accountType } } = this.state;
 
-    const Form = accountType === accountTypes.company ? Company : NormalUser;
+    const FormElement = accountType === accountTypes.company
+      ? Company : NormalUser;
 
     return (
       <div className="signup-form">
@@ -44,7 +43,7 @@ class SignUpForm extends Form {
           name="accountType"
           options={[accountTypes.normal_user, accountTypes.company]}
         />
-        <Form valid={valid} />
+        <FormElement valid={valid} />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const rules = {
+const defaultRules = {
   required: {
     valid: ({
       value, name, values, target,
@@ -18,10 +18,10 @@ const rules = {
 class Validator {
   constructor(form, moreRules) {
     this.form = form;
-    this.rules = _.merge(this.rules, rules, moreRules);
+    this.rules = _.merge(this.rules, defaultRules, moreRules);
   }
 
-  validate = (name, callback = (_) => {}, target) => {
+  validate = (name, callback = () => {}, target) => {
     const { state: { rules, values, messages } } = this.form;
 
     const fieldRules = rules[name] || [];
@@ -32,7 +32,7 @@ class Validator {
     }), {}), messages[name]);
 
     let error = null;
-    for (let i = 0; i < fieldRules.length; i++) {
+    for (let i = 0; i < fieldRules.length; i += 1) {
       if (!this.rules[fieldRules[i]].valid({
         value: values[name], name, values, target,
       })) {
@@ -71,7 +71,7 @@ class Validator {
     },
   });
 
-  checkFulfillment = (callback = (_) => {}) => {
+  checkFulfillment = (callback = () => {}) => {
     const { fulfilled } = this.form.state;
     const valid = Object.keys(fulfilled)
       .reduce((acc, curName) => (
@@ -85,13 +85,13 @@ class Validator {
     }, callback);
   };
 
-  setError(name, error, callback = (_) => {}) {
+  setError(name, error, callback = () => {}) {
     this.form.setState(({ errors }) => ({
       errors: { ...errors, [name]: error },
     }), callback);
   }
 
-  clearErrors(name, fulfil = false, callback = (_) => {}) {
+  clearErrors(name, fulfil = false, callback = () => {}) {
     this.form.setState(({ errors, fulfilled }) => {
       if (name) {
         return {
