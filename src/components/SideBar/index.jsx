@@ -42,18 +42,22 @@ class SideBar extends Component {
     }));
   }
 
-  renderItem = ({ label, link, active }) => (
+  renderItem = ({
+    label, link, active, icon,
+  }) => (
     <div className={`side-bar__item ${active ? 'active' : ''}`}>
       <Link to={link}>
-        {label}
+        <img src={icon} alt="" />
+        <span>{label}</span>
       </Link>
     </div>
   );
 
   render() {
     const { items } = this.state;
+    const { collapsed } = this.props;
     return (
-      <div className="side-bar">
+      <div className={`side-bar ${collapsed ? 'collapsed' : ''}`}>
         {
           Object.keys(items).map(item => this.renderItem(items[item]))
         }

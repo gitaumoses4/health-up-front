@@ -3,34 +3,60 @@
 .side-bar {
   padding: 3em 0;
   display: grid;
-  background: white;
+  background: $accent;
+  color: white;
   height: 100%;
   width: 300px;
   align-content: start;
+  z-index: 10;
   position: fixed;
   grid-gap: 1em;
   border-right: 1px solid #ddd;
+
+  &.collapsed {
+    width: 80px;
+    .side-bar__item {
+      display: grid;
+      place-items: center;
+      padding: 0;
+
+      &:before {
+        width: 5px;
+      }
+
+      span {
+        display: none;
+      }
+      img {
+        height: 30px;
+        display: block;
+      }
+    }
+  }
 
   &__item {
     height: 3em;
     display: grid;
     align-items: center;
-    background: rgba(204, 204, 204, 0.43);
     padding: 0 2em;
     cursor: pointer;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid rgba(255,255,255,.2);
+    border-bottom: 1px solid rgba(255,255,255,.2);
     position: relative;
     overflow: hidden;
 
+    img {
+      display: none;
+    }
+
     a {
       text-decoration: none;
-      color: black;
+      color: white;
     }
 
     &:before {
       content: '';
-      background: $accent;
+      background: white;
       width: 10px;
       height: 100%;
       right: -11px;
@@ -38,7 +64,8 @@
     }
 
     &.active {
-      background: rgba(198, 198, 198, 0.73);
+      border-top: 1px solid rgba(255,255,255, 1);
+      border-bottom: 1px solid rgba(255,255,255, 1);
 
       &:before {
         right: -1px;
@@ -46,8 +73,8 @@
     }
 
     &:hover {
-      border-top: 1px solid $accent;
-      border-bottom: 1px solid $accent;
+      border-top: 1px solid rgba(255,255,255, .5);
+      border-bottom: 1px solid rgba(255,255,255, .5);
     }
   }
 }

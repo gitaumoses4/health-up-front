@@ -51,4 +51,5 @@ export default {
   emergency_phone_2: ['Other Emergency Number 2'],
   select: ['Select', 'اختر'],
   normal_user: ['Normal', 'فرد'],
+  profile_completion: ['Profile Completion'],
 };

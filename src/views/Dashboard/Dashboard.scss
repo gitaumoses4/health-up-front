@@ -1,0 +1,12 @@
+.user-dashboard {
+  .profile-form {
+    display: grid;
+  }
+
+  .profile-completion {
+    display: none;
+    justify-content: center;
+    justify-items: center;
+    align-content: start;
+  }
+}
