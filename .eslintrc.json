@@ -3,8 +3,7 @@
     "airbnb",
     "eslint:recommended",
     "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:cypress/recommended"
+    "plugin:import/warnings"
   ],
   "plugins": [
     "react",
@@ -82,6 +81,7 @@
     "react/jsx-no-duplicate-props": 1,
     "react/no-unused-state": 0,
     "react/jsx-no-literals": 0,
+    "consistent-return": 0,
     "react/jsx-no-undef": 1,
     "react/jsx-pascal-case": 1,
     "react/jsx-sort-prop-types": 0,
@@ -99,6 +99,7 @@
     "react/prefer-stateless-function": 0,
     "react/prop-types": 1,
     "react/react-in-jsx-scope": 1,
+    "comma-dangle": 1,
     "react/require-extension": 0,
     "react/self-closing-comp": 1,
     "react/sort-comp": 1,

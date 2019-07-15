@@ -7,7 +7,7 @@ const lang = process.env.REACT_APP_LANGUAGE || 'en';
 const translate = (text) => {
   const languages = {
     en: 0,
-    ar: 1
+    ar: 1,
   };
   let string = strings[text];
   string = string ? string[languages[lang]] : '';
@@ -17,20 +17,18 @@ const translate = (text) => {
 
 translate.propTypes = {
   text: PropTypes.string,
-  func: PropTypes.string
+  func: PropTypes.string,
 };
 
 translate.defaultProps = {
   text: '',
-  func: null
+  func: null,
 };
 
 const T = Object.keys(strings)
-  .reduce((acc, cur) => {
-    return {
-      ...acc,
-      [cur]: translate(cur)
-    };
-  }, {});
+  .reduce((acc, cur) => ({
+    ...acc,
+    [cur]: translate(cur),
+  }), {});
 
 export default T;

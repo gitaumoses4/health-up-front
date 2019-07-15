@@ -5,7 +5,7 @@
   align-items: start;
   margin: 10px 0;
 
-  input {
+  input, select {
     min-width: 300px;
     width: calc(100% - 2em);
     padding: 0 1em;
@@ -36,7 +36,7 @@
 
   &.error {
 
-    input {
+    input, select {
       border: 1px solid red;
     }
 

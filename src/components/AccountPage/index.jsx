@@ -4,9 +4,10 @@ import background from '../../assets/images/background.svg';
 import logo from '../../assets/images/logo.svg';
 import './AccountPage.scss';
 
-const AccountPageWrapper = ({header, message, title, form: FormElement}) => {
-  class AccountPage extends React.Component{
-
+const AccountPageWrapper = ({
+  header, message, title, form: FormElement, 
+}) => {
+  class AccountPage extends React.Component {
     goBack = () => {
       window.location.replace('/');
     };
