@@ -9,7 +9,9 @@ class DropDownMenu extends Component {
 
   dropdown = React.createRef();
 
-  toggleDropdown = () => {
+  toggleDropdown = (e) => {
+    console.dir(e.target)
+    console.dir(e.clientX);
     this.setState(({ open }) => ({ open: !open }));
   };
 
@@ -43,6 +45,7 @@ class DropDownMenu extends Component {
           onClick={this.toggleDropdown}>
           {children[0]}
         </span>
+        <span />
         <div className={`dropdown-content ${open ? 'open' : ''}`}>
           {children[1]}
         </div>

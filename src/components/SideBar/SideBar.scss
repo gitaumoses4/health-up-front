@@ -4,8 +4,10 @@
   padding: 3em 0;
   display: grid;
   background: white;
-  height: 100vh;
+  height: 100%;
+  width: 300px;
   align-content: start;
+  position: fixed;
   grid-gap: 1em;
   border-right: 1px solid #ddd;
 
@@ -13,32 +15,39 @@
     height: 3em;
     display: grid;
     align-items: center;
-    background: rgba(204, 204, 204, 0.51);
-    padding: 0 1em;
+    background: rgba(204, 204, 204, 0.43);
+    padding: 0 2em;
     cursor: pointer;
-    border: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    overflow: hidden;
 
     a {
       text-decoration: none;
       color: black;
     }
 
+    &:before {
+      content: '';
+      background: $accent;
+      width: 10px;
+      height: 100%;
+      right: -11px;
+      position: absolute;
+    }
+
     &.active {
       background: rgba(198, 198, 198, 0.73);
-      position: relative;
 
       &:before {
-        content: '';
-        background: $accent;
-        width: 10px;
-        height: 100%;
-        left: -1px;
-        position: absolute;
+        right: -1px;
       }
     }
 
     &:hover {
-      border: 1px solid $accent;
+      border-top: 1px solid $accent;
+      border-bottom: 1px solid $accent;
     }
   }
 }

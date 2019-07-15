@@ -8,8 +8,19 @@ class TabLayout extends Component {
   };
 
   changeTab = (index) => {
-    this.setState({ currentTab: index });
+    const { onTabChange } = this.props;
+    this.setState({ currentTab: index }, () => {
+      const { currentTab } = this.state;
+      onTabChange(currentTab);
+    });
   };
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    const { currentTab } = this.state;
+    if (nextProps.currentTab && currentTab !== nextProps.currentTab) {
+      this.setState({ currentTab: nextProps.currentTab });
+    }
+  }
 
   renderTab = ({ icon, title }, index) => {
     const { currentTab } = this.state;

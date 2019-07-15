@@ -1,6 +1,8 @@
 .login-form {
   display: grid;
   align-content: start;
+  grid-template-columns: minmax(200px, 300px);
+  justify-content: center;
 
   button {
     justify-self: center;

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Dropdown.scss';
+import T from '../../Translation';
 
 const Dropdown = ({
   name, type, value, options = [], onChange,
@@ -21,7 +22,7 @@ const Dropdown = ({
 
   return (
     <select value={value} name={name} onChange={onChange}>
-      <option value="">-- Select --</option>
+      <option value="">{`-- ${T.select} --`}</option>
       {
         renderOptions()
       }

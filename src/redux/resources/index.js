@@ -9,6 +9,9 @@ const resources = {
   user: {
     endpoint: '/user',
   },
+  userProfile: {
+    endpoint: '/profile',
+  },
 };
 
 export default resources;

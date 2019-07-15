@@ -7,6 +7,10 @@ import general from '../../../assets/images/general.svg';
 import PersonalInfoForm from '../../../components/PersonalInfoForm';
 
 class UserDashboard extends Component {
+  state = {
+    currentTab: 0,
+  };
+
   tabs = [
     {
       icon: personal,
@@ -22,11 +26,20 @@ class UserDashboard extends Component {
     },
   ];
 
+  goToNextPage = () => {
+    this.setState(({ currentTab }) => ({ currentTab: currentTab + 1 }));
+  };
+
   render() {
+    const { currentTab } = this.state;
     return (
       <div className="user-dashboard">
-        <TabLayout tabs={this.tabs}>
-          <PersonalInfoForm />
+        <TabLayout
+          tabs={this.tabs}
+          currentTab={currentTab}
+          onTabChange={tab => this.setState({ currentTab: tab })}
+        >
+          <PersonalInfoForm goNext={this.goToNextPage} />
           <div>Health</div>
           <div>General</div>
         </TabLayout>

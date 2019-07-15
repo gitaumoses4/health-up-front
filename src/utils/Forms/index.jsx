@@ -30,8 +30,8 @@ class Form extends React.Component {
       clearRules: this.clearRules,
     };
     this.setState(state => ({
-      ...state,
       ...defaultState,
+      ...state,
     }));
   }
 
@@ -89,7 +89,7 @@ class Form extends React.Component {
     delete current.messages[name];
     delete current.fulfilled[name];
     delete current.values[name];
-    delete current.errors[name];
+    if (errors) delete current.errors[name];
 
     this.setState({ ...current });
   };

@@ -1,16 +1,55 @@
+@import "../index";
+
 .layout-wrapper {
   display: grid;
   grid-template-rows: auto 1fr;
 
   .layout-body {
     display: grid;
-    grid-template-columns: 300px 1fr;
 
     .content {
+      margin-left: 300px;
       max-width: 1300px;
       padding: 2em;
-      width: 100%;
+      width: calc(100% - 4em);
       justify-self: center;
+    }
+  }
+}
+
+@include mobile {
+  .layout-wrapper {
+    .layout-body {
+      grid-template-columns: 1fr;
+
+      .content {
+        padding: 1em;
+        margin-left: 0;
+      }
+    }
+
+    &.sidebarOpen {
+      .layout-wrapper__sidebar {
+        background: rgba(0,0,0,0.2);
+        pointer-events: all;
+        .side-bar {
+          transform: translateX(0);
+        }
+      }
+    }
+
+    &__sidebar {
+      position: fixed;
+      z-index: 1000;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0);
+      pointer-events: none;
+
+      .side-bar {
+        width: 70%;
+        transform: translateX(-100%);
+      }
     }
   }
 }

@@ -31,11 +31,18 @@ class NavBar extends Component {
   };
 
   render() {
-    const { user: { data: { user } }, title = '' } = this.props;
+    const { user: { data: { user } }, title = '', onHamburgerClick } = this.props;
     const ProfileDropdown = this.DropDown;
     return (
       <div className="nav-bar">
         <div className="logo">
+          {
+            onHamburgerClick && (
+              <span onClick={onHamburgerClick} className="hamburger" role="presentation">
+                <i className="fas fa-bars" />
+              </span>
+            )
+          }
           <img src={logo} alt="" />
           <h3>{T.health_up}</h3>
         </div>
