@@ -26,7 +26,12 @@ class Input extends React.Component {
     const InputField = this.switchInput();
 
     const {
-      label, type, name, messages = {}, rules = [], required, ...otherProps
+      label,
+      type, inline,
+      reverseLabel,
+      name, messages = {},
+      rules = [],
+      required, ...otherProps
     } = this.props;
     return (
       <FormContext.Consumer>
@@ -45,6 +50,8 @@ class Input extends React.Component {
             const classes = classNames({
               'form-input': true,
               error: errors[name],
+              inline,
+              reverseLabel,
             });
             if (optionalFields !== '*' && !optionalFields.includes(name) && !required) {
               if (!rules.includes('required')) {
@@ -58,18 +65,20 @@ class Input extends React.Component {
             });
             return (
               <div className={classes}>
-                <label htmlFor={name}>{label}</label>
-                <InputField
-                  type={type || 'text'}
-                  name={name}
-                  id={name}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  onFocus={onFocus}
-                  error={errors[name]}
-                  placeholder={label || otherProps.placeholder}
-                  value={values[name] || ''}
-                  {...otherProps} />
+                <div className="input-field">
+                  <label htmlFor={name}>{label}</label>
+                  <InputField
+                    type={type || 'text'}
+                    name={name}
+                    id={name}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    onFocus={onFocus}
+                    error={errors[name]}
+                    placeholder={label || otherProps.placeholder}
+                    value={values[name] || ''}
+                    {...otherProps} />
+                </div>
                 <span className={errorClasses}>{errors[name]}</span>
               </div>
             );

@@ -43,11 +43,16 @@ class Layout extends Component {
     document.body.style.overflow = sidebarOpen && width < 600 ? 'hidden' : '';
     return user ? (
       <div className={`layout-wrapper ${sidebarOpen ? 'sidebarOpen' : ''}`}>
-        <NavBar onHamburgerClick={this.onHamburgerClick} />
+        <div className="navigation">
+          <NavBar
+            onHamburgerClick={width < 600 && this.onHamburgerClick}
+          />
+        </div>
         <div className="layout-body">
           <div className="layout-wrapper__sidebar" ref={this.sidebar}>
             <SideBar
               type={user.accountType}
+              onHamburgerClick={this.onHamburgerClick}
               match={match}
               collapsed={width > 600 && sidebarOpen}
               history={history} />

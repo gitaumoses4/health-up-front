@@ -33,6 +33,7 @@ class SignUpForm extends Form {
   renderForm() {
     const { valid, values: { accountType } } = this.state;
 
+
     const FormElement = accountType === 'company'
       ? Company : NormalUser;
 

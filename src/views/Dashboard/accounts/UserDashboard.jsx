@@ -8,6 +8,7 @@ import general from '../../../assets/images/general.svg';
 import PersonalInfoForm from '../../../components/PersonalInfoForm';
 import '../Dashboard.scss';
 import CircularProgressBar from '../../../components/CircularProgress';
+import HealthInformationForm from '../../../components/HealthInformationForm';
 
 class UserDashboard extends Component {
   state = {
@@ -43,8 +44,8 @@ class UserDashboard extends Component {
             currentTab={currentTab}
             onTabChange={tab => this.setState({ currentTab: tab })}
           >
+            <HealthInformationForm goNext={this.goToNextPage} />
             <PersonalInfoForm goNext={this.goToNextPage} />
-            <div>{T.health}</div>
             <div>{T.general}</div>
           </TabLayout>
           <div className="profile-completion">
