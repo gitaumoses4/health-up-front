@@ -20,7 +20,12 @@ class NavBar extends Component {
         <i className="fas fa-caret-down" />
       </div>
       <div className="menu">
-        <span className="item" role="presentation" onClick={this.logout}>Logout</span>
+        <span
+          className="item"
+          role="presentation"
+          onClick={this.logout}>
+          {T.logout}
+        </span>
       </div>
     </DropDownMenu>
   );

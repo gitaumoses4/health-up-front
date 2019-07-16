@@ -9,7 +9,7 @@ class Dashboard extends Component {
 
   renderDashboard = ({ user: { accountType } }) => {
     switch (accountType) {
-    case accountTypes.normal_user:
+    case 'normal_user':
       return <UserDashboard />;
     default:
       return null;

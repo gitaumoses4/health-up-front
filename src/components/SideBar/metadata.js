@@ -1,30 +1,30 @@
-import accountTypes from '../../utils/accountTypes';
 import profile from '../../assets/images/profile.svg';
+import T from '../../utils/Translation';
 import health from '../../assets/images/health.svg';
 
 export default {
-  [accountTypes.normal_user]: [
+  normal_user: [
     {
-      label: 'My Profile',
+      label: T.my_profile,
       link: '/dashboard',
       icon: profile,
       active: true,
     },
     {
-      label: 'Health Records',
+      label: T.health_records,
       icon: health,
       link: '/healthRecords',
     },
   ],
-  [accountTypes.company]: [
+  company: [
     {
-      label: 'Profile',
+      label: T.profile,
       link: '/dashboard',
       icon: profile,
       active: true,
     },
     {
-      label: 'Employees',
+      label: T.employees,
       link: '/employees',
     },
   ],

@@ -33,7 +33,7 @@ class SignUpForm extends Form {
   renderForm() {
     const { valid, values: { accountType } } = this.state;
 
-    const FormElement = accountType === accountTypes.company
+    const FormElement = accountType === 'company'
       ? Company : NormalUser;
 
     return (
@@ -41,7 +41,10 @@ class SignUpForm extends Form {
         <Input
           type="select"
           name="accountType"
-          options={[accountTypes.normal_user, accountTypes.company]}
+          options={[
+            { value: 'company', name: accountTypes.company },
+            { value: 'normal_user', name: accountTypes.normal_user },
+          ]}
         />
         <FormElement valid={valid} />
       </div>

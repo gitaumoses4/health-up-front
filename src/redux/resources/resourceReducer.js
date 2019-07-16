@@ -8,7 +8,7 @@ const initialState = {
   },
 };
 
-const initialFormState = {
+export const initialFormState = {
   data: {},
   errors: {},
   loading: false,
