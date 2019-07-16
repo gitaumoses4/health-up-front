@@ -13,6 +13,11 @@
       padding: 2em;
       width: calc(100% - 4em - 300px);
       justify-self: center;
+
+      &:lang(ar) {
+        margin-left: 0;
+        margin-right: 300px;
+      }
     }
   }
 
@@ -25,6 +30,10 @@
       .content {
         margin-left: 150px;
         width: calc(100% - 4em - 150px);
+        &:lang(ar){
+          margin-left: 0;
+          margin-right: 150px;
+        }
       }
     }
   }
@@ -39,6 +48,9 @@
         padding: 1em;
         margin: 0;
         width: calc(100% - 4em );
+        &:lang(ar) {
+          margin: 0;
+        }
       }
     }
 
@@ -54,6 +66,9 @@
         .content {
           margin: 0;
           width: calc(100% - 4em);
+          &:lang(ar) {
+            margin: 0;
+          }
         }
       }
     }
@@ -69,6 +84,9 @@
       .side-bar {
         width: 70%;
         transform: translateX(-110%);
+        &:lang(ar){
+          transform: translateX(110%);
+        }
       }
     }
   }

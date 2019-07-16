@@ -19,6 +19,12 @@
       &:not(:last-child) {
         border-right: none;
       }
+      &:lang(ar){
+        border-right: 1px solid #ccc;
+        &:not(:last-child) {
+          border-left: none;
+        }
+      }
 
       img {
         height: 40px;

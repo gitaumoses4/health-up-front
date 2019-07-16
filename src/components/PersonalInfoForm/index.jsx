@@ -61,7 +61,7 @@ class PersonalInfoForm extends Form {
           />
         </div>
         <Button onClick={goNext}>
-          Next
+          {T.next}
         </Button>
       </div>
     );

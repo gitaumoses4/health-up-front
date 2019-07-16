@@ -17,15 +17,15 @@ class UserDashboard extends Component {
   tabs = [
     {
       icon: personal,
-      title: 'Personal',
+      title: T.personal,
     },
     {
       icon: health,
-      title: 'Health',
+      title: T.health,
     },
     {
       icon: general,
-      title: 'General',
+      title: T.general,
     },
   ];
 
@@ -44,8 +44,8 @@ class UserDashboard extends Component {
             onTabChange={tab => this.setState({ currentTab: tab })}
           >
             <PersonalInfoForm goNext={this.goToNextPage} />
-            <div>Health</div>
-            <div>General</div>
+            <div>{T.health}</div>
+            <div>{T.general}</div>
           </TabLayout>
           <div className="profile-completion">
             <h3>{T.profile_completion}</h3>
