@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import './Input.scss';
 import PropTypes from 'prop-types';
+import randomString from 'randomstring';
 import Dropdown from './Dropdown';
 import { FormContext } from '../index';
 import TextInput from './TextInput';
@@ -17,6 +18,10 @@ class Input extends React.Component {
     }
   };
 
+  componentDidMount() {
+    this.id = randomString.generate(7);
+  }
+
   componentWillUnmount = () => {
     const { name } = this.props;
     this.clearRules(name);
@@ -26,7 +31,7 @@ class Input extends React.Component {
     const InputField = this.switchInput();
 
     const {
-      label,
+      label, id,
       type, inline,
       reverseLabel,
       name, messages = {},
@@ -66,11 +71,11 @@ class Input extends React.Component {
             return (
               <div className={classes}>
                 <div className="input-field">
-                  <label htmlFor={name}>{label}</label>
+                  <label htmlFor={id || this.id}>{label}</label>
                   <InputField
                     type={type || 'text'}
                     name={name}
-                    id={name}
+                    id={id || this.id}
                     onChange={onChange}
                     onBlur={onBlur}
                     onFocus={onFocus}
