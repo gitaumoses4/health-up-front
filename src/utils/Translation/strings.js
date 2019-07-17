@@ -67,6 +67,7 @@ export default {
   family_history: ['Family history'],
   blood_sugar: ['Blood Sugar'],
   blood_pressure: ['Blood Pressure'],
+  blood_diseases: ['Blood Diseases'],
   respiratory_diseases: ['Respiratory system diseases'],
   heart_diseases: ['Heart Diseases'],
   current_illnesses: ['Current Illnesses'],
@@ -76,4 +77,8 @@ export default {
   animals: ['Animals'],
   plants: ['Plants'],
   others_specify: ['Others(Specify)'],
+  previous: ['Previous'],
+  height: ['Height (cm)'],
+  weight: ['Weight (kg)'],
+  save: ['Save'],
 };

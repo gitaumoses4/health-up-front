@@ -17,7 +17,7 @@ class TabLayout extends Component {
 
   componentWillReceiveProps(nextProps, nextContext) {
     const { currentTab } = this.state;
-    if (nextProps.currentTab && currentTab !== nextProps.currentTab) {
+    if (nextProps.currentTab >= 0 && currentTab !== nextProps.currentTab) {
       this.setState({ currentTab: nextProps.currentTab });
     }
   }

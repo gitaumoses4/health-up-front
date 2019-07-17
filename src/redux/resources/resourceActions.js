@@ -28,7 +28,7 @@ export const resourceRequest = (name, type) => (params = {}) => {
     successCallback = () => {},
     errorCallback = () => {},
     endpoint,
-    method, ...otherProps
+    ...otherProps
   } = params;
   return _.merge({}, (resources[name] || {}),
     {

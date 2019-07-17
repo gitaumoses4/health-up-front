@@ -5,10 +5,11 @@ import T from '../../../utils/Translation';
 import personal from '../../../assets/images/personal.svg';
 import health from '../../../assets/images/health.svg';
 import general from '../../../assets/images/general.svg';
-import PersonalInfoForm from '../../../components/PersonalInfoForm';
+import PersonalInfoForm from '../../../components/Forms/PersonalInfoForm';
 import '../Dashboard.scss';
 import CircularProgressBar from '../../../components/CircularProgress';
-import HealthInformationForm from '../../../components/HealthInformationForm';
+import HealthInformationForm from '../../../components/Forms/HealthInformationForm';
+import GeneralInformationForm from '../../../components/Forms/GeneralInformationForm';
 
 class UserDashboard extends Component {
   state = {
@@ -34,6 +35,10 @@ class UserDashboard extends Component {
     this.setState(({ currentTab }) => ({ currentTab: currentTab + 1 }));
   };
 
+  goToPreviousPage = () => {
+    this.setState(({ currentTab }) => ({ currentTab: currentTab - 1 }));
+  };
+
   render() {
     const { currentTab } = this.state;
     return (
@@ -44,9 +49,9 @@ class UserDashboard extends Component {
             currentTab={currentTab}
             onTabChange={tab => this.setState({ currentTab: tab })}
           >
-            <HealthInformationForm goNext={this.goToNextPage} />
             <PersonalInfoForm goNext={this.goToNextPage} />
-            <div>{T.general}</div>
+            <HealthInformationForm goNext={this.goToNextPage} goBack={this.goToPreviousPage} />
+            <GeneralInformationForm />
           </TabLayout>
           <div className="profile-completion">
             <h3>{T.profile_completion}</h3>

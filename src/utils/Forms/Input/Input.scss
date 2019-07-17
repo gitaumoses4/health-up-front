@@ -4,7 +4,7 @@
   display: grid;
   align-items: start;
 
-  input:not([type="radio"]):not([type="checkbox"]), select {
+  input:not([type="radio"]):not([type="checkbox"]),textarea, select {
     width: calc(100% - 2em);
     padding: 0 1em;
     outline: none;
@@ -17,15 +17,28 @@
     }
   }
 
+  &.label {
+    margin: 0.3em 0;
+  }
+
+  textarea {
+    height: auto;
+    padding: 1em 1em;
+  }
+
   .input-field {
     display: grid;
-    grid-gap: 0.6em;
+    grid-gap: 0.3em;
     label {
+      font-size: 0.8em;
+    }
+    > label {
+      font-weight: bold;
     }
   }
 
   .error {
-    font-size: 0.8em;
+    font-size: 0.7em;
     color: red;
     margin-bottom: 5px;
     height: 0.8em;
@@ -37,7 +50,7 @@
   &.error {
 
     .input-field{
-      input, select {
+      input, select , textarea{
         border: 1px solid red;
       }
     }
@@ -45,6 +58,30 @@
     .error {
       opacity: 1;
       transform: translateY(-2px);
+    }
+  }
+
+  .radio-group {
+    display: grid;
+    grid-auto-flow: column;
+
+    .radio-input {
+      cursor: pointer;
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: start;
+      align-items: center;
+    }
+  }
+
+  .checkbox-group {
+
+    .checkbox-input {
+      display: grid;
+      justify-content: start;
+      grid-gap: 1em;
+      padding: 0.2em 0;
+      grid-auto-flow: column;
     }
   }
 }

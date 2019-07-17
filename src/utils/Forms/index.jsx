@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import Validator from './validator';
 import connectResource from '../ResourceComponent';
 
@@ -8,10 +9,24 @@ export const FormContext = React.createContext({
   valid: false,
 });
 
+const defaultProperties = {
+  rules: {},
+  autoSave: false,
+  mirror: false,
+  debounce: 1000,
+};
+
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    this.validator = new Validator(this, this.rules());
+    this.properties = _.merge({}, defaultProperties, this.getProperties());
+    this.validator = new Validator(this, this.properties.rules || {});
+    this.onChange = this.onChange.bind(this);
+    this.updateRules = this.updateRules.bind(this);
+    this.clearRules = this.clearRules.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -33,6 +48,7 @@ class Form extends React.Component {
       ...defaultState,
       ...state,
     }));
+    this.initialize(this.properties);
   }
 
   componentDidMount() {
@@ -46,7 +62,15 @@ class Form extends React.Component {
     this.setState({
       errors: nextProps.errors,
     });
+    const { mirror } = this.properties;
+    const values = this.readData(nextProps);
+    if (mirror && values) {
+      this.setState({
+        values,
+      });
+    }
   }
+
 
   onSubmit() {
     const { createResource } = this.props;
@@ -62,7 +86,7 @@ class Form extends React.Component {
   }
 
 
-  updateRules = (name, rules, messages) => {
+  updateRules(name, rules, messages) {
     this.setState(state => ({
       rules: { ...state.rules, [name]: rules },
       messages: { ...state.messages, [name]: messages },
@@ -76,9 +100,9 @@ class Form extends React.Component {
         this.validator.validate(name);
       }
     });
-  };
+  }
 
-  clearRules = (name, callback) => {
+  clearRules(name, callback) {
     const {
       rules, messages, fulfilled, values, errors,
     } = this.state;
@@ -92,44 +116,48 @@ class Form extends React.Component {
     if (errors) delete current.errors[name];
 
     this.setState({ ...current });
-  };
+  }
 
-  onChange = ({ target: { name, value } }) => {
+  onChange({ target: { name, value } }) {
     this.setState(({ values }) => (
       { values: { ...values, [name]: value } }
-    ), () => this.validator.validate(name));
-  };
-
-  onBlur = ({ target: { name, value } }) => {
-    this.validator.validate(name);
-  };
-
-  onFocus = (e) => {
-
-  };
-
-  updateState = (state) => {
-    if (state) {
-      if (state.constructor === Function) {
-        this.setState(curState => state(curState));
-      } else {
-        this.setState(state);
+    ), () => this.validator.validate(name, () => {
+      const { autoSave } = this.properties;
+      if (autoSave) {
+        this.autoSave();
       }
-    }
-  };
+    }));
+  }
 
-  isOptional = (name) => {
-    const { optionalFields } = this.state;
-    return optionalFields.includes(name);
-  };
+  onBlur({ target: { name, value } }) {
+    this.validator.validate(name);
+  }
+
+  onFocus(e) {
+
+  }
 
   createData() {
     const { values } = this.state;
     return { data: values, successCallback: this.onSuccess, errorCallback: this.onFailure };
   }
 
-  rules() {
+  readData(nextProps) {
+    return null;
+  }
+  
+  getProperties() {
+    return { };
+  }
 
+  initialize({ mirror, autoSave, debounce }) {
+    if (autoSave) {
+      this.autoSave = _.debounce(this.onSubmit, debounce);
+      this.properties.mirror = true;
+    }
+    
+    const { readResource } = this.props;
+    if (readResource && mirror) readResource();
   }
 
   renderForm() {

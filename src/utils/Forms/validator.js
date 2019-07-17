@@ -4,7 +4,17 @@ const defaultRules = {
   required: {
     valid: ({
       value, name, values, target,
-    }) => !!value,
+    }) => {
+      if (value) {
+        if (value.constructor === Object) {
+          return value !== {};
+        } if (value.constructor === Array) {
+          return value.length;
+        }
+        return true;
+      } 
+      return false;
+    },
     message: ({
       value, name, values, target,
     }) => `${_.startCase(name)} is required`,

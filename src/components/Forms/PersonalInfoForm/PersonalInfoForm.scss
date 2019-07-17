@@ -1,4 +1,4 @@
-@import "../../index";
+@import "../../../index";
 
 .personal-info-form {
   display: grid;
@@ -11,7 +11,7 @@
   }
 
   button {
-    justify-self: center;
+    justify-self: start;
   }
 }
 

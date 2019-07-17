@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toast from 'toastr';
-import Form, { connectForm } from '../../utils/Forms';
-import Input from '../../utils/Forms/Input';
-import T from '../../utils/Translation';
-import Button from '../Button';
+import Form, { connectForm } from '../../../utils/Forms';
+import Input from '../../../utils/Forms/Input';
+import T from '../../../utils/Translation';
+import Button from '../../Button';
 import './LoginForm.scss';
-import WithLoading from '../WithLoading';
+import WithLoading from '../../WithLoading';
 
 class LoginForm extends Form {
   rules = () => ({

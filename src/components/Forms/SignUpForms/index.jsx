@@ -1,13 +1,13 @@
 import React from 'react';
 import toast from 'toastr';
-import Form, { connectForm } from '../../utils/Forms';
-import T from '../../utils/Translation';
+import Form, { connectForm } from '../../../utils/Forms';
+import T from '../../../utils/Translation';
 import './SignUpForm.scss';
-import WithLoading from '../WithLoading';
+import WithLoading from '../../WithLoading';
 import NormalUser from './accounts/NormalUser';
 import Company from './accounts/Company';
-import Input from '../../utils/Forms/Input';
-import accountTypes from '../../utils/accountTypes';
+import Input from '../../../utils/Forms/Input';
+import accountTypes from '../../../utils/accountTypes';
 
 class SignUpForm extends Form {
   rules = () => ({

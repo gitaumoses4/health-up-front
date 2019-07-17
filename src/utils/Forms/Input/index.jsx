@@ -6,6 +6,9 @@ import randomString from 'randomstring';
 import Dropdown from './Dropdown';
 import { FormContext } from '../index';
 import TextInput from './TextInput';
+import RadioGroup from './RadioGroup';
+import TextArea from './TextArea';
+import CheckboxGroup from './CheckboxGroup';
 
 class Input extends React.Component {
   switchInput = () => {
@@ -13,6 +16,12 @@ class Input extends React.Component {
     switch (type) {
     case 'select':
       return Dropdown;
+    case 'radio-group':
+      return RadioGroup;
+    case 'textarea':
+      return TextArea;
+    case 'checkbox-group':
+      return CheckboxGroup;
     default:
       return TextInput;
     }
@@ -56,6 +65,7 @@ class Input extends React.Component {
               'form-input': true,
               error: errors[name],
               inline,
+              label,
               reverseLabel,
             });
             if (optionalFields !== '*' && !optionalFields.includes(name) && !required) {

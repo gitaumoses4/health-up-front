@@ -1,0 +1,16 @@
+.general-information-form {
+  .form {
+    max-width: 400px;
+  }
+
+  .button-group {
+    display: grid;
+    justify-content: start;
+    grid-auto-flow: column;
+    padding: 2em 0;
+
+    button:nth-child(2){
+      background: #006300;
+    }
+  }
+}
