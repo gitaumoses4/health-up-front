@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
+import Loader from 'react-loader-spinner';
 import Validator from './validator';
+import './Forms.scss';
 import connectResource from '../ResourceComponent';
 
 export const FormContext = React.createContext({
@@ -12,6 +14,7 @@ export const FormContext = React.createContext({
 const defaultProperties = {
   rules: {},
   autoSave: false,
+  autoSaveLoader: false,
   mirror: false,
   debounce: 1000,
 };
@@ -165,10 +168,19 @@ class Form extends React.Component {
   }
 
   render() {
+    const { autoSaveLoader } = this.properties;
+    const { submitting } = this.props;
     return (
       <form
         onSubmit={(e) => { e.preventDefault(); this.onSubmit(); }}
         className="form-element">
+        {
+          autoSaveLoader && (
+            <div className={`loader ${submitting ? 'showing' : ''}`}>
+              <Loader type="Oval" width={20} height={20} color="#000" />
+            </div>
+          )
+        }
         <FormContext.Provider value={this.state}>
           { this.renderForm() }
         </FormContext.Provider>

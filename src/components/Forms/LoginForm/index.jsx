@@ -9,13 +9,6 @@ import './LoginForm.scss';
 import WithLoading from '../../WithLoading';
 
 class LoginForm extends Form {
-  rules = () => ({
-    required: {
-      message: T.not_empty,
-    },
-  });
-
-
   onSuccess = ({ token }) => {
     toast.success(T.login_success);
     localStorage.setItem('jwt-token', token);
@@ -26,6 +19,16 @@ class LoginForm extends Form {
     const { message } = this.props;
     toast.error(message);
   };
+
+  getProperties() {
+    return {
+      rules: {
+        required: {
+          message: T.not_empty,
+        },
+      },
+    };
+  }
 
   renderForm() {
     const { valid } = this.state;
@@ -56,4 +59,4 @@ LoginForm.propTypes = {};
 
 LoginForm.defaultProps = {};
 
-export default connectForm(WithLoading(LoginForm, 'loading'))('login');
+export default connectForm(WithLoading(LoginForm, 'submitting'))('login');

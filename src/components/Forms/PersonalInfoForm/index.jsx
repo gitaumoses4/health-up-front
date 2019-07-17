@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loader from 'react-loader-spinner';
 import moment from 'moment';
 import T from '../../../utils/Translation';
 import Form, { connectForm } from '../../../utils/Forms';
@@ -28,6 +29,7 @@ class PersonalInfoForm extends Form {
     return {
       autoSave: true,
       mirror: true,
+      autoSaveLoader: true,
     };
   }
 

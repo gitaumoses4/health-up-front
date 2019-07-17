@@ -10,15 +10,6 @@ import Input from '../../../utils/Forms/Input';
 import accountTypes from '../../../utils/accountTypes';
 
 class SignUpForm extends Form {
-  rules = () => ({
-    required: {
-      message: T.not_empty,
-    },
-    email: {
-      message: T.valid_email,
-    },
-  });
-
   onSuccess = () => {
     const { history } = this.props;
     toast.success(T.registration_success);
@@ -29,6 +20,28 @@ class SignUpForm extends Form {
     const { message } = this.props;
     toast.error(message);
   };
+
+  getProperties() {
+    return {
+      rules: {
+        required: {
+          message: T.not_empty,
+        },
+        email: {
+          message: T.valid_email,
+        },
+      },
+    };
+  }
+
+  onChange({ target: { name, value } }) {
+    super.onChange({ target: { name, value } });
+    if (name === 'accountType') {
+      setTimeout(() => {
+        this.validator.validate('accountType');
+      }, 100);
+    }
+  }
 
   renderForm() {
     const { valid, values: { accountType } } = this.state;

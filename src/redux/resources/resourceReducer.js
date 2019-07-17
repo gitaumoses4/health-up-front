@@ -44,6 +44,7 @@ const createReducer = (state = initialFormState, action, resource) => {
       data: {},
       errors: action.errors || {},
       loading: false,
+      submitting: false,
       message: action.message,
     };
   }
@@ -78,6 +79,7 @@ const updateReducer = (state = initialFormState, action, resource) => {
       ...state,
       errors: action.errors || {},
       loading: false,
+      submitting: false,
       message: action.message,
     };
   }
@@ -103,6 +105,7 @@ const readReducer = (state = initialFormState, action, resource) => {
       data: { ...state.data, ...action.data },
       errors: {},
       loading: false,
+      submitting: false,
       message: action.data.message,
     };
   }
@@ -111,6 +114,7 @@ const readReducer = (state = initialFormState, action, resource) => {
       ...state,
       errors: action.errors || {},
       loading: false,
+      submitting: false,
       message: action.message,
     };
   }
