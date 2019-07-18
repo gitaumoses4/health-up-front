@@ -5,9 +5,8 @@
   align-items: start;
 
   input:not([type="radio"]):not([type="checkbox"]), textarea, select {
-    width: calc(100% - 2em);
-    padding: 0 1em;
     outline: none;
+    padding: 0 1em;
     background: #dadada;
     height: 4em;
     border: 1px solid #ddd;
@@ -16,6 +15,11 @@
       border: 1px solid $accent;
     }
   }
+
+  input[type="date"]{
+    width: 100%;
+  }
+
 
   &.label {
     margin: 0.3em 0;

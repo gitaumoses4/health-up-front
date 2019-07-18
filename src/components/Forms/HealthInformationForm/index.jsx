@@ -29,6 +29,7 @@ class HealthInformationForm extends Form {
       autoSave: true,
       mirror: true,
       autoSaveLoader: true,
+      optionalFields: '*',
     };
   }
 
@@ -60,9 +61,9 @@ class HealthInformationForm extends Form {
         <div className="form">
           <div>
             <Input name="bloodType" label={T.blood_type} placeholder={T.blood_type} />
-            <Input name="smoker" type="radio-group" label={T.are_you_a_smoker} options={{ yes: 'Yes', no: 'No' }} />
+            <Input name="smoker" type="radio-group" label={T.are_you_a_smoker} options={{ yes: T.yes, no: T.no }} />
             <Input name="drugsUsed" type="textarea" label={T.drugs_used} />
-            <Input name="operations" type="radio-group" label={T.have_you_had_operations} options={{ yes: 'Yes', no: 'No' }} />
+            <Input name="operations" type="radio-group" label={T.have_you_had_operations} options={{ yes: T.yes, no: T.no }} />
           </div>
           <div>
             <Input name="familyHistory" type="checkbox-group" label={T.family_history} options={this.illnesses} />
