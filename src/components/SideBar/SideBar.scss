@@ -1,17 +1,36 @@
 @import "../../index";
 
 .side-bar {
-  padding: 3em 0;
+  padding: 115px 0 0 0;
   display: grid;
   background: $accent;
   color: white;
   height: 100%;
   width: 300px;
+  top: 0;
   align-content: start;
   z-index: 10;
   position: fixed;
   grid-gap: 1em;
   border-right: 1px solid #ddd;
+
+  &:lang(ar){
+    border: none;
+    border-left: 1px solid #ddd;
+  }
+
+  .hamburger {
+    position: fixed;
+    left: 2em;
+    top: 2em;
+    cursor: pointer;
+
+    &:lang(ar){
+      right: 2em;
+      left: auto;
+      transform: rotate(180deg)
+    }
+  }
 
   &.collapsed {
     width: 80px;
@@ -19,6 +38,8 @@
       display: grid;
       place-items: center;
       padding: 0;
+      width: 100%;
+      border-radius: 0;
 
       &:before {
         width: 5px;
@@ -39,11 +60,17 @@
     display: grid;
     align-items: center;
     padding: 0 2em;
+    width: 70%;
     cursor: pointer;
-    border-top: 1px solid rgba(255,255,255,.2);
-    border-bottom: 1px solid rgba(255,255,255,.2);
+    border: 1px solid rgba(255,255,255,.2);
     position: relative;
     overflow: hidden;
+    border-top-right-radius: 1.5em;
+    border-bottom-right-radius: 1.5em;
+
+    &:lang(ar){
+      border-radius: 1.5em 0 0 1.5em;
+    }
 
     img {
       display: none;
@@ -59,28 +86,27 @@
       background: white;
       width: 10px;
       height: 100%;
-      right: -11px;
+      left: -11px;
       position: absolute;
     }
 
     &:lang(ar){
       &:before {
-        left: -11px;
+        right: -11px;
       }
     }
 
     &.active {
-      border-top: 1px solid rgba(255,255,255, 1);
-      border-bottom: 1px solid rgba(255,255,255, 1);
+      border: 1px solid rgba(255,255,255, 1);
 
       &:before {
-        right: 1px;
+        left: 0;
       }
 
       &:lang(ar) {
         &:before {
-          left: 1px;
-          right: auto;
+          right: 0;
+          left: auto;
         }
       }
     }

@@ -12,6 +12,10 @@ class SideBar extends Component {
   };
 
   componentDidMount() {
+    this.initialize();
+  }
+
+  initialize = () => {
     const { type, match } = this.props;
     const items = metadata[type];
 
@@ -55,9 +59,12 @@ class SideBar extends Component {
 
   render() {
     const { items } = this.state;
-    const { collapsed } = this.props;
+    const { collapsed, onHamburgerClick } = this.props;
     return (
       <div className={`side-bar ${collapsed ? 'collapsed' : ''}`}>
+        <span onClick={onHamburgerClick} className="hamburger" role="presentation">
+          <i className={`${collapsed ? 'fas fa-bars' : 'fas fa-arrow-left'}`} />
+        </span>
         {
           Object.keys(items).map(item => this.renderItem(items[item]))
         }

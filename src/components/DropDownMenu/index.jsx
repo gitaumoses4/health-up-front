@@ -10,8 +10,6 @@ class DropDownMenu extends Component {
   dropdown = React.createRef();
 
   toggleDropdown = (e) => {
-    console.dir(e.target)
-    console.dir(e.clientX);
     this.setState(({ open }) => ({ open: !open }));
   };
 

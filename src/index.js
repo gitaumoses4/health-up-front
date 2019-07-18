@@ -7,8 +7,27 @@ import store from './redux/store';
 import App from './routes';
 import './index.scss';
 
-const language = process.env.REACT_APP_LANGUAGE;
-document.querySelector('html').setAttribute('dir', language === 'ar' ? 'rtl' : 'ltr');
+const language = localStorage.getItem('lang') || process.env.REACT_APP_LANGUAGE;
+
+
+const setLanguage = (lang = language) => {
+  const html = document.querySelector('html');
+  html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+  html.setAttribute('lang', lang);
+};
+
+setLanguage(language);
+
+
+if (process.env.NODE_ENV === 'development') {
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.which === 76) {
+      const current = document.querySelector('html').getAttribute('lang');
+      localStorage.setItem('lang', current === 'ar' ? 'en' : 'ar');
+      window.location.reload();
+    }
+  });
+}
 
 const routes = () => (
   <Provider store={store}>

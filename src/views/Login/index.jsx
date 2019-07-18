@@ -1,6 +1,6 @@
 import AccountPageWrapper from '../../components/AccountPage';
 import T from '../../utils/Translation';
-import LoginForm from '../../components/LoginForm';
+import LoginForm from '../../components/Forms/LoginForm';
 
 const Login = AccountPageWrapper({
   header: T.welcome_back,

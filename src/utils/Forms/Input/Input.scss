@@ -3,12 +3,10 @@
 .form-input {
   display: grid;
   align-items: start;
-  margin: 10px 0;
 
-  input, select {
-    width: calc(100% - 2em);
-    padding: 0 1em;
+  input:not([type="radio"]):not([type="checkbox"]), textarea, select {
     outline: none;
+    padding: 0 1em;
     background: #dadada;
     height: 4em;
     border: 1px solid #ddd;
@@ -18,13 +16,33 @@
     }
   }
 
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
+  input[type="date"]{
+    width: 100%;
+  }
+
+
+  &.label {
+    margin: 0.3em 0;
+  }
+
+  textarea {
+    height: auto;
+    padding: 1em 1em;
+  }
+
+  .input-field {
+    display: grid;
+    grid-gap: 0.3em;
+    label {
+      font-size: 0.8em;
+    }
+    > label {
+      font-weight: bold;
+    }
   }
 
   .error {
-    font-size: 0.8em;
+    font-size: 0.7em;
     color: red;
     margin-bottom: 5px;
     height: 0.8em;
@@ -35,13 +53,39 @@
 
   &.error {
 
-    input, select {
-      border: 1px solid red;
+    .input-field{
+      input, select , textarea{
+        border: 1px solid red;
+      }
     }
 
     .error {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(-2px);
+    }
+  }
+
+  .radio-group {
+    display: grid;
+    grid-auto-flow: column;
+
+    .radio-input {
+      cursor: pointer;
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: start;
+      align-items: center;
+    }
+  }
+
+  .checkbox-group {
+
+    .checkbox-input {
+      display: grid;
+      justify-content: start;
+      grid-gap: 1em;
+      padding: 0.2em 0;
+      grid-auto-flow: column;
     }
   }
 }

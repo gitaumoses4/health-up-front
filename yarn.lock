@@ -1777,6 +1777,11 @@ array-union@^1.0.1:
   dependencies:
     array-uniq "^1.0.1"
 
+array-uniq@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/array-uniq/-/array-uniq-1.0.2.tgz#5fcc373920775723cfd64d65c64bef53bf9eba6d"
+  integrity sha1-X8w3OSB3VyPP1k1lxkvvU7+eum0=
+
 array-uniq@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/array-uniq/-/array-uniq-1.0.3.tgz#af6ac877a25cc7f74e058894753858dfdb24fdb6"
@@ -6706,6 +6711,11 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdi
   dependencies:
     minimist "0.0.8"
 
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
+
 moo@^0.4.3:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/moo/-/moo-0.4.3.tgz#3f847a26f31cf625a956a87f2b10fbc013bfd10e"
@@ -8479,6 +8489,13 @@ randomfill@^1.0.3:
   dependencies:
     randombytes "^2.0.5"
     safe-buffer "^5.1.0"
+
+randomstring@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/randomstring/-/randomstring-1.1.5.tgz#6df0628f75cbd5932930d9fe3ab4e956a18518c3"
+  integrity sha1-bfBij3XL1ZMpMNn+OrTpVqGFGMM=
+  dependencies:
+    array-uniq "1.0.2"
 
 range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"

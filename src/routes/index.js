@@ -6,22 +6,16 @@ import connectResource from '../utils/ResourceComponent';
 import API from '../utils/api';
 import routes from './routes';
 import { UNAUTHENTICATED } from '../utils/accountTypes';
+import Home from '../views/Home';
 
 const checkPermission = (history, allowedRoles, user) => {
-  if (allowedRoles.includes(UNAUTHENTICATED)) {
-    if (user) {
+  if (user) {
+    if (allowedRoles.includes(UNAUTHENTICATED)) {
       history.push('/dashboard');
-    } else {
       return true;
-    }
-  } else {
-    const hasPermission = user && allowedRoles.includes(user.accountType);
-    if (!hasPermission && allowedRoles.length) {
-      history.push('/');
-      return false;
-    }
-    return true;
+    } return !!allowedRoles.includes(user.accountType);
   }
+  return allowedRoles.includes(UNAUTHENTICATED);
 };
 
 const AuthenticatedRoute = (ComposedComponent, roles = []) => {
@@ -35,9 +29,9 @@ const AuthenticatedRoute = (ComposedComponent, roles = []) => {
     }
 
     render() {
-      const { user: { data: { loading, user } }, history } = this.props;
+      const { user: { data: { user } }, history } = this.props;
 
-      return !loading && checkPermission(history, roles, user) ? (
+      return checkPermission(history, roles, user) ? (
         <ComposedComponent {...this.props} />
       ) : null;
     }
@@ -52,6 +46,7 @@ const AuthenticatedRoute = (ComposedComponent, roles = []) => {
 const App = () => (
   <BrowserRouter>
     <Switch>
+      <Route path="/" exact component={Home} />
       <AuthenticationWrapper>
         {
           Object.keys(routes).map((route) => {

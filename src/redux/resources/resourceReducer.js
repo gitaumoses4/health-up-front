@@ -12,6 +12,7 @@ export const initialFormState = {
   data: {},
   errors: {},
   loading: false,
+  submitting: false,
   message: '',
 };
 
@@ -22,7 +23,8 @@ const createReducer = (state = initialFormState, action, resource) => {
       ...state,
       data: {},
       errors: {},
-      loading: true,
+      loading: false,
+      submitting: true,
       message: '',
     };
   }
@@ -32,6 +34,7 @@ const createReducer = (state = initialFormState, action, resource) => {
       data: action.data,
       errors: {},
       loading: false,
+      submitting: false,
       message: action.data.message,
     };
   }
@@ -41,6 +44,7 @@ const createReducer = (state = initialFormState, action, resource) => {
       data: {},
       errors: action.errors || {},
       loading: false,
+      submitting: false,
       message: action.message,
     };
   }
@@ -55,7 +59,8 @@ const updateReducer = (state = initialFormState, action, resource) => {
     return {
       ...state,
       errors: {},
-      loading: true,
+      loading: false,
+      submitting: true,
       message: '',
     };
   }
@@ -65,6 +70,7 @@ const updateReducer = (state = initialFormState, action, resource) => {
       data: { ...state.data, ...action.data },
       errors: {},
       loading: false,
+      submitting: false,
       message: action.data.message,
     };
   }
@@ -73,6 +79,7 @@ const updateReducer = (state = initialFormState, action, resource) => {
       ...state,
       errors: action.errors || {},
       loading: false,
+      submitting: false,
       message: action.message,
     };
   }
@@ -88,6 +95,7 @@ const readReducer = (state = initialFormState, action, resource) => {
       ...state,
       errors: {},
       loading: true,
+      submitting: false,
       message: '',
     };
   }
@@ -97,6 +105,7 @@ const readReducer = (state = initialFormState, action, resource) => {
       data: { ...state.data, ...action.data },
       errors: {},
       loading: false,
+      submitting: false,
       message: action.data.message,
     };
   }
@@ -105,6 +114,7 @@ const readReducer = (state = initialFormState, action, resource) => {
       ...state,
       errors: action.errors || {},
       loading: false,
+      submitting: false,
       message: action.message,
     };
   }
@@ -120,7 +130,8 @@ const deleteReducer = (state = initialFormState, action, resource) => {
       ...state,
       data: {},
       errors: {},
-      loading: true,
+      loading: false,
+      submitting: true,
       message: '',
     };
   }
@@ -129,6 +140,7 @@ const deleteReducer = (state = initialFormState, action, resource) => {
       ...state,
       errors: {},
       loading: false,
+      submitting: false,
       message: action.data.message,
     };
   }
@@ -137,6 +149,7 @@ const deleteReducer = (state = initialFormState, action, resource) => {
       ...state,
       errors: action.errors || {},
       loading: false,
+      submitting: false,
       message: action.message,
     };
   }

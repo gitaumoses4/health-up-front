@@ -1,3 +1,11 @@
 .form-element {
+  display: grid;
+  .loader {
+    justify-self: end;
+    opacity: 0;
 
+    &.showing {
+      opacity: 1;
+    }
+  }
 }

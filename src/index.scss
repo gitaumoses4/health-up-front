@@ -7,8 +7,16 @@ $box-shadow: 0 0 4px 2px rgba(0,0,0,.2);
   font-family: 'Quicksand' ,sans-serif;
 }
 
-*:not(svg):not(g):not(path){
+*{
   transition: 0.5s all;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}
+
+svg, svg * {
+  transition: auto !important;
 }
 
 @mixin mobile {
@@ -64,4 +72,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.layout-shell.loading {
+  display: grid;
+  height: 100vh;
+  place-items: center;
+  .loader {
+    align-self: center;
+  }
 }

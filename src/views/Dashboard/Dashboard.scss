@@ -1,6 +1,15 @@
 .user-dashboard {
   .profile-form {
     display: grid;
+
+    .tab-layout {
+      .tabs {
+        position: sticky;
+        top: 10px;
+        background: #ededee;
+      }
+    }
+
   }
 
   .profile-completion {

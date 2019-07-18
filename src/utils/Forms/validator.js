@@ -4,7 +4,17 @@ const defaultRules = {
   required: {
     valid: ({
       value, name, values, target,
-    }) => !!value,
+    }) => {
+      if (value) {
+        if (value.constructor === Object) {
+          return value !== {};
+        } if (value.constructor === Array) {
+          return value.length;
+        }
+        return true;
+      } 
+      return false;
+    },
     message: ({
       value, name, values, target,
     }) => `${_.startCase(name)} is required`,
@@ -73,12 +83,14 @@ class Validator {
 
   checkFulfillment = (callback = () => {}) => {
     const { fulfilled } = this.form.state;
-    const valid = Object.keys(fulfilled)
-      .reduce((acc, curName) => (
-        acc && Object.keys(fulfilled[curName]).reduce((accRules, curRule) => (
-          accRules && fulfilled[curName][curRule]
-        ), true)
-      ), true);
+    let valid = true;
+    Object.keys(fulfilled).forEach((field) => {
+      Object.keys(fulfilled[field]).forEach((rule) => {
+        if (!fulfilled[field][rule]) {
+          valid = false;
+        }
+      });
+    });
 
     this.form.setState({
       valid,
@@ -89,35 +101,6 @@ class Validator {
     this.form.setState(({ errors }) => ({
       errors: { ...errors, [name]: error },
     }), callback);
-  }
-
-  clearErrors(name, fulfil = false, callback = () => {}) {
-    this.form.setState(({ errors, fulfilled }) => {
-      if (name) {
-        return {
-          errors: { ...errors, [name]: undefined },
-          fulfilled: {
-            ...fulfilled,
-            [name]: Object.keys(fulfilled[name]).reduce((acc, cur) => ({
-              ...acc,
-              [cur]: fulfil,
-            }), {}),
-          },
-        };
-      }
-      return {
-        errors: {},
-        fulfilled: Object.keys(fulfilled)
-          .reduce((acc, curName) => ({
-            ...acc,
-            [curName]: Object.keys(fulfilled[curName])
-              .reduce((accRules, curRule) => ({
-                ...accRules,
-                [curRule]: fulfil,
-              }), {}),
-          }), {}),
-      };
-    }, callback);
   }
 }
 

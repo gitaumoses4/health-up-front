@@ -1,28 +1,25 @@
 import React, { Component } from 'react';
 import toast from 'toastr';
+import Loader from 'react-loader-spinner';
 import connectResource from '../../utils/ResourceComponent';
 
 class AuthenticationWrapper extends Component {
-  componentDidMount() {
+  componentWillMount() {
     const { readResource } = this.props;
-    readResource({
-      errorCallback: (error) => {
-        if (window.location.pathname !== '/' && error.status === 401) {
-          toast.error('Session expired. Login to continue');
-          localStorage.clear();
-          window.location.replace('/');
-        }
-      },
-    });
+    readResource();
   }
 
   render() {
     const { loading, children } = this.props;
     return (
-      <div className="layout-shell">
+      <div className={`layout-shell ${loading ? 'loading' : ''}`}>
         <div className="layout-shell__content">
           {
-            !loading && (
+            (loading) ? (
+              <div className="main-loader">
+                <Loader type="Triangle" color="#000" height={60} width={60} />
+              </div>
+            ) : (
               children
             )
           }

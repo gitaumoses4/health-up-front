@@ -5,13 +5,16 @@ import T from '../../../utils/Translation';
 import personal from '../../../assets/images/personal.svg';
 import health from '../../../assets/images/health.svg';
 import general from '../../../assets/images/general.svg';
-import PersonalInfoForm from '../../../components/PersonalInfoForm';
+import PersonalInfoForm from '../../../components/Forms/PersonalInfoForm';
 import '../Dashboard.scss';
 import CircularProgressBar from '../../../components/CircularProgress';
+import HealthInformationForm from '../../../components/Forms/HealthInformationForm';
+import GeneralInformationForm from '../../../components/Forms/GeneralInformationForm';
 
+const CURRENT_TAB = 'UserDashboard.currentTab';
 class UserDashboard extends Component {
   state = {
-    currentTab: 0,
+    currentTab: localStorage.getItem(CURRENT_TAB),
   };
 
   tabs = [
@@ -33,6 +36,15 @@ class UserDashboard extends Component {
     this.setState(({ currentTab }) => ({ currentTab: currentTab + 1 }));
   };
 
+  goToPreviousPage = () => {
+    this.setState(({ currentTab }) => ({ currentTab: currentTab - 1 }));
+  };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { currentTab } = this.state;
+    localStorage.setItem(CURRENT_TAB, currentTab);
+  }
+
   render() {
     const { currentTab } = this.state;
     return (
@@ -44,8 +56,8 @@ class UserDashboard extends Component {
             onTabChange={tab => this.setState({ currentTab: tab })}
           >
             <PersonalInfoForm goNext={this.goToNextPage} />
-            <div>{T.health}</div>
-            <div>{T.general}</div>
+            <HealthInformationForm goNext={this.goToNextPage} goBack={this.goToPreviousPage} />
+            <GeneralInformationForm goBack={this.goToPreviousPage} />
           </TabLayout>
           <div className="profile-completion">
             <h3>{T.profile_completion}</h3>
