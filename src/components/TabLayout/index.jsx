@@ -7,6 +7,10 @@ class TabLayout extends Component {
     currentTab: 0,
   };
 
+  componentDidMount() {
+    this.updateTab(this.props);
+  }
+
   changeTab = (index) => {
     const { onTabChange } = this.props;
     this.setState({ currentTab: index }, () => {
@@ -16,17 +20,23 @@ class TabLayout extends Component {
   };
 
   componentWillReceiveProps(nextProps, nextContext) {
-    const { currentTab } = this.state;
-    if (nextProps.currentTab >= 0 && currentTab !== nextProps.currentTab) {
-      this.setState({ currentTab: nextProps.currentTab });
-    }
+    this.updateTab(nextProps);
   }
+
+  updateTab = (props) => {
+    const { currentTab } = this.state;
+    if (currentTab !== props.currentTab) {
+      this.setState({ currentTab: +props.currentTab });
+    }
+  };
 
   renderTab = ({ icon, title }, index) => {
     const { currentTab } = this.state;
     return (
       <div
-        className={`tab ${currentTab === index ? 'active' : ''}`} key={Math.random()} role="presentation"
+        className={`tab ${currentTab === index ? 'active' : ''}`}
+        key={Math.random()}
+        role="presentation"
         onClick={() => this.changeTab(index)}>
         <span><img src={icon} alt="" /></span>
         <span className="title">{title}</span>

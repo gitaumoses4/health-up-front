@@ -4,7 +4,7 @@
   display: grid;
   align-items: start;
 
-  input:not([type="radio"]):not([type="checkbox"]),textarea, select {
+  input:not([type="radio"]):not([type="checkbox"]), textarea, select {
     width: calc(100% - 2em);
     padding: 0 1em;
     outline: none;

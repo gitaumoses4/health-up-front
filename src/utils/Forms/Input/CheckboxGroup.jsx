@@ -10,15 +10,15 @@ class CheckboxGroup extends Component {
   };
 
   componentDidMount() {
-    this.updateValues();
+    this.updateValues(this.props);
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    this.updateValues();
+    this.updateValues(nextProps);
   }
 
-  updateValues = () => {
-    const { options, value } = this.props;
+  updateValues = (nextProps) => {
+    const { options, value } = nextProps;
     this.setState(Object.keys(options).reduce((acc, cur) => ({
       ...acc,
       [cur]: !!value[cur],

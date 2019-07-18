@@ -81,4 +81,11 @@ export default {
   height: ['Height (cm)'],
   weight: ['Weight (kg)'],
   save: ['Save'],
+  saving: ['Saving...'],
+  saved: ['Saved'],
+  health_information: ['Health Information'],
+  last_visit_to_dentist: ['When was your last visit to the dentist?'],
+  last_visit_to_ophthalmologist: ['When was your last visit to the ophthalmologist?'],
+  last_visit_to_eye_doctor: ['When was your last visit to the eye doctor?'],
+  last_blood_analysis: ['When was the last time you did blood analysis?'],
 };

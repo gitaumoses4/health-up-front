@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Form from '../../../utils/Forms';
+import Form, { connectForm } from '../../../utils/Forms';
 import Input from '../../../utils/Forms/Input';
 import T from '../../../utils/Translation';
 import './HealthInformationForm.scss';
 import Button from '../../Button';
+import WithLoading from '../../WithLoading';
 
 class HealthInformationForm extends Form {
   illnesses = {
@@ -23,8 +24,37 @@ class HealthInformationForm extends Form {
     others: T.others_specify,
   };
 
+  getProperties() {
+    return {
+      autoSave: true,
+      mirror: true,
+      autoSaveLoader: true,
+    };
+  }
+
+  readData(nextProps) {
+    const { data: { profile } } = nextProps;
+    if (profile) {
+      return {
+        ...profile.healthInformation,
+      };
+    }
+  }
+
+  createData() {
+    const { values } = this.state;
+    return {
+      method: 'put',
+      data: {
+        healthInformation: {
+          ...values,
+        },
+      },
+    };
+  }
+
   renderForm() {
-    const { goNext, goBack } = this.props;
+    const { goNext, goBack, submitting } = this.props;
     return (
       <div className="health-information-form">
         <div className="form">
@@ -41,8 +71,8 @@ class HealthInformationForm extends Form {
           </div>
         </div>
         <div className="button-group">
-          <Button onClick={goBack}>{T.previous}</Button>
-          <Button onClick={goNext}>{T.next}</Button>
+          <Button onClick={goBack} disabled={submitting}>{T.previous}</Button>
+          <Button onClick={goNext} disabled={submitting}>{T.next}</Button>
         </div>
       </div>
     );
@@ -53,4 +83,4 @@ HealthInformationForm.propTypes = {};
 
 HealthInformationForm.defaultProps = {};
 
-export default HealthInformationForm;
+export default connectForm(WithLoading(HealthInformationForm))('userProfile');

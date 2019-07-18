@@ -45,6 +45,7 @@ class Input extends React.Component {
       reverseLabel,
       name, messages = {},
       rules = [],
+      formatValue,
       required, ...otherProps
     } = this.props;
     return (
@@ -78,6 +79,8 @@ class Input extends React.Component {
                 updateRules(name, rules, messages);
               }
             });
+
+            const actualValue = values[name] || '';
             return (
               <div className={classes}>
                 <div className="input-field">
@@ -91,7 +94,7 @@ class Input extends React.Component {
                     onFocus={onFocus}
                     error={errors[name]}
                     placeholder={label || otherProps.placeholder}
-                    value={values[name] || ''}
+                    value={formatValue ? formatValue(actualValue) : actualValue}
                     {...otherProps} />
                 </div>
                 <span className={errorClasses}>{errors[name]}</span>

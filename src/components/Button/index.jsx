@@ -5,15 +5,16 @@ import './Button.scss';
 import classNames from 'classnames';
 
 const Button = ({
-  children, disabled, onClick, secondary, link, ...otherProps 
+  children, disabled, onClick, className = '', secondary, link, ...otherProps
 }) => (
   <button
     disabled={disabled}
-    type="button" onClick={onClick} className={classNames({
+    type="button" onClick={onClick}
+    className={`${classNames({
       secondary,
       button: true,
       disabled,
-    })}
+    })} ${className}`}
     {...otherProps}
   >
     {

@@ -1,0 +1,11 @@
+.health-data-form {
+  max-width: 400px;
+
+  button:not(.submitting) {
+    background: #007000;
+  }
+
+  button {
+    cursor: default;
+  }
+}

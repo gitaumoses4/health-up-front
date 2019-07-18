@@ -12,6 +12,10 @@ class SideBar extends Component {
   };
 
   componentDidMount() {
+    this.initialize();
+  }
+
+  initialize = () => {
     const { type, match } = this.props;
     const items = metadata[type];
 

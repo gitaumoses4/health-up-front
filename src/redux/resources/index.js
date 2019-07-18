@@ -12,6 +12,9 @@ const resources = {
   userProfile: {
     endpoint: '/profile',
   },
+  healthData: {
+    endpoint: '/healthInformation',
+  },
 };
 
 export default resources;

@@ -36,11 +36,10 @@ class PersonalInfoForm extends Form {
   createData() {
     const {
       values: {
-        fullName, idNumber, age, nationality, dateOfBirth, ...others 
-      }, 
+        fullName, idNumber, age, nationality, dateOfBirth, ...others
+      },
     } = this.state;
     return {
-      ...super.createData(),
       method: 'put',
       data: {
         fullName,
@@ -56,7 +55,7 @@ class PersonalInfoForm extends Form {
   }
 
   renderForm = () => {
-    const { goNext } = this.props;
+    const { goNext, submitting } = this.props;
     return (
       <div className="personal-info-form">
         <div className="fieldset">
@@ -72,7 +71,7 @@ class PersonalInfoForm extends Form {
           <Input name="emergencyNumber1" label={T.emergency_phone_1} placeholder={T.emergency_phone_1} />
           <Input name="emergencyNumber2" label={T.emergency_phone_2} placeholder={T.emergency_phone_2} />
         </div>
-        <Button onClick={goNext}>
+        <Button onClick={goNext} disabled={submitting}>
           {T.next}
         </Button>
       </div>

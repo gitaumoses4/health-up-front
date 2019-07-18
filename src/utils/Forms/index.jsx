@@ -40,7 +40,7 @@ class Form extends React.Component {
       rules: {},
       fulfilled: {},
       messages: {},
-      optionalFields: [],
+      optionalFields: this.properties.optionalFields || [],
       onChange: this.onChange,
       onBlur: this.onBlur,
       onFocus: this.onFocus,
@@ -77,7 +77,14 @@ class Form extends React.Component {
 
   onSubmit() {
     const { createResource } = this.props;
-    if (createResource) createResource(this.createData());
+    const { values, valid } = this.state;
+    const data = {
+      data: values,
+      successCallback: this.onSuccess,
+      errorCallback: this.onFailure,
+      ...this.createData(),
+    };
+    if (createResource && valid) createResource(data);
   }
 
   onSuccess(data) {
@@ -141,14 +148,13 @@ class Form extends React.Component {
   }
 
   createData() {
-    const { values } = this.state;
-    return { data: values, successCallback: this.onSuccess, errorCallback: this.onFailure };
+    return {};
   }
 
   readData(nextProps) {
     return null;
   }
-  
+
   getProperties() {
     return { };
   }
@@ -158,7 +164,7 @@ class Form extends React.Component {
       this.autoSave = _.debounce(this.onSubmit, debounce);
       this.properties.mirror = true;
     }
-    
+
     const { readResource } = this.props;
     if (readResource && mirror) readResource();
   }

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import strings from './strings';
 
-const lang = process.env.REACT_APP_LANGUAGE || 'en';
 
 const translate = (text) => {
+  const lang = localStorage.getItem('lang') || process.env.REACT_APP_LANGUAGE;
   const languages = {
     en: 0,
     ar: 1,
@@ -12,7 +12,7 @@ const translate = (text) => {
   let string = strings[text];
   string = string ? string[languages[lang]] : '';
 
-  return string;
+  return string || '';
 };
 
 translate.propTypes = {
