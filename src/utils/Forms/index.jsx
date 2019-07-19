@@ -70,6 +70,8 @@ class Form extends React.Component {
     if (mirror && values) {
       this.setState({
         values,
+      }, () => {
+        Object.keys(values).forEach(value => this.validator.validate(value));
       });
     }
   }
@@ -78,21 +80,14 @@ class Form extends React.Component {
   onSubmit() {
     const { createResource } = this.props;
     const { values, valid } = this.state;
+    const { onSuccess, onFailure } = this.properties;
     const data = {
       data: values,
-      successCallback: this.onSuccess,
-      errorCallback: this.onFailure,
+      successCallback: onSuccess,
+      errorCallback: onFailure,
       ...this.createData(),
     };
     if (createResource && valid) createResource(data);
-  }
-
-  onSuccess(data) {
-
-  }
-
-  onFailure(data) {
-
   }
 
 

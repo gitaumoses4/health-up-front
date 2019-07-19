@@ -21,7 +21,7 @@ setLanguage(language);
 
 if (process.env.NODE_ENV === 'development') {
   document.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.which === 76) {
+    if ((e.ctrlKey || e.metaKey) && e.which === 186) {
       const current = document.querySelector('html').getAttribute('lang');
       localStorage.setItem('lang', current === 'ar' ? 'en' : 'ar');
       window.location.reload();

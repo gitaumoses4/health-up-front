@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Layout from '../../Layout';
 import accountTypes from '../../utils/accountTypes';
 import UserDashboard from './accounts/UserDashboard';
+import CompanyDashboard from './accounts/CompanyDashboard';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -11,6 +12,8 @@ class Dashboard extends Component {
     switch (accountType) {
     case 'normal_user':
       return <UserDashboard />;
+    case 'company':
+      return <CompanyDashboard />;
     default:
       return null;
     }

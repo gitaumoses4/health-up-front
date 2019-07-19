@@ -46,7 +46,7 @@ class Input extends React.Component {
       name, messages = {},
       rules = [],
       formatValue,
-      required, ...otherProps
+      required = true, ...otherProps
     } = this.props;
     return (
       <FormContext.Consumer>
@@ -69,7 +69,7 @@ class Input extends React.Component {
               label,
               reverseLabel,
             });
-            if (optionalFields !== '*' && !optionalFields.includes(name) && !required) {
+            if (optionalFields !== '*' && !optionalFields.includes(name) && required) {
               if (!rules.includes('required')) {
                 rules.push('required');
               }

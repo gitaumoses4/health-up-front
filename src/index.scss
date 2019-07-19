@@ -82,3 +82,14 @@ code {
     align-self: center;
   }
 }
+
+
+.simple-form {
+  display: grid;
+  justify-content: start;
+  grid-template-columns: repeat(1, minmax(200px, 400px));
+
+  button {
+    justify-self: center;
+  }
+}

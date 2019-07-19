@@ -10,17 +10,6 @@ import Input from '../../../utils/Forms/Input';
 import accountTypes from '../../../utils/accountTypes';
 
 class SignUpForm extends Form {
-  onSuccess = () => {
-    const { history } = this.props;
-    toast.success(T.registration_success);
-    history.push('/login');
-  };
-
-  onFailure = () => {
-    const { message } = this.props;
-    toast.error(message);
-  };
-
   getProperties() {
     return {
       rules: {
@@ -30,6 +19,15 @@ class SignUpForm extends Form {
         email: {
           message: T.valid_email,
         },
+      },
+      onSuccess: () => {
+        const { history } = this.props;
+        toast.success(T.registration_success);
+        history.push('/login');
+      },
+      onFailure: () => {
+        const { message } = this.props;
+        toast.error(message);
       },
     };
   }
