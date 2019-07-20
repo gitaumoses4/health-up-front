@@ -10,10 +10,11 @@ import Home from '../views/Home';
 
 const checkPermission = (history, allowedRoles, user) => {
   if (user) {
-    if (allowedRoles.includes(UNAUTHENTICATED)) {
+    if (allowedRoles.includes(UNAUTHENTICATED) || !allowedRoles.includes(user.accountType)) {
       history.push('/dashboard');
+    } else {
       return true;
-    } return !!allowedRoles.includes(user.accountType);
+    }
   }
   return allowedRoles.includes(UNAUTHENTICATED);
 };

@@ -6,7 +6,14 @@ import connectResource from '../../utils/ResourceComponent';
 class AuthenticationWrapper extends Component {
   componentWillMount() {
     const { readResource } = this.props;
-    readResource();
+    readResource({
+      errorCallback: ({ status }) => {
+        if (status === 500) {
+          toast.error('Something went wrong. Please try again!');
+          window.location.href = '/';
+        }
+      },
+    });
   }
 
   render() {

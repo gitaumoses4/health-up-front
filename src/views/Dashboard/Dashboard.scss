@@ -19,3 +19,13 @@
     align-content: start;
   }
 }
+
+.company-dashboard {
+  .company-profile-forms {
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
+    justify-content: space-between;
+    align-items: start;
+  }
+}

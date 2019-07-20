@@ -30,7 +30,7 @@ class SideBar extends Component {
     });
 
     const currentLink = match.path;
-    let found = Object.keys(items).find(item => items[item].link === currentLink);
+    let found = Object.keys(items).find(item => new RegExp(`^${items[item].link}.*`).test(currentLink));
 
     if (!found) {
       found = Object.keys(items).find(item => items[item].active);

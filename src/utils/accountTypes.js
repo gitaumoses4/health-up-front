@@ -1,10 +1,15 @@
 import T from './Translation';
 
+export const NORMAL_USER = 'normal_user';
+export const COMPANY = 'company';
+export const ADMINISTRATOR = 'admin';
+export const AMBULANCE_MAN = 'ambulance_man';
+
 const accountTypes = {
-  normal_user: T.normal_user,
-  company: T.company,
-  admin: T.admin,
-  ambulance_man: T.ambulance_man,
+  [NORMAL_USER]: T.normal_user,
+  [COMPANY]: T.company,
+  [ADMINISTRATOR]: T.admin,
+  [AMBULANCE_MAN]: T.ambulance_man,
 };
 
 export const UNAUTHENTICATED = 'UNAUTHENTICATED';

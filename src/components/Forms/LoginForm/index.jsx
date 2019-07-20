@@ -9,23 +9,21 @@ import './LoginForm.scss';
 import WithLoading from '../../WithLoading';
 
 class LoginForm extends Form {
-  onSuccess = ({ token }) => {
-    toast.success(T.login_success);
-    localStorage.setItem('jwt-token', token);
-    window.location.replace('/dashboard');
-  };
-
-  onFailure = () => {
-    const { message } = this.props;
-    toast.error(message);
-  };
-
   getProperties() {
     return {
       rules: {
         required: {
           message: T.not_empty,
         },
+      },
+      onSuccess: ({ token }) => {
+        toast.success(T.login_success);
+        localStorage.setItem('jwt-token', token);
+        window.location.replace('/dashboard');
+      },
+      onFailure: () => {
+        const { message } = this.props;
+        toast.error(message);
       },
     };
   }

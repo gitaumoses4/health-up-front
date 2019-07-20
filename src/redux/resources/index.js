@@ -15,6 +15,17 @@ const resources = {
   healthData: {
     endpoint: '/healthInformation',
   },
+  companyProfile: {
+    endpoint: '/company',
+  },
+  updatePassword: {
+    endpoint: '/updatePassword',
+  },
+  employees: {
+    endpoint: '/company/employees',
+  },
+  userInformation: {
+  },
 };
 
 export default resources;

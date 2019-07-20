@@ -36,7 +36,7 @@ class HealthDataForm extends Form {
       <div className="health-data-form">
         <Input type="date" formatValue={Tools.formatDate} name="dentist" label={T.last_visit_to_dentist} />
         <Input type="date" formatValue={Tools.formatDate} name="ophthalmologist" label={T.last_visit_to_ophthalmologist} />
-        <Input type="date" formatValue={Tools.formatDate} name="eyeDoctor" label={T.last_visit_to_eye_doctor} />
+        <Input type="date" formatValue={Tools.formatDate} name="earDoctor" label={T.last_visit_to_ear_doctor} />
         <Input type="date" formatValue={Tools.formatDate} name="bloodAnalysis" label={T.last_blood_analysis} />
         <Button className={submitting ? 'submitting' : ''}>
           {submitting ? T.saving : T.saved}

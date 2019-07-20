@@ -55,9 +55,9 @@ class PersonalInfoForm extends Form {
   }
 
   renderForm = () => {
-    const { goNext, submitting } = this.props;
+    const { goNext, submitting, readOnly } = this.props;
     return (
-      <div className="personal-info-form">
+      <div className={`personal-info-form ${readOnly ? 'read-only' : ''}`}>
         <div className="fieldset">
           <Input name="fullName" label={T.full_name} placeholder={T.full_name} />
           <Input name="medicalFileNumber" label={T.medical_file_number} placeholder={T.medical_file_number} />

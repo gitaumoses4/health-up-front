@@ -24,6 +24,21 @@
       width: calc(100% - 4em - 300px);
       justify-self: center;
 
+      &__header {
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        grid-column-gap: 2em;
+        justify-content: start;
+
+        span {
+          cursor: pointer;
+          &:hover {
+            transform: translateX(-3px);
+          }
+        }
+      }
+
       &:lang(ar) {
         margin-left: 0;
         margin-right: 300px;

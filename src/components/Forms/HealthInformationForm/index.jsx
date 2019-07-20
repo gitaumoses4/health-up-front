@@ -7,23 +7,23 @@ import './HealthInformationForm.scss';
 import Button from '../../Button';
 import WithLoading from '../../WithLoading';
 
+export const illnesses = {
+  sugar: T.blood_sugar,
+  bloodPressure: T.blood_pressure,
+  bloodDiseases: T.blood_diseases,
+  respiratory: T.respiratory_diseases,
+  heartDiseases: T.heart_diseases,
+};
+
+export const allergies = {
+  food: T.food,
+  drugs: T.drugs,
+  animals: T.animals,
+  plants: T.plants,
+  others: T.others_specify,
+};
+
 class HealthInformationForm extends Form {
-  illnesses = {
-    sugar: T.blood_sugar,
-    bloodPressure: T.blood_pressure,
-    bloodDiseases: T.blood_diseases,
-    respiratory: T.respiratory_diseases,
-    heartDiseases: T.heart_diseases,
-  };
-
-  allergies = {
-    food: T.food,
-    drugs: T.drugs,
-    animals: T.animals,
-    plants: T.plants,
-    others: T.others_specify,
-  };
-
   getProperties() {
     return {
       autoSave: true,
@@ -56,6 +56,7 @@ class HealthInformationForm extends Form {
 
   renderForm() {
     const { goNext, goBack, submitting } = this.props;
+    const { values: { allergies: allergiesValue, operations } } = this.state;
     return (
       <div className="health-information-form">
         <div className="form">
@@ -64,11 +65,21 @@ class HealthInformationForm extends Form {
             <Input name="smoker" type="radio-group" label={T.are_you_a_smoker} options={{ yes: T.yes, no: T.no }} />
             <Input name="drugsUsed" type="textarea" label={T.drugs_used} />
             <Input name="operations" type="radio-group" label={T.have_you_had_operations} options={{ yes: T.yes, no: T.no }} />
+            {
+              operations === 'yes' && (
+                <Input name="operationsHad" type="textarea" />
+              )
+            }
           </div>
           <div>
-            <Input name="familyHistory" type="checkbox-group" label={T.family_history} options={this.illnesses} />
-            <Input name="currentIllness" type="checkbox-group" label={T.current_illnesses} options={this.illnesses} />
-            <Input name="allergies" type="checkbox-group" label={T.are_you_allergic_to} options={this.allergies} />
+            <Input name="familyHistory" type="checkbox-group" label={T.family_history} options={illnesses} />
+            <Input name="currentIllness" type="checkbox-group" label={T.current_illnesses} options={illnesses} />
+            <Input name="allergies" type="checkbox-group" label={T.are_you_allergic_to} options={allergies} />
+            {
+              allergiesValue && allergiesValue.others && (
+                <Input name="otherAllergies" type="textarea" />
+              )
+            }
           </div>
         </div>
         <div className="button-group">

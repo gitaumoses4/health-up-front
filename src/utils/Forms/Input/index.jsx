@@ -46,7 +46,7 @@ class Input extends React.Component {
       name, messages = {},
       rules = [],
       formatValue,
-      required, ...otherProps
+      required = true, ...otherProps
     } = this.props;
     return (
       <FormContext.Consumer>
@@ -56,6 +56,7 @@ class Input extends React.Component {
             errors = {},
             rules: parentRules, optionalFields,
             onChange, onBlur,
+            readOnly,
             clearRules, onFocus, updateRules,
           }) => {
             const errorClasses = classNames({
@@ -68,8 +69,9 @@ class Input extends React.Component {
               inline,
               label,
               reverseLabel,
+              readOnly,
             });
-            if (optionalFields !== '*' && !optionalFields.includes(name) && !required) {
+            if (optionalFields !== '*' && !optionalFields.includes(name) && required) {
               if (!rules.includes('required')) {
                 rules.push('required');
               }
@@ -90,6 +92,7 @@ class Input extends React.Component {
                     name={name}
                     id={id || this.id}
                     onChange={onChange}
+                    disabled={readOnly}
                     onBlur={onBlur}
                     onFocus={onFocus}
                     error={errors[name]}

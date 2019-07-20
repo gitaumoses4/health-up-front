@@ -1,0 +1,80 @@
+@import "../../index";
+.table {
+  .simple-table {
+    width: 100%;
+    box-shadow: 0 0 10px 4px rgba(0,0,0,.1);
+    &:hover {
+      //box-shadow: 0 20px 20px 4px rgba(0,0,0,.1);
+    }
+
+    .thead {
+      display: grid;
+      background: $accent;
+      color: white;
+      margin: 0;
+
+      .th {
+        font-weight: bold;
+        padding: 0 1em;
+      }
+    }
+
+    .tbody {
+      background: white;
+      display: grid;
+
+      .tr {
+        display: grid;
+        cursor: pointer;
+        .td {
+          white-space: nowrap;
+          padding: 0 1em;
+          .title {
+            display: none;
+          }
+        }
+
+        &:hover {
+          background: #eee;
+        }
+      }
+    }
+
+    .thead, .tr {
+      padding: 1em 0.7em ;
+    }
+  }
+}
+
+@include mobile {
+  .table {
+    .simple-table{
+      display: grid;
+
+      .thead {
+        display: none;
+      }
+
+      .tbody {
+        .tr {
+          grid-template-columns: none !important;
+          grid-auto-flow: row;
+          border-bottom: 1px solid #ccc;
+
+          .td {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            align-items: center;
+            margin: 0.5em 0;
+            font-size: 0.8em;
+
+            .title {
+              display: block;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+.company-employees {
+  .header {
+    display: grid;
+    justify-content: space-between;
+    grid-auto-flow: column;
+    align-items: center;
+  }
+}

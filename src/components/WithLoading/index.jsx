@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './WithLoading.scss';
 import Loader from 'react-loader-spinner';
 
-const WithLoading = (Component, prop = 'loading', LoadingElement) => {
+const WithLoading = (Component, prop = 'loading', hide, LoadingElement) => {
   class Loading extends React.Component {
     render() {
       const { props } = this;
@@ -12,7 +12,10 @@ const WithLoading = (Component, prop = 'loading', LoadingElement) => {
         <div className={`loading-component ${loading ? 'loading' : ''}`}>
           <div className="loading-component__content">
             {
-              <Component {...this.props} />
+              hide ? (
+                loading && <Component {...props} />
+              )
+                : <Component {...this.props} />
             }
           </div>
           <div className="loader">
