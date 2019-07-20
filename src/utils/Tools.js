@@ -6,6 +6,10 @@ class Tools {
       return moment(date).format('YYYY-MM-DD');
     }
   }
+
+  static s(string) {
+    return string || '--';
+  }
 }
 
 export default Tools;

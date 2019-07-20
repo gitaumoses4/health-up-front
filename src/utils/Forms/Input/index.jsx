@@ -56,6 +56,7 @@ class Input extends React.Component {
             errors = {},
             rules: parentRules, optionalFields,
             onChange, onBlur,
+            readOnly,
             clearRules, onFocus, updateRules,
           }) => {
             const errorClasses = classNames({
@@ -68,6 +69,7 @@ class Input extends React.Component {
               inline,
               label,
               reverseLabel,
+              readOnly,
             });
             if (optionalFields !== '*' && !optionalFields.includes(name) && required) {
               if (!rules.includes('required')) {
@@ -90,6 +92,7 @@ class Input extends React.Component {
                     name={name}
                     id={id || this.id}
                     onChange={onChange}
+                    disabled={readOnly}
                     onBlur={onBlur}
                     onFocus={onFocus}
                     error={errors[name]}

@@ -1,0 +1,28 @@
+.info-label {
+  > .title {
+    font-weight: bold;
+  }
+
+  > .title, > .value {
+    height: 2em;
+    display: grid;
+    align-items: center;
+  }
+
+  &.inline {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    grid-column-gap: 1em;
+    align-items: center;
+    height: 1.5em;
+
+    .title {
+      font-weight: normal;
+    }
+
+    .value {
+      font-weight: bold;
+    }
+  }
+}

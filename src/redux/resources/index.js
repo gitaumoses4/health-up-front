@@ -21,6 +21,11 @@ const resources = {
   updatePassword: {
     endpoint: '/updatePassword',
   },
+  employees: {
+    endpoint: '/company/employees',
+  },
+  userInformation: {
+  },
 };
 
 export default resources;

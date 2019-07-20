@@ -4,7 +4,19 @@
   display: grid;
   align-items: start;
 
-  input:not([type="radio"]):not([type="checkbox"]), textarea, select {
+  &.readOnly {
+    input {
+      &:disabled {
+        background: transparent;
+        padding: 0;
+        outline: none;
+        border: none;
+        height: 4em;
+      }
+    }
+  }
+
+  &:not(.readOnly) input:not([type="radio"]):not([type="checkbox"]), textarea, select {
     outline: none;
     padding: 0 1em;
     background: #dadada;

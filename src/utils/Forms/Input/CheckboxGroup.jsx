@@ -36,7 +36,7 @@ class CheckboxGroup extends Component {
   };
 
   render() {
-    const { options } = this.props;
+    const { options, disabled } = this.props;
     const { state } = this;
     return (
       <div className="checkbox-group">
@@ -48,6 +48,7 @@ class CheckboxGroup extends Component {
               <input
                 id={this.id + option}
                 onChange={this.onChange}
+                disabled={disabled}
                 checked={state[option]}
                 value={option}
                 type="checkbox" />

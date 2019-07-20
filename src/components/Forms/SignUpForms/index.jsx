@@ -7,18 +7,12 @@ import WithLoading from '../../WithLoading';
 import NormalUser from './accounts/NormalUser';
 import Company from './accounts/Company';
 import Input from '../../../utils/Forms/Input';
-import accountTypes from '../../../utils/accountTypes';
+import accountTypes, { COMPANY, NORMAL_USER } from '../../../utils/accountTypes';
 
 class SignUpForm extends Form {
   getProperties() {
     return {
       rules: {
-        required: {
-          message: T.not_empty,
-        },
-        email: {
-          message: T.valid_email,
-        },
       },
       onSuccess: () => {
         const { history } = this.props;
@@ -45,7 +39,7 @@ class SignUpForm extends Form {
     const { valid, values: { accountType } } = this.state;
 
 
-    const FormElement = accountType === 'company'
+    const FormElement = accountType === COMPANY
       ? Company : NormalUser;
 
     return (
@@ -54,8 +48,8 @@ class SignUpForm extends Form {
           type="select"
           name="accountType"
           options={[
-            { value: 'company', name: accountTypes.company },
-            { value: 'normal_user', name: accountTypes.normal_user },
+            { value: COMPANY, name: accountTypes.company },
+            { value: NORMAL_USER, name: accountTypes.normal_user },
           ]}
         />
         <FormElement valid={valid} />

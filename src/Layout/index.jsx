@@ -6,7 +6,7 @@ import './Layout.scss';
 import connectResource from '../utils/ResourceComponent';
 import accountTypes from '../utils/accountTypes';
 
-class Layout extends Component {
+class LayoutComponent extends Component {
   state = {
     sidebarOpen: localStorage.getItem('sidebar') === 'false',
   };
@@ -35,7 +35,7 @@ class Layout extends Component {
 
   render() {
     const {
-      children, data: { user }, match, history,
+      children, data: { user }, match, history, header,
     } = this.props;
 
     const width = document.body.clientWidth;
@@ -58,6 +58,19 @@ class Layout extends Component {
               history={history} />
           </div>
           <div className="content">
+            {
+              header && (
+                <div className="content__header">
+                  <span
+                    role="presentation"
+                    onClick={history.goBack}
+                  >
+                    <i className="fas fa-arrow-left" />
+                  </span>
+                  <h2>{header}</h2>
+                </div>
+              )
+            }
             { children }
           </div>
         </div>
@@ -66,11 +79,13 @@ class Layout extends Component {
   }
 }
 
-Layout.propTypes = {
+LayoutComponent.propTypes = {
 
 };
 
-export default connectResource(Layout)({
+const Layout = connectResource(LayoutComponent)({
   resources: ['user'],
   setToProps: true,
 });
+
+export default Layout;

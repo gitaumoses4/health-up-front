@@ -1,0 +1,10 @@
+.user-profile-info {
+  max-width: 900px;
+
+  .personal-info, .health-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
+    grid-row-gap: 2em;
+    justify-content: space-between;
+  }
+}

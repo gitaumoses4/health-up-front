@@ -4,6 +4,7 @@ import Loader from 'react-loader-spinner';
 import Validator from './validator';
 import './Forms.scss';
 import connectResource from '../ResourceComponent';
+import T from '../Translation';
 
 export const FormContext = React.createContext({
   values: {},
@@ -23,13 +24,22 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.properties = _.merge({}, defaultProperties, this.getProperties());
-    this.validator = new Validator(this, this.properties.rules || {});
+    this.validator = new Validator(this, {
+      required: {
+        message: T.not_empty,
+      },
+      email: {
+        message: T.valid_email,
+      },
+      ...(this.properties.rules || {}),
+    });
     this.onChange = this.onChange.bind(this);
     this.updateRules = this.updateRules.bind(this);
     this.clearRules = this.clearRules.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.clearForm = this.clearForm.bind(this);
   }
 
   componentWillMount() {
@@ -40,6 +50,7 @@ class Form extends React.Component {
       rules: {},
       fulfilled: {},
       messages: {},
+      readOnly: this.properties.readOnly,
       optionalFields: this.properties.optionalFields || [],
       onChange: this.onChange,
       onBlur: this.onBlur,
@@ -78,16 +89,22 @@ class Form extends React.Component {
 
 
   onSubmit() {
-    const { createResource } = this.props;
-    const { values, valid } = this.state;
-    const { onSuccess, onFailure } = this.properties;
-    const data = {
-      data: values,
-      successCallback: onSuccess,
-      errorCallback: onFailure,
-      ...this.createData(),
-    };
-    if (createResource && valid) createResource(data);
+    this.validator.validateAll().then(() => {
+      const { createResource } = this.props;
+      const { values, valid } = this.state;
+      const { onSuccess, onFailure } = this.properties;
+      const data = {
+        data: values,
+        successCallback: onSuccess,
+        errorCallback: onFailure,
+        ...this.createData(),
+      };
+      if (createResource && valid) createResource(data);
+    });
+  }
+
+  clearForm() {
+    this.setState({ values: {}, valid: false, fulfilled: {} });
   }
 
 
@@ -126,7 +143,7 @@ class Form extends React.Component {
   onChange({ target: { name, value } }) {
     this.setState(({ values }) => (
       { values: { ...values, [name]: value } }
-    ), () => this.validator.validate(name, () => {
+    ), () => this.validator.validate(name).then(() => {
       const { autoSave } = this.properties;
       if (autoSave) {
         this.autoSave();
@@ -161,7 +178,7 @@ class Form extends React.Component {
     }
 
     const { readResource } = this.props;
-    if (readResource && mirror) readResource();
+    if (readResource && mirror) readResource(this.properties.readResource || {});
   }
 
   renderForm() {
