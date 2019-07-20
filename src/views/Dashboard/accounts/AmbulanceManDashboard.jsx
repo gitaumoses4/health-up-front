@@ -37,10 +37,10 @@ class AmbulanceManDashboard extends Component {
     const { search } = this.state;
     return (
       <div className="ambulance-man-dashboard">
-        <h1>Search for User</h1>
+        <h1>{T.search_for_user}</h1>
         <div className="search-form">
           <div className="form">
-            <input type="text" value={search} placeholder="Search..." onChange={this.onInputChange} />
+            <input type="text" value={search} placeholder={T.search} onChange={this.onInputChange} />
           </div>
           <EmployeeList
             {...searchUsers}
