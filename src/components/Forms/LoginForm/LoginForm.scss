@@ -4,8 +4,25 @@
   grid-template-columns: minmax(200px, 300px);
   justify-content: center;
 
-  button {
+  > button {
     justify-self: center;
     height: 4em;
+  }
+
+  .footer {
+    margin-top: 2em;
+    font-size: 0.8em;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    button {
+      padding: 0.5em 1em;
+      height: auto;
+      background: darkblue;
+      border-radius: 0.5em;
+    }
   }
 }

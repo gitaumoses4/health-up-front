@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toast from 'toastr';
+import { Link } from 'react-router-dom';
 import Form, { connectForm } from '../../../utils/Forms';
 import Input from '../../../utils/Forms/Input';
 import T from '../../../utils/Translation';
@@ -48,6 +49,16 @@ class LoginForm extends Form {
         <Button type="submit" disabled={!valid}>
           {T.sign_in}
         </Button>
+        <div className="footer">
+          <span>
+            {T.dont_have_an_account}
+          </span>
+          <Button>
+            <Link to="/register">
+              {T.sign_up}
+            </Link>
+          </Button>
+        </div>
       </div>
     );
   }

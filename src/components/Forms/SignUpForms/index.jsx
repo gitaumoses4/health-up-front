@@ -1,5 +1,6 @@
 import React from 'react';
 import toast from 'toastr';
+import { Link } from 'react-router-dom';
 import Form, { connectForm } from '../../../utils/Forms';
 import T from '../../../utils/Translation';
 import './SignUpForm.scss';
@@ -8,6 +9,7 @@ import NormalUser from './accounts/NormalUser';
 import Company from './accounts/Company';
 import Input from '../../../utils/Forms/Input';
 import accountTypes, { COMPANY, NORMAL_USER } from '../../../utils/accountTypes';
+import Button from '../../Button';
 
 class SignUpForm extends Form {
   getProperties() {
@@ -53,6 +55,16 @@ class SignUpForm extends Form {
           ]}
         />
         <FormElement valid={valid} />
+        <div className="footer">
+          <span>
+            {T.already_have_and_account}
+          </span>
+          <Button>
+            <Link to="/login">
+              {T.login}
+            </Link>
+          </Button>
+        </div>
       </div>
     );
   }

@@ -93,3 +93,12 @@ code {
     justify-self: center;
   }
 }
+
+@include mobile{
+  h1 {
+    font-size: 1.3em;
+  }
+  h2 {
+    font-size: 1.1em;
+  }
+}

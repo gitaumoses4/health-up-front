@@ -29,3 +29,20 @@
     align-items: start;
   }
 }
+
+
+.ambulance-man-dashboard {
+  .search-form {
+    display: grid;
+    grid-gap: 2em;
+
+    .form {
+      display: grid;
+
+      input {
+        height: 3em;
+        padding: 0 1em;
+      }
+    }
+  }
+}
