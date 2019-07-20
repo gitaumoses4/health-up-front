@@ -1,9 +1,17 @@
 import profile from '../../assets/images/profile.svg';
 import T from '../../utils/Translation';
 import health from '../../assets/images/health.svg';
+import employees from '../../assets/images/employees.svg';
+import companies from '../../assets/images/companies.svg';
+import ambulances from '../../assets/images/ambulances.svg';
+import dashboard from '../../assets/images/dashboard.svg';
+
+import {
+  ADMINISTRATOR, AMBULANCE_MAN, COMPANY, NORMAL_USER, 
+} from '../../utils/accountTypes';
 
 export default {
-  normal_user: [
+  [NORMAL_USER]: [
     {
       label: T.my_profile,
       link: '/dashboard',
@@ -16,7 +24,7 @@ export default {
       link: '/healthRecords',
     },
   ],
-  company: [
+  [COMPANY]: [
     {
       label: T.profile,
       link: '/dashboard',
@@ -26,6 +34,28 @@ export default {
     {
       label: T.employees,
       link: '/employees',
+      icon: employees,
+    },
+  ],
+  [ADMINISTRATOR]: [
+    {
+      label: T.companies,
+      link: '/companies',
+      icon: companies,
+      active: true,
+    },
+    {
+      label: T.ambulances,
+      link: '/ambulances',
+      icon: ambulances,
+    },
+  ],
+  [AMBULANCE_MAN]: [
+    {
+      label: T.dashboard,
+      link: '/dashboard',
+      icon: dashboard,
+      active: true,
     },
   ],
 };

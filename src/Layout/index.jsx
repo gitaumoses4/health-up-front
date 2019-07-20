@@ -23,6 +23,7 @@ class LayoutComponent extends Component {
     const width = document.body.clientWidth;
     if (e.target && current && e.target.contains(current) && width < 600) {
       this.setState({ sidebarOpen: false });
+      localStorage.setItem('sidebar', width > 600 ? false : 'true');
     }
   };
 

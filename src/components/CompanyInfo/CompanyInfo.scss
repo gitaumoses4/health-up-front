@@ -1,0 +1,57 @@
+.company-information {
+  display: grid;
+
+  .company {
+    display: grid;
+
+    .header {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: space-between;
+
+      .badge.verified {
+        background: #006b00;
+        color: white;
+        padding: 0.5em 1em;
+        border-radius: 0.5em;
+      }
+
+      .verify {
+        .dropdown-content {
+          width: 200px;
+          div {
+            display: grid;
+            padding: 0.5em ;
+            text-align: center;
+            justify-content: center;
+
+            span {
+              font-size: 0.8em;
+            }
+
+            button {
+              justify-self: center;
+              padding: 0.3em 1em;
+              background: #006a00;
+              border-radius: 0.2em;
+            }
+          }
+        }
+      }
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+
+  .employees {
+    .tbody {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 400px));
+      grid-gap: 1em;
+    }
+  }
+}

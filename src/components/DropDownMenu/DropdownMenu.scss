@@ -12,8 +12,33 @@
     width: 100%;
     border: 1px solid #ccc;
     opacity: 0;
+    right: 0;
     transform: translateY(-5px);
     box-shadow: 0 0 3px 3px rgba(0,0,0,.05);
+
+    &:before, &:after {
+      position: absolute;
+      content: '';
+      width: 10px;
+      height: 10px;
+      left: 50%;
+      z-index: -1;
+      background: white;
+    }
+
+    &:before {
+      box-shadow: 0 0 3px 3px rgba(0,0,0,.05);
+      border: 1px solid #ccc;
+      transform: rotate(45deg) translateX(-50%);
+      transform-origin: 0 0;
+      top: -5px;
+    }
+
+    &:after {
+      top: 0;
+      width: 100%;
+      left: 0;
+    }
 
 
     &.open {

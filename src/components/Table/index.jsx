@@ -25,7 +25,9 @@ class Table extends Component {
     }), {});
 
   renderBody = () => {
-    const { rows, children = this.renderRows, columns } = this.props;
+    const {
+      rows, children = this.renderRows, readOnly, columns, 
+    } = this.props;
     return (
       <div className="tbody">
         {
@@ -34,7 +36,7 @@ class Table extends Component {
             return (
               <div
                 role="presentation"
-                onClick={data.onClick}
+                onClick={() => !readOnly && data.onClick && data.onClick(this.props)}
                 className="tr"
                 key={Math.random()}
                 style={templateColumns(columns)}>
@@ -57,8 +59,9 @@ class Table extends Component {
   render() {
     const TableHead = this.renderHeader;
     const TableBody = this.renderBody;
+    const { cards } = this.props;
     return (
-      <div className="table">
+      <div className={`table ${cards ? 'card' : ''}`}>
         <div className="simple-table">
           <TableHead />
           <TableBody />

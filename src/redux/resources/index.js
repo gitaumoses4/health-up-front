@@ -26,6 +26,17 @@ const resources = {
   },
   userInformation: {
   },
+  companies: {
+    endpoint: '/companies',
+  },
+  companyInformation: {
+  },
+  ambulances: {
+    endpoint: '/ambulances',
+  },
+  searchUsers: {
+    endpoint: '/users',
+  },
 };
 
 export default resources;

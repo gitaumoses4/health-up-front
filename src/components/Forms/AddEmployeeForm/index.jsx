@@ -44,3 +44,5 @@ AddEmployeeForm.propTypes = {
 };
 
 export default connectForm(WithLoading(AddEmployeeForm, 'submitting'))('employees');
+
+export const AddAmbulanceManForm = connectForm(WithLoading(AddEmployeeForm, 'submitting'))('ambulances');

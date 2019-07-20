@@ -6,9 +6,7 @@ import UserTabs from '../UserTabs';
 import InfoLabel from '../InfoLabel';
 import Tools from '../../utils/Tools';
 import './UserProfileInfo.scss';
-import Input from '../../utils/Forms/Input';
 import { allergies, illnesses } from '../Forms/HealthInformationForm';
-import CheckboxGroup from '../../utils/Forms/Input/CheckboxGroup';
 
 const Options = ({ options, value, title }) => (
   <InfoLabel title={title}>

@@ -9,18 +9,28 @@ class DropDownMenu extends Component {
 
   dropdown = React.createRef();
 
-  toggleDropdown = (e) => {
-    this.setState(({ open }) => ({ open: !open }));
-  };
 
   componentDidMount() {
     document.addEventListener('click', this.handleOutsideClick);
   }
 
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    this.setState({ open: nextProps.open });
+  }
+
   componentWillUnmount() {
     document.removeEventListener('click', this.handleOutsideClick);
   }
+
+  toggleDropdown = (e) => {
+    this.setState(({ open }) => ({ open: !open }), () => {
+      const { onVisibilityChange } = this.props;
+      const { open } = this.state;
+      onVisibilityChange(open);
+    });
+  };
+
 
   handleOutsideClick = (e) => {
     const { target } = e;
@@ -28,6 +38,8 @@ class DropDownMenu extends Component {
     if (current) {
       if (!current.contains(target)) {
         this.setState({ open: false });
+        const { onVisibilityChange } = this.props;
+        onVisibilityChange(false);
       }
     }
   };
@@ -53,7 +65,11 @@ class DropDownMenu extends Component {
 }
 
 DropDownMenu.propTypes = {
+  onVisibilityChange: PropTypes.func,
+};
 
+DropDownMenu.defaultProps = {
+  onVisibilityChange: () => {},
 };
 
 export default DropDownMenu;

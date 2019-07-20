@@ -20,11 +20,11 @@
     }
 
     .tbody {
-      background: white;
       display: grid;
 
       .tr {
         display: grid;
+        background: white;
         cursor: pointer;
         .td {
           white-space: nowrap;
@@ -44,11 +44,13 @@
       padding: 1em 0.7em ;
     }
   }
-}
 
-@include mobile {
-  .table {
+
+  @mixin cardTable()
+  {
+
     .simple-table{
+      box-shadow: none;
       display: grid;
 
       .thead {
@@ -60,10 +62,12 @@
           grid-template-columns: none !important;
           grid-auto-flow: row;
           border-bottom: 1px solid #ccc;
+          margin-bottom: 1em;
+          box-shadow: 0 0 10px 4px rgba(0,0,0,.1);
 
           .td {
             display: grid;
-            grid-template-columns: 100px 1fr;
+            grid-template-columns: 1fr 2fr;
             align-items: center;
             margin: 0.5em 0;
             font-size: 0.8em;
@@ -71,10 +75,21 @@
             .title {
               display: block;
               font-weight: bold;
+              white-space: pre-wrap;
+              text-overflow: ellipsis;
             }
           }
         }
       }
     }
   }
+
+  @include mobile {
+    @include cardTable()
+  }
+
+  &.card {
+    @include cardTable();
+  }
 }
+
