@@ -49,19 +49,21 @@ const App = () => (
     <Switch>
       <Route path="/" exact component={Home} />
       <AuthenticationWrapper>
-        {
-          Object.keys(routes).map((route) => {
-            const [component, auth = []] = routes[route];
-            return (
-              <Route
-                path={route}
-                key={route}
-                exact
-                component={AuthenticatedRoute(component, auth)}
-              />
-            );
-          })
-        }
+        <Switch>
+          {
+            Object.keys(routes).map((route) => {
+              const [component, auth = []] = routes[route];
+              return (
+                <Route
+                  path={route}
+                  key={route}
+                  exact
+                  component={AuthenticatedRoute(component, auth)}
+                />
+              );
+            })
+          }
+        </Switch>
       </AuthenticationWrapper>
     </Switch>
   </BrowserRouter>
