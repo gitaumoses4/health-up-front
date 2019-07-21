@@ -9,6 +9,7 @@ import TextInput from './TextInput';
 import RadioGroup from './RadioGroup';
 import TextArea from './TextArea';
 import CheckboxGroup from './CheckboxGroup';
+import TimePicker from './TimePicker';
 
 class Input extends React.Component {
   switchInput = () => {
@@ -22,6 +23,8 @@ class Input extends React.Component {
       return TextArea;
     case 'checkbox-group':
       return CheckboxGroup;
+    case 'time':
+      return TimePicker;
     default:
       return TextInput;
     }
@@ -45,6 +48,7 @@ class Input extends React.Component {
       reverseLabel,
       name, messages = {},
       rules = [],
+      value,
       formatValue,
       required = true, ...otherProps
     } = this.props;
@@ -78,7 +82,7 @@ class Input extends React.Component {
             }
             rules.forEach((rule) => {
               if (!parentRules[name] || !parentRules[name].includes(rule)) {
-                updateRules(name, rules, messages);
+                updateRules(name, rules, messages, value);
               }
             });
 

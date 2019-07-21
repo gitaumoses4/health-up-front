@@ -108,8 +108,9 @@ class Form extends React.Component {
   }
 
 
-  updateRules(name, rules, messages) {
+  updateRules(name, rules, messages, value) {
     this.setState(state => ({
+      values: { ...state.values, [name]: value },
       rules: { ...state.rules, [name]: rules },
       messages: { ...state.messages, [name]: messages },
       fulfilled: {

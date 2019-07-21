@@ -48,7 +48,7 @@ class UserProfileInfo extends Component {
       <InfoLabel title={T.nationality} value={nationality} />
       <InfoLabel title={T.age} value={age} />
       <InfoLabel title={T.date_of_birth} value={Tools.formatDate(dateOfBirth)} />
-      <InfoLabel title={T.location} value={location} />
+      {/* <InfoLabel title={T.location} value={location} /> */}
       <InfoLabel title={T.place_of_residence} value={placeOfResidence} />
       <InfoLabel title={T.mobile_number} value={mobileNumber} />
       <InfoLabel title={T.emergency_phone_1} value={emergencyNumber1} />
@@ -105,7 +105,7 @@ class UserProfileInfo extends Component {
       healthInformation: {
         allergies: {},
         familyHistory: {},
-        currentIllness: {}
+        currentIllness: {},
       },
       personalInformation: {},
       generalInformation: {},

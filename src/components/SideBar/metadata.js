@@ -5,6 +5,7 @@ import employees from '../../assets/images/employees.svg';
 import companies from '../../assets/images/companies.svg';
 import ambulances from '../../assets/images/ambulances.svg';
 import dashboard from '../../assets/images/dashboard.svg';
+import notifications from '../../assets/images/notifications.svg';
 
 import {
   ADMINISTRATOR, AMBULANCE_MAN, COMPANY, NORMAL_USER, 
@@ -48,6 +49,11 @@ export default {
       label: T.ambulances,
       link: '/ambulances',
       icon: ambulances,
+    },
+    {
+      label: T.notifications,
+      link: '/builder/notifications',
+      icon: notifications,
     },
   ],
   [AMBULANCE_MAN]: [

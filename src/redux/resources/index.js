@@ -37,6 +37,12 @@ const resources = {
   searchUsers: {
     endpoint: '/users',
   },
+  notificationTypes: {
+    endpoint: '/notifications/types',
+  },
+  notificationType: {
+    endpoint: '/notifications/types/:id',
+  },
 };
 
 export default resources;

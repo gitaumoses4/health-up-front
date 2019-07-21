@@ -32,6 +32,12 @@
     }
   }
 
+  .time-picker {
+    input {
+      width: 3em !important;
+    }
+  }
+
   input[type="date"]{
     width: 100%;
   }

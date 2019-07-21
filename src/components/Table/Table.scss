@@ -27,7 +27,6 @@
         background: white;
         cursor: pointer;
         .td {
-          white-space: nowrap;
           padding: 0 1em;
           .title {
             display: none;
@@ -88,7 +87,7 @@
     @include cardTable()
   }
 
-  &.card {
+  &.cardLike {
     @include cardTable();
   }
 }
