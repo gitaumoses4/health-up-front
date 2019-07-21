@@ -63,6 +63,7 @@ class Form extends React.Component {
       ...state,
     }));
     this.initialize(this.properties);
+    this.prefill(this.props);
   }
 
   componentDidMount() {
@@ -76,6 +77,10 @@ class Form extends React.Component {
     this.setState({
       errors: nextProps.errors,
     });
+    this.prefill(nextProps);
+  }
+
+  prefill = (nextProps) => {
     const { mirror } = this.properties;
     const values = this.readData(nextProps);
     if (mirror && values) {
@@ -85,8 +90,7 @@ class Form extends React.Component {
         Object.keys(values).forEach(value => this.validator.validate(value));
       });
     }
-  }
-
+  };
 
   onSubmit() {
     this.validator.validateAll().then(() => {
@@ -109,15 +113,20 @@ class Form extends React.Component {
 
 
   updateRules(name, rules, messages, value) {
-    this.setState(state => ({
-      values: { ...state.values, [name]: value },
-      rules: { ...state.rules, [name]: rules },
-      messages: { ...state.messages, [name]: messages },
-      fulfilled: {
-        ...state.fulfilled,
-        [name]: rules.reduce((acc, cur) => ({ ...acc, [cur]: false }), {}),
-      },
-    }), () => {
+    this.setState((state) => {
+      const newState = {
+        rules: { ...state.rules, [name]: rules },
+        messages: { ...state.messages, [name]: messages },
+        fulfilled: {
+          ...state.fulfilled,
+          [name]: rules.reduce((acc, cur) => ({ ...acc, [cur]: false }), {}),
+        },
+      };
+      if (value) {
+        newState.values = { ...state.values, [name]: value };
+      }
+      return newState; 
+    }, () => {
       const { values } = this.state;
       if (values[name]) {
         this.validator.validate(name);
@@ -208,8 +217,8 @@ class Form extends React.Component {
   }
 }
 
-export const connectForm = Component => resource => connectResource(Component)(
-  { resources: [resource], setToProps: true },
+export const connectForm = Component => (resource, types) => connectResource(Component)(
+  { resources: [resource], setToProps: true, types },
 );
 
 export default Form;

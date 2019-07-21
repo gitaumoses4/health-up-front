@@ -11,41 +11,51 @@ class NotificationsConfiguration extends Component {
     title: configuration.name,
   }));
 
-  generateTabs = (configurations) => {
-    const { history, notificationType } = this.props;
-    return configurations.map(configuration => (
-      <div key={Math.random()}>
-        <NotificationCreator
-          notificationType={notificationType}
-          condition={configuration}
-          history={history} />
-      </div>
-    ));
+  generateTabs = configurations => configurations.map(configuration => (
+    <div key={Math.random()}>
+      {this.renderCreator(configuration)}
+    </div>
+  ));
+
+  renderCreator = (configuration) => {
+    const {
+      history, notificationType,
+      updateResource,
+    } = this.props;
+
+    return (
+      <NotificationCreator
+        updateResource={updateResource}
+        notificationType={notificationType}
+        condition={configuration}
+        history={history} />
+    );
   };
 
-  onTabChange = () => {
-
+  renderTabs = ({ configurations }) => {
+    const { currentTab, onTabChange } = this.props;
+    return (
+      <TabLayout
+        onTabChange={onTabChange}
+        currentTab={currentTab}
+        tabs={this.generateTabsHeader(configurations)}
+      >
+        {this.generateTabs(configurations)}
+      </TabLayout>
+    );
   };
-
-  renderTabs = ({ configurations }) => (
-    <TabLayout
-      onTabChange={this.onTabChange}
-      currentTab={0}
-      tabs={this.generateTabsHeader(configurations)}
-    >
-      {this.generateTabs(configurations)}
-    </TabLayout>
-  );
 
   render() {
-    const { notificationType, history, notificationType: { conditions } } = this.props;
+    const { notificationType: { conditions } } = this.props;
     const ConfigTabLayout = this.renderTabs;
     return (
       <div className="notification-type-configuration">
         {
           conditions.length ? (
             <ConfigTabLayout configurations={conditions} />
-          ) : <NotificationCreator notificationType={notificationType} history={history} />
+          ) : (
+            this.renderCreator()
+          )
         }
       </div>
     );

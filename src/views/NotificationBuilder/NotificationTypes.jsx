@@ -4,6 +4,7 @@ import WithLoading from '../../components/WithLoading';
 import notificationsIcon from '../../assets/images/notifications.svg';
 import connectResource from '../../utils/ResourceComponent';
 import T from '../../utils/Translation';
+import Empty from '../../components/Empty';
 
 class NotificationTypes extends Component {
   componentDidMount() {
@@ -41,7 +42,7 @@ class NotificationTypes extends Component {
             notificationTypes.map(type => (
               <NotificationType notificationType={type} history={history} key={Math.random()} />
             ))
-          ) : null
+          ) : <Empty />
         }
       </div>
     );

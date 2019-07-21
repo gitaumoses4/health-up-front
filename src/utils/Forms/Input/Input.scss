@@ -33,8 +33,15 @@
   }
 
   .time-picker {
-    input {
+    input, select {
       width: 3em !important;
+      background: transparent !important;
+      border: none !important;
+    }
+
+    .react-time-picker__wrapper{
+      border: 1px solid #ddd;
+      background: #dadada;
     }
   }
 
@@ -76,7 +83,10 @@
   &.error {
 
     .input-field{
-      input, select , textarea{
+      input, select , textarea  {
+        border: 1px solid red;
+      }
+      .react-time-picker__wrapper {
         border: 1px solid red;
       }
     }

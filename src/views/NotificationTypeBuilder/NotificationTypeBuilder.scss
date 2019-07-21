@@ -4,4 +4,46 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 1em;
   }
+
+  .notification-editor {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(1, minmax(200px, 500px));
+
+    .header {
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+
+      button {
+        background: #b30000;
+      }
+
+      .dropdown-content {
+        width: 200px;
+
+        .confirm-delete {
+          padding: 0.5em 1em;
+          display: grid;
+          justify-content: center;
+          justify-items: center;
+          text-align: center;
+
+          span {
+            font-size: 0.7em;
+          }
+
+          button {
+            padding: 0.5em 1em;
+            border-radius: 0.5em;
+          }
+        }
+      }
+    }
+
+    .notification-form {
+    }
+  }
 }

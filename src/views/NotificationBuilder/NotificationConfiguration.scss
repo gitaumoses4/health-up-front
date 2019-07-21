@@ -1,6 +1,7 @@
 .notification-configuration {
   .notification-type-list {
     display: grid;
+    justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
     grid-gap: 1em;
 
