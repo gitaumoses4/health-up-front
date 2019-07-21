@@ -54,10 +54,18 @@
       height: 30px;
     }
 
+    .logo {
+      h3 {
+        font-size: 0.7em;
+        font-weight: bold;
+      }
+    }
+
     .user-profile {
       img {
         display: none;
       }
+      font-size: 0.7em;
     }
 
     .logo {

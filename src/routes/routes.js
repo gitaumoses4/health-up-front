@@ -11,6 +11,8 @@ import ViewEmployee from '../views/ViewEmployee';
 import ViewCompany from '../views/ViewCompany';
 import Ambulances from '../views/Ambulances';
 import AddAmbulanceMan from '../views/AddAmbulanceMan';
+import NotificationBuilder from '../views/NotificationBuilder';
+import NotificationTypeBuilder from '../views/NotificationTypeBuilder';
 
 export default {
   '/register': [Register, [UNAUTHENTICATED]],
@@ -24,4 +26,6 @@ export default {
   '/companies/:id': [ViewCompany, [ADMINISTRATOR]],
   '/ambulances': [Ambulances, [ADMINISTRATOR]],
   '/ambulances/new': [AddAmbulanceMan, [ADMINISTRATOR]],
+  '/builder/notifications': [NotificationBuilder, [ADMINISTRATOR]],
+  '/builder/notifications/:id': [NotificationTypeBuilder, [ADMINISTRATOR]],
 };

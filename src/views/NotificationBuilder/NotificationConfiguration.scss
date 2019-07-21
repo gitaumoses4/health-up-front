@@ -1,0 +1,35 @@
+.notification-configuration {
+  .notification-type-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+    grid-gap: 1em;
+
+    .notification-type {
+      height: 200px;
+      display: grid;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      align-content: center;
+
+      h3 {
+        font-weight: bold;
+        color: #666;
+      }
+
+      img {
+        height: 40px;
+      }
+
+      div {
+        display: grid;
+        grid-auto-flow: column;
+        grid-column-gap: 0.5em;
+
+        .count {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

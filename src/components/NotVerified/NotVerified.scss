@@ -1,0 +1,19 @@
+@import "../../index";
+
+.not-verified {
+  display: grid;
+  grid-gap: 2em;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  place-items: center;
+
+  img {
+    height: 300px;
+
+    @include mobile {
+      height: auto;
+      width: 100%;
+    }
+  }
+}

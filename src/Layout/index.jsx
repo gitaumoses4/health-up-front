@@ -4,7 +4,8 @@ import NavBar from '../components/NavBar';
 import SideBar from '../components/SideBar';
 import './Layout.scss';
 import connectResource from '../utils/ResourceComponent';
-import accountTypes from '../utils/accountTypes';
+import accountTypes, { COMPANY } from '../utils/accountTypes';
+import NotVerified from '../components/NotVerified';
 
 class LayoutComponent extends Component {
   state = {
@@ -34,9 +35,22 @@ class LayoutComponent extends Component {
     localStorage.setItem('sidebar', width > 600 ? sidebarOpen : 'true');
   };
 
+
+  renderContent = () => {
+    const { data: { user }, children } = this.props;
+    if (user.accountType === COMPANY) {
+      const { company } = user;
+      if (company.verified) {
+        return children;
+      }
+      return <NotVerified />;
+    } 
+    return children;
+  };
+
   render() {
     const {
-      children, data: { user }, match, history, header,
+      data: { user }, match, history, header,
     } = this.props;
 
     const width = document.body.clientWidth;
@@ -72,7 +86,7 @@ class LayoutComponent extends Component {
                 </div>
               )
             }
-            { children }
+            { this.renderContent() }
           </div>
         </div>
       </div>

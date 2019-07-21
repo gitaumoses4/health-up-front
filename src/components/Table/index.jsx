@@ -61,7 +61,7 @@ class Table extends Component {
     const TableBody = this.renderBody;
     const { cards } = this.props;
     return (
-      <div className={`table ${cards ? 'card' : ''}`}>
+      <div className={`table ${cards ? 'cardLike' : ''}`}>
         <div className="simple-table">
           <TableHead />
           <TableBody />
