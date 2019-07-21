@@ -147,4 +147,13 @@ export default {
   december: ['December', 'ديسمبر'],
   month: ['Month', 'شهر'],
   create: ['Create', 'خلق'],
+  daily_at: ['Daily at {}', 'يوميًا في {}'], // eg Daily at 11 PM
+  weekly_on: ['Every {} at {}', 'كل {} في {}'], // eg Every Tuesday at 11 PM
+  monthly_on: ['Date {} of every month', 'تاريخ {} من كل شهر'], // eg. Date 12 of every month
+  yearly_on: ['Every {} on date {}', 'تاريخ {} من كل شهر'], // eg. Every January on date 12
+  notification: ['Notification'],
+  edit_notification: ['Edit Notification'],
+  delete: ['Delete'],
+  confirm_deletion: ['Are you sure you want to delete this notification?'],
+  download: ['Download'],
 };

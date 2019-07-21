@@ -1,0 +1,42 @@
+.file-input {
+  display: grid;
+
+  .file {
+    display: grid;
+    align-items: center;
+    cursor: pointer;
+    grid-auto-flow: column;
+    justify-content: start;
+    grid-gap: 1em;
+
+    .file-name {
+      width: 100%;
+      overflow: hidden;
+      font-size: 0.8em;
+      text-overflow: ellipsis;
+    }
+
+    img {
+      height: 1.5em;
+    }
+
+    .placeholder {
+      color: #666;
+      font-size: 0.9em;
+    }
+  }
+
+  progress {
+    height: 2px;
+    background: darkgreen;
+    width: 100%;
+
+    &[value="0"]::-webkit-progress-bar{
+      background: #ddd;
+    }
+  }
+
+  input {
+    display: none;
+  }
+}

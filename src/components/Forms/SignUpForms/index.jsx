@@ -48,6 +48,7 @@ class SignUpForm extends Form {
       <div className="signup-form">
         <Input
           type="select"
+          value="company"
           name="accountType"
           options={[
             { value: COMPANY, name: accountTypes.company },

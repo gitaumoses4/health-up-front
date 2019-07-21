@@ -93,12 +93,20 @@ class NotificationForm extends Form {
     }
   };
 
+  readData({ notification }) {
+    return {
+      ...notification,
+    };
+  }
+
   getProperties() {
+    const { editing } = this.props;
     return {
       onSuccess: ({ message }) => {
         toast.success(message);
         this.clearForm();
       },
+      mirror: editing,
       onFailure: ({ message }) => {
         toast.error(message);
       },
@@ -120,15 +128,17 @@ class NotificationForm extends Form {
     };
   }
 
+
   renderForm() {
     const { valid } = this.state;
+    const { editing } = this.props;
     return (
       <div className="notification-form">
         <Input type="textarea" name="text" label={T.notification_text} placeholder={T.notification_text} />
         <Input type="select" name="frequency" options={frequencies} label={T.frequency} />
         { this.renderFrequencyOption() }
         <Button type="submit" disabled={!valid}>
-          {T.create}
+          {editing ? T.update : T.create}
         </Button>
       </div>
     );
@@ -139,4 +149,4 @@ NotificationForm.propTypes = {
 
 };
 
-export default connectForm(WithLoading(NotificationForm, 'submitting'))('notificationType');
+export default connectForm(WithLoading(NotificationForm, 'submitting'))('notificationType', ['create']);

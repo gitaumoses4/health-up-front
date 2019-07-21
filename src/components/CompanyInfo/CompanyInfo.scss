@@ -44,6 +44,43 @@
     .info {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-gap: 1em;
+
+      .card {
+        padding: 0.5em;
+
+        &.receipt {
+          background: #0f5317;
+          color: white;
+          display: grid;
+          justify-content: center;
+          justify-items: center;
+
+          .title {
+            height: auto;
+          }
+
+          img {
+            height: 1.5em;
+          }
+
+          a {
+            cursor: pointer;
+            text-decoration: none;
+            display: grid;
+            grid-auto-flow: column;
+            color: white;
+            justify-content: start;
+            align-items: center;
+            font-size: 1em;
+
+            span {
+              margin-left: 0.5em;
+              cursor: pointer;
+            }
+          }
+        }
+      }
     }
   }
 

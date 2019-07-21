@@ -10,6 +10,7 @@ import RadioGroup from './RadioGroup';
 import TextArea from './TextArea';
 import CheckboxGroup from './CheckboxGroup';
 import TimePicker from './TimePicker';
+import FileInput from './FileInput';
 
 class Input extends React.Component {
   switchInput = () => {
@@ -25,6 +26,8 @@ class Input extends React.Component {
       return CheckboxGroup;
     case 'time':
       return TimePicker;
+    case 'file':
+      return FileInput;
     default:
       return TextInput;
     }

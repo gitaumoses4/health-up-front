@@ -6,6 +6,12 @@ import Button from '../../../Button';
 
 const Company = ({ valid }) => (
   <React.Fragment>
+    <Input
+      cloudinaryUrl={process.env.REACT_APP_CLOUDINARY_API}
+      uploadPreset={process.env.REACT_APP_CLOUDINARY_PRESET}
+      name="receipt"
+      type="file"
+      placeholder={T.receipt} />
     <Input name="name" placeholder={T.company_name} rules={['required']} />
     <Input name="email" rules={['required', 'email']} placeholder={T.email} />
     <Input name="password" type="password" placeholder={T.password} />
