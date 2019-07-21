@@ -6,6 +6,7 @@ import './CompanyInfo.scss';
 import EmployeeList from '../EmployeeList';
 import InfoLabel from '../InfoLabel';
 import Button from '../Button';
+import download from '../../assets/images/download.svg';
 import DropDownMenu from '../DropDownMenu';
 
 class CompanyInfo extends Component {
@@ -60,6 +61,7 @@ class CompanyInfo extends Component {
     company,
     company: {
       employees, registrationNumber,
+      receipt,
       naturalBusiness, noOfEmployees,
       owner: {
         name,
@@ -78,10 +80,15 @@ class CompanyInfo extends Component {
             {this.renderVerified(company)}
           </div>
           <div className="info">
-            <InfoLabel title={T.registration_number} value={registrationNumber} />
-            <InfoLabel title={T.email} value={email} />
-            <InfoLabel title={T.natural_business} value={naturalBusiness} />
-            <InfoLabel title={T.number_of_employees} value={noOfEmployees} />
+            <InfoLabel className="card" title={T.registration_number} value={registrationNumber} />
+            <InfoLabel className="card" title={T.email} value={email} />
+            <InfoLabel className="card" title={T.natural_business} value={naturalBusiness} />
+            <InfoLabel className="card" title={T.number_of_employees} value={noOfEmployees} />
+            <InfoLabel className="card clickable receipt" title={T.receipt}>
+              <a href={receipt} download="Receipt">
+                <img src={download} alt="" />
+              </a>
+            </InfoLabel>
           </div>
         </div>
       </div>

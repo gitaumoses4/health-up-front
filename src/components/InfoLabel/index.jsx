@@ -4,9 +4,9 @@ import Tools from '../../utils/Tools';
 import './InfoLabel.scss';
 
 const InfoLabel = ({
-  title, children, value, inline, 
+  title, children, value, inline, className = '',
 }) => (
-  <div className={`info-label ${inline ? 'inline' : ''}`}>
+  <div className={`info-label ${className} ${inline ? 'inline' : ''}`}>
     <div className="title">{title}</div>
     {
       children || <span className="value">{Tools.s(value)}</span>

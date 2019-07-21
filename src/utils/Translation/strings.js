@@ -155,4 +155,5 @@ export default {
   edit_notification: ['Edit Notification'],
   delete: ['Delete'],
   confirm_deletion: ['Are you sure you want to delete this notification?'],
+  download: ['Download'],
 };

@@ -16,7 +16,7 @@
     }
   }
 
-  &:not(.readOnly) input:not([type="radio"]):not([type="checkbox"]), textarea, select {
+  &:not(.readOnly) input:not([type="radio"]):not([type="checkbox"]), textarea, select, .file-input .file {
     outline: none;
     padding: 0 1em;
     background: #dadada;
