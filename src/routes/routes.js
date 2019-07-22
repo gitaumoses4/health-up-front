@@ -13,6 +13,7 @@ import Ambulances from '../views/Ambulances';
 import AddAmbulanceMan from '../views/AddAmbulanceMan';
 import NotificationBuilder from '../views/NotificationBuilder';
 import NotificationTypeBuilder from '../views/NotificationTypeBuilder';
+import Notifications from '../views/Notifications';
 
 export default {
   '/register': [Register, [UNAUTHENTICATED]],
@@ -28,4 +29,5 @@ export default {
   '/ambulances/new': [AddAmbulanceMan, [ADMINISTRATOR]],
   '/builder/notifications': [NotificationBuilder, [ADMINISTRATOR]],
   '/builder/notifications/:id': [NotificationTypeBuilder, [ADMINISTRATOR]],
+  '/notifications': [Notifications, ALL],
 };

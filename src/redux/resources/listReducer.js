@@ -1,65 +1,18 @@
-import { REQUEST_RESOURCE_FAILURE, REQUEST_RESOURCE_SUCCESS, RESOURCE_REQUEST } from './resourceActions';
-import resources from './index';
 import {
-  createListReducer,
-  deleteListReducer, initialListState,
-  readListReducer,
-  updateListReducer,
-} from './listReducer';
+  REQUEST_RESOURCE_FAILURE,
+  REQUEST_RESOURCE_SUCCESS,
+  RESOURCE_REQUEST,
+} from './resourceActions';
 
-
-const initialState = {
-  resources: {
-
-  },
-};
-
-export const initialFormState = {
-  data: {},
+export const initialListState = {
+  data: [],
   errors: {},
   loading: false,
   submitting: false,
   message: '',
 };
 
-const createReducer = (state = initialFormState, action, resource) => {
-  switch (action.type) {
-  case RESOURCE_REQUEST(resource): {
-    return {
-      ...state,
-      data: {},
-      errors: {},
-      loading: false,
-      submitting: true,
-      message: '',
-    };
-  }
-  case REQUEST_RESOURCE_SUCCESS(resource): {
-    return {
-      ...state,
-      data: action.data,
-      errors: {},
-      loading: false,
-      submitting: false,
-      message: action.data.message,
-    };
-  }
-  case REQUEST_RESOURCE_FAILURE(resource): {
-    return {
-      ...state,
-      data: {},
-      errors: action.errors || {},
-      loading: false,
-      submitting: false,
-      message: action.message,
-    };
-  }
-  default:
-    return state;
-  }
-};
-
-const updateReducer = (state = initialFormState, action, resource) => {
+export const createListReducer = (state = initialListState, action, resource) => {
   switch (action.type) {
   case RESOURCE_REQUEST(resource): {
     return {
@@ -71,9 +24,10 @@ const updateReducer = (state = initialFormState, action, resource) => {
     };
   }
   case REQUEST_RESOURCE_SUCCESS(resource): {
+    const { resolveSingle } = action.request;
     return {
       ...state,
-      data: { ...state.data, ...action.data },
+      data: [resolveSingle ? resolveSingle(action.data) : action.data, ...state.data],
       errors: {},
       loading: false,
       submitting: false,
@@ -94,7 +48,48 @@ const updateReducer = (state = initialFormState, action, resource) => {
   }
 };
 
-const readReducer = (state = initialFormState, action, resource) => {
+export const updateListReducer = (state = initialListState, action, resource) => {
+  switch (action.type) {
+  case RESOURCE_REQUEST(resource): {
+    return {
+      ...state,
+      errors: {},
+      loading: false,
+      submitting: true,
+      message: '',
+    };
+  }
+  case REQUEST_RESOURCE_SUCCESS(resource): {
+    const { resolveUpdate, resolveSingle } = action.request;
+    const resolver = resolveUpdate
+      ? state.data.findIndex(current => resolveUpdate(current, action.data)) : -1;
+
+    const newData = [...state.data];
+    if (resolver >= 0) newData[resolver] = resolveSingle ? resolveSingle(action.data) : action.data;
+    return {
+      ...state,
+      data: newData,
+      errors: {},
+      loading: false,
+      submitting: false,
+      message: action.data.message,
+    };
+  }
+  case REQUEST_RESOURCE_FAILURE(resource): {
+    return {
+      ...state,
+      errors: action.errors || {},
+      loading: false,
+      submitting: false,
+      message: action.message,
+    };
+  }
+  default:
+    return state;
+  }
+};
+
+export const readListReducer = (state = initialListState, action, resource) => {
   switch (action.type) {
   case RESOURCE_REQUEST(resource): {
     return {
@@ -106,9 +101,11 @@ const readReducer = (state = initialFormState, action, resource) => {
     };
   }
   case REQUEST_RESOURCE_SUCCESS(resource): {
+    const { resolveList } = action.request;
+    const list = resolveList ? resolveList(action.data) : action.data;
     return {
       ...state,
-      data: { ...state.data, ...action.data },
+      data: list,
       errors: {},
       loading: false,
       submitting: false,
@@ -129,12 +126,20 @@ const readReducer = (state = initialFormState, action, resource) => {
   }
 };
 
-const deleteReducer = (state = initialFormState, action, resource) => {
+export const deleteListReducer = (state = initialListState, action, resource) => {
   switch (action.type) {
   case RESOURCE_REQUEST(resource): {
+    const { resolveUpdate } = action.request;
+    const resolver = resolveUpdate
+      ? state.data.findIndex(current => resolveUpdate(current, action.data)) : -1;
+
+    let newData = [...state.data];
+    if (resolver >= 0) {
+      newData = newData.splice(resolver, 1);
+    }
     return {
       ...state,
-      data: {},
+      data: newData,
       errors: {},
       loading: false,
       submitting: true,
@@ -163,30 +168,3 @@ const deleteReducer = (state = initialFormState, action, resource) => {
     return state;
   }
 };
-
-const generateReducer = (state, action, resource) => {
-  const list = action.list || resources[resource].list;
-  console.log(list);
-  let func;
-  switch (action.resourceType) {
-  case 'read':
-    func = list ? readListReducer : readReducer;
-    break;
-  case 'update':
-    func = list ? updateListReducer : updateReducer;
-    break;
-  case 'delete':
-    func = list ? deleteListReducer : deleteReducer;
-    break;
-  default:
-    func = list ? createListReducer : createReducer;
-  }
-
-  return func(state || (list ? initialListState : initialFormState), action, resource);
-};
-
-
-export default (state = initialState, action) => Object.keys(resources).reduce((acc, resource) => ({
-  ...acc,
-  [resource]: generateReducer(state[resource], action, resource),
-}), {});

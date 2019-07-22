@@ -1,0 +1,36 @@
+.notifications-list {
+  .list {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-gap: 1em;
+
+    .notification {
+      padding: 1em;
+
+      .text {
+        display: grid;
+        align-items: center;
+        grid-auto-flow: column;
+        justify-content: start;
+        grid-gap: 1em;
+
+        img {
+          height: 1em;
+        }
+      }
+
+      .meta {
+        font-size: 0.7em;
+        color: #999;
+      }
+
+      &.unread {
+        background: #ddd;
+      }
+
+      &.read {
+        background: white;
+      }
+    }
+  }
+}

@@ -22,7 +22,7 @@ const getMethod = (type) => {
   }
 };
 
-export const resourceRequest = (name, type) => (params = {}) => {
+export const resourceRequest = (name, type, list) => (params = {}) => {
   const {
     data,
     successCallback = () => {},
@@ -38,22 +38,27 @@ export const resourceRequest = (name, type) => (params = {}) => {
       successCallback,
       errorCallback,
       endpoint,
+      list,
       method: getMethod(type),
       ...otherProps,
     });
 };
 
-export const requestResourceSuccess = (name, type) => (response, request) => ({
+export const requestResourceSuccess = (name, type, list) => (response, request) => ({
   type: REQUEST_RESOURCE_SUCCESS(name),
   data: response,
   resourceType: type,
   request,
+  list,
 });
 
-export const requestResourceFailure = (name, type) => ({ errors, message }, request) => ({
+export const requestResourceFailure = (name, type, list) => (
+  { errors, message }, request,
+) => ({
   type: REQUEST_RESOURCE_FAILURE(name),
   resourceType: type,
   errors,
+  list,
   message,
   request,
 });

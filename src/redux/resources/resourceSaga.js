@@ -5,13 +5,15 @@ import errorHandler from '../../utils/errorHandler';
 import resources from './index';
 
 
-export const requestResource = name => function* ({ type, resourceType, ...otherProps }) {
+export const requestResource = name => function* ({
+  type, list, resourceType, ...otherProps 
+}) {
   try {
     const response = yield call(ResourceService.request, otherProps);
-    yield put(requestResourceSuccess(name, resourceType)(response.data, otherProps));
+    yield put(requestResourceSuccess(name, resourceType, list)(response.data, otherProps));
     otherProps.successCallback(response.data);
   } catch (error) {
-    yield put(requestResourceFailure(name, resourceType)(errorHandler(error), otherProps));
+    yield put(requestResourceFailure(name, resourceType, list)(errorHandler(error), otherProps));
     otherProps.errorCallback(error.response || {});
   }
 };
