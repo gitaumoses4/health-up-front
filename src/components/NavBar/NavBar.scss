@@ -11,9 +11,37 @@
   padding: 0 2em;
   z-index: 80;
   justify-content: space-between;
-  grid-template-columns: auto auto auto;
+  grid-auto-flow: column;
   box-shadow: 0 0 4px 2px rgba(0,0,0,.1);
 
+  .menu {
+    display: grid;
+    align-items: center;
+    grid-auto-flow: column;
+    grid-gap: 2em;
+
+    .notification-bell {
+      position: relative;
+      img {
+        height: 2em;
+      }
+
+      .badge {
+        position: absolute;
+        top: -7px;
+        left: -7px;
+        display: grid;
+        place-items: center;
+        background: $accent;
+        height: 15px;
+        min-width: 15px;
+        font-size: 12px;
+        border-radius: 10px;
+        color: white;
+        padding: 3px;
+      }
+    }
+  }
   img {
     height: 50px;
   }
@@ -54,6 +82,19 @@
       height: 30px;
     }
 
+    .menu {
+      .notification-bell {
+        img {
+          height: 1.5em;
+        }
+
+        .badge {
+          height: 15px;
+          min-width: 15px;
+          font-size: 12px;
+        }
+      }
+    }
     .logo {
       h3 {
         font-size: 0.7em;

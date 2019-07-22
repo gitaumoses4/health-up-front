@@ -78,7 +78,7 @@ class NotificationCreator extends Component {
         id: notificationType.id,
         notificationId: id,
       },
-      endpoint: '/notifications/types/:id/:notificationId',
+      endpoint: '/notificationBuilder/types/:id/:notificationId',
       method: 'delete',
       successCallback: ({ message }) => toast.success(message),
     });

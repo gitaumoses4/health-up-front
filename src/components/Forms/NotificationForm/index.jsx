@@ -64,17 +64,17 @@ const days = (count = 31) => Array(count).fill(0).map(
 
 class NotificationForm extends Form {
   renderFrequencyOption = () => {
-    const { values: { frequency, month } } = this.state;
+    const { values: { frequency, month, time = '23:59' } } = this.state;
     switch (frequency) {
     case 'daily':
       return (
-        <Input type="time" name="time" value="23:59" label={T.time} />
+        <Input type="time" name="time" value={time} label={T.time} />
       );
     case 'weekly':
       return (
         <>
           <Input type="select" name="weekDay" label={T.day} options={weekDays} />
-          <Input type="time" name="time" value="23:59" label={T.time} />
+          <Input type="time" name="time" value={time} label={T.time} />
         </>
       );
     case 'monthly':

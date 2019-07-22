@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './NavBar.scss';
+import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.svg';
 import profile from '../../assets/images/profile.svg';
 import connectResource from '../../utils/ResourceComponent';
 import T from '../../utils/Translation';
+import notificationBell from '../../assets/images/notificationBell.svg';
 import DropDownMenu from '../DropDownMenu';
+import handleNotification from '../../utils/socket';
 
 
 class NavBar extends Component {
   componentDidMount() {
+    const { readResource, user: { data: { user } } } = this.props;
+    readResource('notifications')();
+    handleNotification(user);
   }
 
   DropDown = ({ user }) => (
@@ -30,14 +36,32 @@ class NavBar extends Component {
     </DropDownMenu>
   );
 
+  notificationBell = ({ notifications = [] }) => {
+    const count = notifications.reduce((acc, notification) => {
+      if (['sent', 'unread'].includes(notification.status)) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+    return (
+      <Link className="notification-bell" to="/notifications">
+        <span className="badge">{count}</span>
+        <img src={notificationBell} alt="" />
+      </Link>
+    );
+  };
+
   logout = () => {
     localStorage.clear();
     window.location.replace('/');
   };
 
   render() {
-    const { user: { data: { user } }, title = '', onHamburgerClick } = this.props;
+    const {
+      user: { data: { user } }, notifications: { data }, title = '', onHamburgerClick, 
+    } = this.props;
     const ProfileDropdown = this.DropDown;
+    const Notifications = this.notificationBell;
     return (
       <div className="nav-bar">
         <div className="logo">
@@ -56,7 +80,12 @@ class NavBar extends Component {
         </div>
         <div className="menu">
           {
-            user && <ProfileDropdown user={user} />
+            user && (
+              <>
+                <Notifications notifications={data || []} />
+                <ProfileDropdown user={user} />
+              </>
+            )
           }
         </div>
       </div>
@@ -69,5 +98,5 @@ NavBar.propTypes = {
 };
 
 export default connectResource(NavBar)({
-  resources: ['user'],
+  resources: ['user', 'notifications'],
 });

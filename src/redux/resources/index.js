@@ -38,10 +38,17 @@ const resources = {
     endpoint: '/users',
   },
   notificationTypes: {
-    endpoint: '/notifications/types',
+    endpoint: '/notificationBuilder/types',
   },
   notificationType: {
-    endpoint: '/notifications/types/:id',
+    endpoint: '/notificationBuilder/types/:id',
+  },
+  notifications: {
+    endpoint: '/notifications',
+    list: true,
+    resolveList: data => data.notifications,
+    resolveUpdate: (item, newItem) => item.id === newItem.notification.id,
+    resolveSingle: data => data.notification,
   },
 };
 
