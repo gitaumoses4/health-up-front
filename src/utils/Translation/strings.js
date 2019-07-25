@@ -156,4 +156,5 @@ export default {
   delete: ['Delete'],
   confirm_deletion: ['Are you sure you want to delete this notification?'],
   download: ['Download'],
+  view_all: ['View All'],
 };

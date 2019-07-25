@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import './TabLayout.scss';
 
 class TabLayout extends Component {
@@ -45,7 +46,7 @@ class TabLayout extends Component {
   };
 
   render() {
-    const { tabs, children } = this.props;
+    const { tabs, children, height = 700 } = this.props;
     const { currentTab } = this.state;
     return (
       <div className="tab-layout">
@@ -55,9 +56,25 @@ class TabLayout extends Component {
           }
         </div>
         <div className="tab-content">
-          {
-            children[currentTab]
-          }
+          <div className="swipeable-tabs" style={{ height: `${height}px` }}>
+            {
+              children.map((child, index) => {
+                const translation = (index - currentTab) * 120;
+                return (
+                  <div
+                    key={index}
+                    className="swipeable-tab"
+                    style={{
+                      transform: `translateX(${translation}%)`,
+                    }}>
+                    <div className="swipeable-tab__content">
+                      { child }
+                    </div>
+                  </div>
+                );
+              })
+            }
+          </div>
         </div>
       </div>
     );
