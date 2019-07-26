@@ -29,6 +29,7 @@ Button.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
+    PropTypes.string
   ]).isRequired,
   secondary: PropTypes.bool,
   link: PropTypes.string,

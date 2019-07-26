@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './SideBar.scss';
 import metadata from './metadata';
+import Icon from '../Icon';
 
 class SideBar extends Component {
   state = {
@@ -49,7 +50,7 @@ class SideBar extends Component {
   renderItem = ({
     label, link, active, icon,
   }) => (
-    <div className={`side-bar__item ${active ? 'active' : ''}`}>
+    <div className={`side-bar__item ${active ? 'active' : ''}`} key={Math.random()}>
       <Link to={link}>
         <img src={icon} alt="" />
         <span>{label}</span>
@@ -63,7 +64,9 @@ class SideBar extends Component {
     return (
       <div className={`side-bar ${collapsed ? 'collapsed' : ''}`}>
         <span onClick={onHamburgerClick} className="hamburger" role="presentation">
-          <i className={`${collapsed ? 'fas fa-bars' : 'fas fa-arrow-left'}`} />
+          <Icon
+            icon={{ collapsed: 'fas fa-bars', open: 'fas fa-times' }}
+            value={collapsed ? 'collapsed' : 'open'} />
         </span>
         {
           Object.keys(items).map(item => this.renderItem(items[item]))

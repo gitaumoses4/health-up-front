@@ -14,10 +14,12 @@ import AddAmbulanceMan from '../views/AddAmbulanceMan';
 import NotificationBuilder from '../views/NotificationBuilder';
 import NotificationTypeBuilder from '../views/NotificationTypeBuilder';
 import Notifications from '../views/Notifications';
+import AmbulanceLogin from '../views/AmbulanceLogin';
 
 export default {
   '/register': [Register, [UNAUTHENTICATED]],
   '/login': [Login, [UNAUTHENTICATED]],
+  '/login/ambulance': [AmbulanceLogin, [UNAUTHENTICATED]],
   '/dashboard': [Dashboard, ALL],
   '/healthRecords': [HealthData, ALL],
   '/employees': [Employees, [COMPANY]],

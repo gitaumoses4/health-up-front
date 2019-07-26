@@ -166,7 +166,6 @@ const deleteReducer = (state = initialFormState, action, resource) => {
 
 const generateReducer = (state, action, resource) => {
   const list = action.list || resources[resource].list;
-  console.log(list);
   let func;
   switch (action.resourceType) {
   case 'read':

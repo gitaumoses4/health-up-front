@@ -50,7 +50,23 @@
   .tab-content {
     width: 100%;
     z-index: 5;
-    margin: 1em 0;
+    padding: 1em;
+    overflow: hidden;
+    position: relative;
+
+    .swipeable-tabs {
+      position: relative;
+
+      .swipeable-tab {
+        width: 100%;
+        position: absolute;
+        flex: 1;
+      }
+    }
+  }
+
+  .clearfix {
+    clear: both;
   }
 }
 

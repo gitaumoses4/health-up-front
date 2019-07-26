@@ -4,19 +4,7 @@
   display: grid;
   align-items: start;
 
-  &.readOnly {
-    input {
-      &:disabled {
-        background: transparent;
-        padding: 0;
-        outline: none;
-        border: none;
-        height: 4em;
-      }
-    }
-  }
-
-  &:not(.readOnly) input:not([type="radio"]):not([type="checkbox"]), textarea, select, .file-input .file {
+  input:not([type="radio"]):not([type="checkbox"]), textarea, select, .file-input .file {
     outline: none;
     padding: 0 1em;
     background: #dadada;
@@ -37,6 +25,7 @@
       width: 3em !important;
       background: transparent !important;
       border: none !important;
+      padding: 0 0.4em !important;
     }
 
     .react-time-picker__wrapper{

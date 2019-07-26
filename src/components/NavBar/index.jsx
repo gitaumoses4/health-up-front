@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './NavBar.scss';
-import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.svg';
 import profile from '../../assets/images/profile.svg';
 import connectResource from '../../utils/ResourceComponent';
 import T from '../../utils/Translation';
+import NotificationsList from '../NotificationsList';
 import notificationBell from '../../assets/images/notificationBell.svg';
 import DropDownMenu from '../DropDownMenu';
 import handleNotification from '../../utils/socket';
 
 
 class NavBar extends Component {
+  state = {
+    notificationsOpen: false,
+  };
+
   componentDidMount() {
     const { readResource, user: { data: { user } } } = this.props;
     readResource('notifications')();
@@ -43,11 +46,23 @@ class NavBar extends Component {
       }
       return acc;
     }, 0);
+    const { notificationsOpen } = this.state;
     return (
-      <Link className="notification-bell" to="/notifications">
-        <span className="badge">{count}</span>
-        <img src={notificationBell} alt="" />
-      </Link>
+      <div className="notifications">
+        <DropDownMenu
+          open={notificationsOpen}
+          onVisibilityChange={open => this.setState(
+            { notificationsOpen: open },
+          )}>
+          <div className="notification-bell">
+            <span className="badge">{count}</span>
+            <img src={notificationBell} alt="" />
+          </div>
+          <div className="notifications-content">
+            <NotificationsList dropdown />
+          </div>
+        </DropDownMenu>
+      </div>
     );
   };
 
@@ -58,7 +73,7 @@ class NavBar extends Component {
 
   render() {
     const {
-      user: { data: { user } }, notifications: { data }, title = '', onHamburgerClick, 
+      user: { data: { user } }, notifications: { data }, title = '', onHamburgerClick,
     } = this.props;
     const ProfileDropdown = this.DropDown;
     const Notifications = this.notificationBell;

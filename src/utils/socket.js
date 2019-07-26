@@ -3,6 +3,7 @@ import toast from 'toastr';
 import store from '../redux/store';
 import { requestResourceSuccess } from '../redux/resources/resourceActions';
 import resources from '../redux/resources';
+import notification from '../assets/audio/notification.mp3';
 
 
 const baseUrl = process.env.REACT_APP_API_URL;
@@ -19,5 +20,7 @@ export default function handleNotification({ id }) {
     store.dispatch(requestResourceSuccess('notifications', 'create', true)(
       { notification: data }, resources.notifications,
     ));
+    const audio = new Audio(notification);
+    audio.play();
   });
 }

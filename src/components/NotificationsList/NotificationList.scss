@@ -1,11 +1,50 @@
+@import '../../index';
+
 .notifications-list {
+
+  &.dropdown {
+    .list {
+      max-height: 450px;
+      overflow-y: scroll;
+      grid-auto-flow: dense;
+      border: none;
+
+      @include mobile_and_tablet {
+        max-height: 100%;
+      }
+
+      .notification {
+        padding: 0.5em 1em;
+      }
+    }
+
+    button {
+      background: transparent;
+      color: $accent;
+      font-weight: bold;
+    }
+  }
+
+  .notification__content {
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
+
   .list {
     display: grid;
-    grid-auto-flow: dense;
-    grid-gap: 1em;
+    border: 1px solid #ddd;
+
 
     .notification {
       padding: 1em;
+      border-bottom: 1px solid #ddd;
+
+      &__body {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-gap: 0.5em;
+        align-items: center;
+      }
 
       .text {
         display: grid;
@@ -13,9 +52,19 @@
         grid-auto-flow: column;
         justify-content: start;
         grid-gap: 1em;
+        font-size: 0.8em;
 
-        img {
-          height: 1em;
+        i {
+          font-size: 1.5em;
+        }
+      }
+      .action {
+        cursor: pointer;
+
+        &.delete {
+          &:hover {
+            color: red;
+          }
         }
       }
 
@@ -25,7 +74,8 @@
       }
 
       &.unread {
-        background: #ddd;
+        background: rgb(239, 239, 239);
+        cursor: pointer;
       }
 
       &.read {

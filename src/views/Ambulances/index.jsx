@@ -11,13 +11,15 @@ import Tools from '../../utils/Tools';
 const AmbulanceMenList = ModelTable({
   model: 'ambulances',
   columns: {
+    ambulanceId: T.ambulance_id,
     name: T.name,
     email: T.email,
     joinedOn: T.joined_on,
   },
   renderTable: ({
-    name, email, createdAt,
+    ambulanceId, name, email, createdAt,
   }) => ({
+    ambulanceId: Tools.s(ambulanceId),
     name: Tools.s(name),
     email: Tools.s(email),
     joinedOn: Tools.formatDate(createdAt),

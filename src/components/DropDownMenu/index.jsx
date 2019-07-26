@@ -9,18 +9,24 @@ class DropDownMenu extends Component {
 
   dropdown = React.createRef();
 
+  check = React.createRef();
+
 
   componentDidMount() {
     document.addEventListener('click', this.handleOutsideClick);
+    document.addEventListener('scroll', this.handleOutsideClick);
+    const { open } = this.props;
+    this.setState({ open: !!open });
   }
 
 
   componentWillReceiveProps(nextProps, nextContext) {
-    this.setState({ open: nextProps.open });
+    this.setState({ open: !!nextProps.open });
   }
 
   componentWillUnmount() {
     document.removeEventListener('click', this.handleOutsideClick);
+    document.removeEventListener('scroll', this.handleOutsideClick);
   }
 
   toggleDropdown = (e) => {
@@ -35,8 +41,9 @@ class DropDownMenu extends Component {
   handleOutsideClick = (e) => {
     const { target } = e;
     const { current } = this.dropdown;
+    const { current: checkCurrent } = this.check;
     if (current) {
-      if (!current.contains(target)) {
+      if (!current.contains(target) && current.contains(checkCurrent)) {
         this.setState({ open: false });
         const { onVisibilityChange } = this.props;
         onVisibilityChange(false);
@@ -55,7 +62,7 @@ class DropDownMenu extends Component {
           onClick={this.toggleDropdown}>
           {children[0]}
         </span>
-        <span />
+        {open && <span ref={this.check} />}
         <div className={`dropdown-content ${open ? 'open' : ''}`}>
           {children[1]}
         </div>
