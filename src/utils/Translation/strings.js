@@ -161,4 +161,5 @@ export default {
   email_or_ambulance_id: ['Email or Ambulance Id', 'البريد الالكتروني او رقم الهوية'],
   total_cost: ['Total cost', 'السعر الاجمالي'],
   sar: ['SAR', 'SAR'], // This is currency
+  ambulance_id: ['Ambulance ID', 'معرف سيارة الإسعاف'],
 };
