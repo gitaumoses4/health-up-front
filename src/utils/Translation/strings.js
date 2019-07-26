@@ -157,4 +157,8 @@ export default {
   confirm_deletion: ['Are you sure you want to delete this notification?'],
   download: ['Download'],
   view_all: ['View All'],
+  ambulance_login: ['Ambulance Login', 'دخول المسعف'],
+  email_or_ambulance_id: ['Email or Ambulance Id'],
+  total_cost: ['Total cost'],
+  sar: ['SAR'], // This is currency
 };

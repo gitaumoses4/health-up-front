@@ -6,6 +6,9 @@ const resources = {
   login: {
     endpoint: '/login',
   },
+  ambulanceLogin: {
+    endpoint: '/login/ambulance',
+  },
   user: {
     endpoint: '/user',
   },

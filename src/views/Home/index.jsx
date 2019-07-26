@@ -35,6 +35,9 @@ class Home extends Component {
             <Button secondary link="/login">
               {T.login}
             </Button>
+            <Button secondary link="/login/ambulance">
+              {T.ambulance_login}
+            </Button>
           </div>
         </div>
         <div className="container">

@@ -50,7 +50,7 @@
   .tab-content {
     width: 100%;
     z-index: 5;
-    margin: 1em 0;
+    padding: 1em;
     overflow: hidden;
     position: relative;
 
@@ -58,7 +58,6 @@
       position: relative;
 
       .swipeable-tab {
-        height: 100%;
         width: 100%;
         position: absolute;
         flex: 1;

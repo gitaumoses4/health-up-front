@@ -4,7 +4,7 @@ import Input from '../../../../utils/Forms/Input';
 import T from '../../../../utils/Translation';
 import Button from '../../../Button';
 
-const Company = ({ valid }) => (
+const Company = ({ valid, values: { noOfEmployees = 0 } }) => (
   <React.Fragment>
     <Input
       cloudinaryUrl={process.env.REACT_APP_CLOUDINARY_API}
@@ -17,8 +17,11 @@ const Company = ({ valid }) => (
     <Input name="password" type="password" placeholder={T.password} />
     <Input name="naturalBusinessCompany" placeholder={T.natural_business} />
     <Input name="registrationNumber" placeholder={T.registration_number} />
-    <Input name="noOfEmployees" placeholder={T.number_of_employees} />
+    <Input name="noOfEmployees" type="number" min="1" placeholder={T.number_of_employees} />
     <Input name="responsibleName" placeholder={T.responsible_name} />
+    <div className="cost">
+      {`${T.total_cost} - ${noOfEmployees * 25} ${T.sar}`}
+    </div>
     <Button type="submit" disabled={!valid}>{T.sign_up}</Button>
   </React.Fragment>
 );

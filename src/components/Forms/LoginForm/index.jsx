@@ -8,31 +8,39 @@ import T from '../../../utils/Translation';
 import Button from '../../Button';
 import './LoginForm.scss';
 import WithLoading from '../../WithLoading';
+import { AMBULANCE_MAN, NORMAL_USER } from '../../../utils/accountTypes';
 
-class LoginForm extends Form {
-  getProperties() {
-    return {
-      rules: {
-        required: {
-          message: T.not_empty,
+const BaseLoginForm = (accountType) => {
+  class LoginForm extends Form {
+    getProperties() {
+      return {
+        rules: {
+          required: {
+            message: T.not_empty,
+          },
         },
-      },
-      onSuccess: ({ token }) => {
-        toast.success(T.login_success);
-        localStorage.setItem('jwt-token', token);
-        window.location.replace('/dashboard');
-      },
-      onFailure: () => {
-        const { message } = this.props;
-        toast.error(message);
-      },
-    };
-  }
+        onSuccess: ({ token }) => {
+          toast.success(T.login_success);
+          localStorage.setItem('jwt-token', token);
+          window.location.replace('/dashboard');
+        },
+        onFailure: () => {
+          const { message } = this.props;
+          toast.error(message);
+        },
+      };
+    }
 
-  renderForm() {
-    const { valid } = this.state;
-    return (
-      <div className="login-form">
+    renderIdInput = () => {
+      if (accountType === AMBULANCE_MAN) {
+        return (
+          <Input
+            name="userId"
+            placeholder={T.email_or_ambulance_id}
+          />
+        );
+      }
+      return (
         <Input
           name="email"
           placeholder={T.email}
@@ -41,31 +49,45 @@ class LoginForm extends Form {
             email: T.valid_email,
           }}
         />
-        <Input
-          name="password"
-          type="password"
-          placeholder={T.password}
-        />
-        <Button type="submit" disabled={!valid}>
-          {T.sign_in}
-        </Button>
-        <div className="footer">
-          <span>
-            {T.dont_have_an_account}
-          </span>
-          <Button>
-            <Link to="/register">
-              {T.sign_up}
-            </Link>
+      );
+    };
+
+    renderForm() {
+      const { valid } = this.state;
+      return (
+        <div className="login-form">
+          {this.renderIdInput()}
+          <Input
+            name="password"
+            type="password"
+            placeholder={T.password}
+          />
+          <Button type="submit" disabled={!valid}>
+            {T.sign_in}
           </Button>
+          <div className="footer">
+            <span>
+              {T.dont_have_an_account}
+            </span>
+            <Button>
+              <Link to="/register">
+                {T.sign_up}
+              </Link>
+            </Button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
-}
 
-LoginForm.propTypes = {};
+  LoginForm.propTypes = {};
 
-LoginForm.defaultProps = {};
+  LoginForm.defaultProps = {};
+  return LoginForm;
+};
 
-export default connectForm(WithLoading(LoginForm, 'submitting'))('login');
+export default
+(accountType = NORMAL_USER) => connectForm(
+  WithLoading(BaseLoginForm(accountType),
+    'submitting'),
+)(accountType === AMBULANCE_MAN ? 'ambulanceLogin' : 'login');
