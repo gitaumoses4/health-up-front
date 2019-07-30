@@ -1,17 +1,46 @@
+@import "../../index";
+
 .notification-configuration {
   .notification-type-list {
     display: grid;
-    justify-content: center;
+    justify-content: start;
     grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
-    grid-gap: 1em;
 
     .notification-type {
       height: 200px;
       display: grid;
+      background: white;
+      border-right: 1px solid #eee;
+      border-bottom: 1px solid #eee;
       justify-content: center;
       justify-items: center;
       align-items: center;
+      cursor: pointer;
       align-content: center;
+
+      &__icon {
+        span {
+          background: green;
+          min-width: 1.5em;
+          border-radius: 0.5em;
+          display: grid;
+          place-items: center;
+          position: absolute;
+          color: white;
+          height: 1.5em;
+          font-size: 0.8em;
+        }
+      }
+
+      &__title {
+        margin: 0.5em 0 ;
+        font-weight: bold;
+      }
+
+      &:hover {
+        box-shadow: 0 0 10px 4px rgba(0,0,0,.1);
+        z-index: 10;
+      }
 
       h3 {
         font-weight: bold;
@@ -20,6 +49,11 @@
 
       img {
         height: 40px;
+      }
+
+      .timeline-info {
+        font-size: 0.8em;
+        color: #666;
       }
 
       div {

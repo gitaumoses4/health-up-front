@@ -175,4 +175,6 @@ export default {
   home: ['Home'],
   when_to_send: ['When to send'],
   set_time: ['Set time'],
+  alert_time_not_set: ['Alert time not set'],
+  different_alert_times: ['Different alert times'],
 };
