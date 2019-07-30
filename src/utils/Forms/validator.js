@@ -12,7 +12,7 @@ const defaultRules = {
           return value.length;
         }
         return true;
-      } 
+      }
       return false;
     },
     message: ({

@@ -44,8 +44,15 @@ class LayoutComponent extends Component {
         return children;
       }
       return <NotVerified />;
-    } 
+    }
     return children;
+  };
+
+  renderHeader = (header) => {
+    if (header.constructor === String) {
+      return (<h2>{header}</h2>);
+    }
+    return header;
   };
 
   render() {
@@ -82,7 +89,7 @@ class LayoutComponent extends Component {
                   >
                     <i className="fas fa-arrow-left" />
                   </span>
-                  <h2>{header}</h2>
+                  {header && this.renderHeader(header)}
                 </div>
               )
             }

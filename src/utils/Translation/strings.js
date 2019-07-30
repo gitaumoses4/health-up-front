@@ -162,4 +162,17 @@ export default {
   total_cost: ['Total cost', 'السعر الاجمالي'],
   sar: ['SAR', 'SAR'], // This is currency
   ambulance_id: ['Ambulance ID', 'معرف سيارة الإسعاف'],
+  i_dont_remember: ['I don\'t remember'],
+  after_every: ['After Every'],
+  week: ['Week'],
+  weeks: ['Weeks'],
+  days: ['Days'],
+  months: ['Months'],
+  years: ['Years'],
+  year: ['Year'],
+  not_found: ['The requested page was not found'],
+  sorry: ['Oops!'],
+  home: ['Home'],
+  when_to_send: ['When to send'],
+  set_time: ['Set time'],
 };

@@ -26,7 +26,6 @@ class Home extends Component {
         <div className="nav">
           <div className="logo">
             <img src={logo} alt="" />
-            <span>{T.health_up}</span>
           </div>
           <div className="buttons">
             <Button link="/register">

@@ -88,7 +88,6 @@ class NavBar extends Component {
             )
           }
           <img src={logo} alt="" />
-          <h3>{T.health_up}</h3>
         </div>
         <div className="title">
           <h2>{title}</h2>

@@ -62,12 +62,14 @@ class TabLayout extends Component {
 
   fixHeight = () => {
     const { current: element } = this.tabLayout;
-    const { currentHeight } = this.state;
-    const currentTab = element.querySelector('.swipeable-tab.current .swipeable-tab__content');
-    const height = currentTab.clientHeight;
+    if (element) {
+      const { currentHeight } = this.state;
+      const currentTab = element.querySelector('.swipeable-tab.current .swipeable-tab__content');
+      const height = currentTab.clientHeight;
 
-    if (height !== currentHeight || currentHeight === 2000000) {
-      this.setState({ currentHeight: height });
+      if (height !== currentHeight || currentHeight === 2000000) {
+        this.setState({ currentHeight: height });
+      }
     }
   };
 

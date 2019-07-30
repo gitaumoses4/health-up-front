@@ -18,6 +18,7 @@ const defaultProperties = {
   autoSaveLoader: false,
   mirror: false,
   debounce: 1000,
+  postData: 'createResource',
 };
 
 class Form extends React.Component {
@@ -94,8 +95,7 @@ class Form extends React.Component {
 
   onSubmit() {
     this.validator.validateAll().then(() => {
-      const { createResource } = this.props;
-      const { values, valid } = this.state;
+      const { values } = this.state;
       const { onSuccess, onFailure } = this.properties;
       const data = {
         data: values,
@@ -103,8 +103,16 @@ class Form extends React.Component {
         errorCallback: onFailure,
         ...this.createData(),
       };
-      if (createResource && valid) createResource(data);
+      this.postData(data);
     });
+  }
+
+  postData(data) {
+    const { props, properties: { postData } } = this;
+    const { valid } = this.state;
+    const createResource = props[postData];
+
+    if (createResource && valid) createResource(data);
   }
 
   clearForm() {
@@ -125,7 +133,7 @@ class Form extends React.Component {
       if (value) {
         newState.values = { ...state.values, [name]: value };
       }
-      return newState; 
+      return newState;
     }, () => {
       const { values } = this.state;
       if (values[name]) {
