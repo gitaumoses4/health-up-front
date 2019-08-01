@@ -69,7 +69,7 @@ class LayoutComponent extends Component {
       <div className={`layout-wrapper ${sidebarOpen ? 'sidebarOpen' : ''} ${user ? '' : 'noSidebar'}`}>
         <div className="navigation">
           <NavBar
-            onHamburgerClick={width < 600 && this.onHamburgerClick}
+            onHamburgerClick={width < 600 && user && this.onHamburgerClick}
           />
         </div>
         <div className="layout-body">
