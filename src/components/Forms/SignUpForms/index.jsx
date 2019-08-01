@@ -49,6 +49,7 @@ class SignUpForm extends Form {
         <Input
           type="select"
           name="accountType"
+          value={NORMAL_USER}
           options={[
             { value: COMPANY, name: accountTypes.company },
             { value: NORMAL_USER, name: accountTypes.normal_user },
