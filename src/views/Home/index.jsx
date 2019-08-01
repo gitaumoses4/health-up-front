@@ -16,7 +16,7 @@ const socialMediaLinks = [
   },
   {
     icon: instagram,
-    link: 'https://instagram.com/healthupup',
+    link: 'https://instagram.com/healthUpup2',
   },
 ];
 class Home extends Component {
