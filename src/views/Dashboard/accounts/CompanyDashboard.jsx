@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import T from '../../../utils/Translation';
 import '../Dashboard.scss';
 import CompanyProfileForm from '../../../components/Forms/CompanyProfileForm';
-import UpdatePasswordForm from '../../../components/Forms/UpdatePasswordForm';
+import UpdatePassword from '../../../components/Forms/UpdatePasswordForm';
+
+const UpdatePasswordForm = UpdatePassword();
 
 
 const CompanyDashboard = props => (

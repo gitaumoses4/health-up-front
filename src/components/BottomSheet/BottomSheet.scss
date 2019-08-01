@@ -25,17 +25,40 @@
 
   &__content {
     margin: 0 auto;
-    top: 0;
     position: relative;
-    left: 0;
+    padding: 1em 0;
+    top: 50%;
     display: grid;
     grid-template-rows: auto 1fr;
-    height: 100vh;
+    height: 50vh;
     z-index: 2;
+    transform: translateY(-50%) scale(0.8);
     max-width: 1200px;
-    transform: translateY(40%);
     opacity: 0;
     background: white;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 1em;
+
+    .close {
+      color: black;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      display: block;
+      z-index: 100;
+      font-size: 2em;
+      background: transparent;
+      padding: 0.5em;
+      text-align: right;
+
+      @include mobile {
+        font-size: 1.5em;
+      }
+    }
+
+    @include mobile {
+      width: calc(100% - 1em);
+    }
 
     &__content {
       overflow-y: scroll;
@@ -52,28 +75,13 @@
   &.open {
     pointer-events: all;
 
-    .close {
-      color: black;
-      cursor: pointer;
-      display: block;
-      font-size: 2em;
-      background: transparent;
-      padding: 0.5em;
-      text-align: right;
-
-      @include mobile {
-        font-size: 1.5em;
-      }
-    }
-
     .overlay {
       background: rgba(0,0,0,.5);
     }
 
     .bottom-sheet__content {
-      position: static;
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(-50%) scale(1);
     }
   }
 }

@@ -38,14 +38,23 @@ class LayoutComponent extends Component {
 
   renderContent = () => {
     const { data: { user }, children } = this.props;
-    if (user.accountType === COMPANY) {
-      const { company } = user;
-      if (company.verified) {
-        return children;
+    if (user) {
+      if (user.accountType === COMPANY) {
+        const { company } = user;
+        if (company.verified) {
+          return children;
+        }
+        return <NotVerified />;
       }
-      return <NotVerified />;
-    } 
+    }
     return children;
+  };
+
+  renderHeader = (header) => {
+    if (header.constructor === String) {
+      return (<h2>{header}</h2>);
+    }
+    return header;
   };
 
   render() {
@@ -56,21 +65,25 @@ class LayoutComponent extends Component {
     const width = document.body.clientWidth;
     const { sidebarOpen } = this.state;
     document.body.style.overflow = sidebarOpen && width < 600 ? 'hidden' : '';
-    return user ? (
-      <div className={`layout-wrapper ${sidebarOpen ? 'sidebarOpen' : ''}`}>
+    return (
+      <div className={`layout-wrapper ${sidebarOpen ? 'sidebarOpen' : ''} ${user ? '' : 'noSidebar'}`}>
         <div className="navigation">
           <NavBar
-            onHamburgerClick={width < 600 && this.onHamburgerClick}
+            onHamburgerClick={width < 600 && user && this.onHamburgerClick}
           />
         </div>
         <div className="layout-body">
           <div className="layout-wrapper__sidebar" ref={this.sidebar}>
-            <SideBar
-              type={user.accountType}
-              onHamburgerClick={this.onHamburgerClick}
-              match={match}
-              collapsed={width > 600 && sidebarOpen}
-              history={history} />
+            {
+              user && (
+                <SideBar
+                  type={user.accountType}
+                  onHamburgerClick={this.onHamburgerClick}
+                  match={match}
+                  collapsed={width > 600 && sidebarOpen}
+                  history={history} />
+              )
+            }
           </div>
           <div className="content">
             {
@@ -78,11 +91,17 @@ class LayoutComponent extends Component {
                 <div className="content__header">
                   <span
                     role="presentation"
-                    onClick={history.goBack}
+                    onClick={() => {
+                      if (history.length <= 1) {
+                        history.push('/login');
+                      } else {
+                        history.goBack();
+                      }
+                    }}
                   >
                     <i className="fas fa-arrow-left" />
                   </span>
-                  <h2>{header}</h2>
+                  {header && this.renderHeader(header)}
                 </div>
               )
             }
@@ -90,7 +109,7 @@ class LayoutComponent extends Component {
           </div>
         </div>
       </div>
-    ) : null;
+    );
   }
 }
 

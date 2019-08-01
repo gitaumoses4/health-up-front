@@ -1,5 +1,38 @@
 @import "../index";
 
+
+.layout-wrapper.noSidebar {
+  display: grid;
+
+  .navigation {
+    margin: 0;
+  }
+  .layout-body {
+    .content {
+      max-width: 1300px;
+      margin: auto;
+      padding: 2em;
+      width: calc(100% - 4em);
+
+      &__header {
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        grid-column-gap: 2em;
+        justify-content: start;
+
+        span {
+          cursor: pointer;
+
+          &:hover {
+            transform: translateX(-3px);
+          }
+        }
+      }
+    }
+  }
+}
+
 .layout-wrapper {
   display: grid;
   grid-template-rows: auto 1fr;

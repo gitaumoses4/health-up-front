@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import formatDistance from 'date-fns/distance_in_words_to_now/';
 import _ from 'lodash';
+import notificationIcon from '../../assets/images/notificationBell.svg';
 import connectResource from '../../utils/ResourceComponent';
 import WithLoading from '../WithLoading';
 import './NotificationList.scss';
@@ -90,7 +91,7 @@ class NotificationsList extends Component {
                 )
               }
             </div>
-          ) : <Empty />
+          ) : <Empty image={notificationIcon} />
         }
       </div>
     );

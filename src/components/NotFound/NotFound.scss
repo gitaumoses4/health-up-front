@@ -1,0 +1,25 @@
+.page-not-found {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: auto 1fr;
+
+  .logo {
+    padding: 1em;
+    img {
+      height: 60px;
+    }
+  }
+
+  &__content {
+    display: grid;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+
+    img {
+      height: auto;
+      width: 300px;
+    }
+  }
+}

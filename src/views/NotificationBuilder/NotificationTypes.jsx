@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import WithLoading from '../../components/WithLoading';
-import notificationsIcon from '../../assets/images/notifications.svg';
+import notificationsIcon from '../../assets/images/notificationBell.svg';
 import connectResource from '../../utils/ResourceComponent';
 import T from '../../utils/Translation';
 import Empty from '../../components/Empty';
+import { createAlertText } from '../NotificationTypeBuilder/NotificationCreator';
 
 class NotificationTypes extends Component {
   componentDidMount() {
@@ -15,19 +16,27 @@ class NotificationTypes extends Component {
 
   renderTypeCard = ({
     history, notificationType: {
-      id, name, conditions, notifications, 
-    }, 
+      id, name, conditions,
+      notifications,
+      alert, single, configuration,
+    },
   }) => (
     <div
-      className="notification-type card clickable"
+      className="notification-type"
       role="presentation"
       onClick={() => history.push(`/builder/notifications/${id}`)}
     >
-      <img src={notificationsIcon} alt="" />
-      <h3>{name}</h3>
-      <div>
-        <span className="count">{notifications ? notifications.length : 0}</span>
-        <span>{T.configured_notifications}</span>
+      <div className="notification-type__icon">
+        <img src={notificationsIcon} alt="" />
+        <span>{notifications ? notifications.length : 0}</span>
+      </div>
+      <div className="notification-type__title">{name}</div>
+      <div className="timeline-info">
+        {
+          !single ? configuration ? createAlertText(alert, configuration)
+            : T.alert_time_not_set
+            : T.different_alert_times
+        }
       </div>
     </div>
   );

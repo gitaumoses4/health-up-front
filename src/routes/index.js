@@ -7,34 +7,39 @@ import API from '../utils/api';
 import routes from './routes';
 import { UNAUTHENTICATED } from '../utils/accountTypes';
 import Home from '../views/Home';
+import Login from '../views/Login';
+import NotFound from '../components/NotFound';
+import ForgotPassword from '../views/ForgotPassword';
+import ResetPassword from '../views/ResetPassword';
 
-const checkPermission = (history, allowedRoles, user) => {
+const hasPermissions = (history, allowedRoles, user) => {
   if (user) {
-    if (allowedRoles.includes(UNAUTHENTICATED) || !allowedRoles.includes(user.accountType)) {
-      history.push('/dashboard');
-    } else {
-      return true;
+    if (allowedRoles.includes(UNAUTHENTICATED)) {
+      return false;
     }
+    return !!allowedRoles.includes(user.accountType);
   }
-  return allowedRoles.includes(UNAUTHENTICATED);
+  if (allowedRoles.includes(UNAUTHENTICATED)) {
+    return true;
+  }
+  history.push('/login');
 };
 
 const AuthenticatedRoute = (ComposedComponent, roles = []) => {
   class AuthRoute extends React.Component {
-    componentDidMount() {
+    componentWillMount() {
       const token = localStorage.getItem('jwt-token');
-
+      const { user: { data: { user } }, history } = this.props;
+      if (!hasPermissions(history, roles, user)) {
+        history.push('/dashboard');
+      }
       if (token) {
         API.setToken();
       }
     }
 
     render() {
-      const { user: { data: { user } }, history } = this.props;
-
-      return checkPermission(history, roles, user) ? (
-        <ComposedComponent {...this.props} />
-      ) : null;
+      return <ComposedComponent {...this.props} />;
     }
   }
 
@@ -48,6 +53,8 @@ const App = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={Home} />
+      <Route path="/forgotPassword" exact component={ForgotPassword} />
+      <Route path="/resetPassword/:token" exact component={ResetPassword} />
       <AuthenticationWrapper>
         <Switch>
           {
@@ -63,8 +70,10 @@ const App = () => (
               );
             })
           }
+          <Route component={NotFound} />
         </Switch>
       </AuthenticationWrapper>
+      <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
 );

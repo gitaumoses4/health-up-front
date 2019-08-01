@@ -1,2 +1,24 @@
 .notification-form {
+  &__range_selector {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: end;
+    grid-column-gap: 1em;
+
+    select {
+      margin-bottom: 0.5em;
+    }
+  }
+}
+
+
+.notification-type-form {
+  padding: 1em;
+  display: grid;
+  grid-template-columns: minmax(200px, 500px);
+  margin: auto;
+
+  button {
+    justify-self: center;
+  }
 }

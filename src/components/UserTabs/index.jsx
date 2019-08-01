@@ -20,7 +20,7 @@ const tabs = [
     icon: general,
     title: T.general,
   },
-];
+].splice(0, 2);
 const UserTabs = ({ currentTab = 0, onTabChange = () => {}, children }) => (
   <TabLayout
     tabs={tabs}

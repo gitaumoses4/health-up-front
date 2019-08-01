@@ -17,8 +17,10 @@ class NavBar extends Component {
 
   componentDidMount() {
     const { readResource, user: { data: { user } } } = this.props;
-    readResource('notifications')();
-    handleNotification(user);
+    if (user) {
+      readResource('notifications')();
+      handleNotification(user);
+    }
   }
 
   DropDown = ({ user }) => (
@@ -88,7 +90,6 @@ class NavBar extends Component {
             )
           }
           <img src={logo} alt="" />
-          <h3>{T.health_up}</h3>
         </div>
         <div className="title">
           <h2>{title}</h2>

@@ -3,21 +3,23 @@ import toast from 'toastr';
 import Loader from 'react-loader-spinner';
 import connectResource from '../../utils/ResourceComponent';
 
+const allowedRoutes = [/login/, /register/, /login\/ambulance/];
+
 class AuthenticationWrapper extends Component {
   componentWillMount() {
-    const { readResource } = this.props;
+    const { readResource, location, history } = this.props;
     readResource({
-      errorCallback: ({ status }) => {
-        if (status === 500) {
-          toast.error('Something went wrong. Please try again!');
-          window.location.href = '/';
+      errorCallback: () => {
+        if (!allowedRoutes.find(route => route.test(location.pathname))) {
+          window.location.href = '/login';
         }
       },
     });
   }
 
   render() {
-    const { loading, children } = this.props;
+    const { fetched, children } = this.props;
+    const loading = !fetched;
     return (
       <div className={`layout-shell ${loading ? 'loading' : ''}`}>
         <div className="layout-shell__content">

@@ -64,6 +64,8 @@ class PersonalInfoForm extends Form {
           <Input name="idNumber" label={T.id_number} placeholder={T.id_number} />
           <Input name="nationality" label={T.nationality} placeholder={T.nationality} />
           <Input name="age" label={T.age} placeholder={T.age} />
+          <Input name="height" placeholder={T.height} label={T.height} />
+          <Input name="weight" placeholder={T.weight} label={T.weight} />
           <Input name="dateOfBirth" type="date" label={T.date_of_birth} placeholder={T.date_of_birth} />
           {/* <Input name="location" label={T.location} placeholder={T.location} /> */}
           <Input name="placeOfResidence" label={T.place_of_residence} placeholder={T.place_of_residence} />

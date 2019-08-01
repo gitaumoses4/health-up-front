@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import './TabLayout.scss';
+
 
 class TabLayout extends Component {
   state = {
@@ -13,6 +12,29 @@ class TabLayout extends Component {
 
   componentDidMount() {
     this.updateTab(this.props);
+    this.fixHeight();
+
+    const tabs = this.tabLayout.current.querySelectorAll('.swipeable-tab');
+
+    const observer = new MutationObserver((mutations) => {
+      const element = mutations[0].target;
+      const w = element.clientWidth;
+      const h = element.clientHeight;
+      const event = new CustomEvent('resize', { detail: { width: w, height: h } });
+      tabs.forEach(tab => tab.dispatchEvent(event));
+    });
+
+    tabs.forEach((tab) => {
+      observer.observe(tab, {
+        attributes: true,
+        attributeOldValue: true,
+        subtree: true,
+        childList: true,
+      });
+      tab.addEventListener('resize', () => {
+        this.fixHeight();
+      });
+    });
   }
 
   changeTab = (index) => {
@@ -35,15 +57,21 @@ class TabLayout extends Component {
   };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { current: element } = this.tabLayout;
-    const { currentHeight } = this.state;
-    const currentTab = element.querySelector('.swipeable-tab.current');
-    const { height } = currentTab.getBoundingClientRect();
-
-    if (height !== currentHeight || currentHeight === 2000000) {
-      this.setState({ currentHeight: height });
-    }
+    this.fixHeight();
   }
+
+  fixHeight = () => {
+    const { current: element } = this.tabLayout;
+    if (element) {
+      const { currentHeight } = this.state;
+      const currentTab = element.querySelector('.swipeable-tab.current .swipeable-tab__content');
+      const height = currentTab.clientHeight;
+
+      if (height !== currentHeight || currentHeight === 2000000) {
+        this.setState({ currentHeight: height });
+      }
+    }
+  };
 
   renderTab = ({ icon, title }, index) => {
     const { currentTab } = this.state;
@@ -73,7 +101,7 @@ class TabLayout extends Component {
           <div className="swipeable-tabs" style={{ height: `${currentHeight}px` }}>
             {
               children.map((child, index) => {
-                const translation = (index - currentTab) * 120;
+                const translation = (index - currentTab) * 120 * (process.env.REACT_APP_LANGUAGE === 'ar' ? -1 : 1);
                 return (
                   <React.Fragment key={index}>
                     <div

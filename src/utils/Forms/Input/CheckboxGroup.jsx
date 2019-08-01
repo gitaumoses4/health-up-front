@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import * as randomstring from 'randomstring';
 
 class CheckboxGroup extends Component {
@@ -18,10 +17,15 @@ class CheckboxGroup extends Component {
   }
 
   updateValues = (nextProps) => {
-    const { options, value } = nextProps;
+    const { options, value, showInput = {} } = nextProps;
     this.setState(Object.keys(options).reduce((acc, cur) => ({
       ...acc,
       [cur]: !!value[cur],
+    }), {}));
+
+    this.setState(Object.values(showInput).reduce((acc, cur) => ({
+      ...acc,
+      [cur]: value[cur],
     }), {}));
   };
 
@@ -29,30 +33,51 @@ class CheckboxGroup extends Component {
   onChange = (e) => {
     const event = { ...e };
     const { target: { value } } = e;
-    const { onChange, name } = this.props;
     this.setState(state => ({ [value]: !state[value] }), () => {
-      onChange({ ...event, target: { ...event.target, name, value: this.state } });
+      this.triggerChange(event);
+    });
+  };
+
+  triggerChange = (event = {}) => {
+    const { onChange, name } = this.props;
+    onChange({ ...event, target: { ...event.target, name, value: this.state } });
+  };
+
+  onTextAreaChanged = (e) => {
+    const event = { ...e };
+    const { target: { value, name } } = e;
+    this.setState({ [name]: value }, () => {
+      this.triggerChange(event);
     });
   };
 
   render() {
-    const { options, disabled } = this.props;
+    const { options, disabled, showInput = {} } = this.props;
     const { state } = this;
     return (
       <div className="checkbox-group">
         {
-          Object.keys(options).map(option => (
-            <div
-              className="checkbox-input"
-              key={randomstring.generate(4)}>
-              <input
-                id={this.id + option}
-                onChange={this.onChange}
-                disabled={disabled}
-                checked={state[option]}
-                value={option}
-                type="checkbox" />
-              <label htmlFor={this.id + option}>{options[option]}</label>
+          Object.keys(options).map((option, index) => (
+            <div className="checkbox-input__wrapper" key={index}>
+              <div
+                className="checkbox-input">
+                <input
+                  id={this.id + option}
+                  onChange={this.onChange}
+                  disabled={disabled}
+                  checked={state[option]}
+                  value={option}
+                  type="checkbox" />
+                <label htmlFor={this.id + option}>{options[option]}</label>
+              </div>
+              {
+                showInput[option] && state[option] && (
+                  <textarea
+                    value={state[showInput[option]]}
+                    name={showInput[option]}
+                    onChange={this.onTextAreaChanged} />
+                )
+              }
             </div>
           ))
         }
