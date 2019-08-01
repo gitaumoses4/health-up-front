@@ -55,6 +55,7 @@ class Input extends React.Component {
       name, messages = {},
       rules = [],
       value,
+      info,
       formatValue,
       required = true, ...otherProps
     } = this.props;
@@ -111,6 +112,9 @@ class Input extends React.Component {
                     {...otherProps} />
                 </div>
                 <span className={errorClasses}>{errors[name]}</span>
+                <div className="input-field__info">
+                  {info}
+                </div>
               </div>
             );
           }

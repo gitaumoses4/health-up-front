@@ -7,6 +7,7 @@ import Button from '../../../Button';
 
 const NormalUser = ({ valid }) => (
   <React.Fragment>
+    <Input name="idNumber" placeholder={T.id_number} />
     <Input name="name" placeholder={T.name} rules={['required']} />
     <Input name="email" rules={['required', 'email']} placeholder={T.email} />
     <Input name="password" type="password" placeholder={T.password} />

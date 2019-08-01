@@ -72,19 +72,43 @@ class HealthInformationForm extends Form {
             }
           </div>
           <div>
-            <Input name="familyHistory" type="checkbox-group" label={T.family_history} options={illnesses} />
-            <Input name="currentIllness" type="checkbox-group" label={T.current_illnesses} options={illnesses} />
-            <Input name="allergies" type="checkbox-group" label={T.are_you_allergic_to} options={allergies} />
-            {
-              allergiesValue && allergiesValue.others && (
-                <Input name="otherAllergies" type="textarea" />
-              )
-            }
+            <Input
+              name="familyHistory"
+              type="checkbox-group"
+              showInput={{
+                bloodDiseases: 'bloodDiseasesInfo',
+                respiratory: 'respiratoryInfo',
+                heartDiseases: 'heartDiseasesInfo',
+              }}
+              label={T.family_history}
+              options={illnesses} />
+            <Input
+              name="currentIllness"
+              showInput={{
+                bloodDiseases: 'bloodDiseasesInfo',
+                respiratory: 'respiratoryInfo',
+                heartDiseases: 'heartDiseasesInfo',
+              }}
+              type="checkbox-group"
+              label={T.current_illnesses}
+              options={illnesses} />
+            <Input
+              name="allergies"
+              showInput={{
+                food: 'foodInfo',
+                drugs: 'drugsInfo',
+                animals: 'animalsInfo',
+                plants: 'plantsInfo',
+                others: 'otherAllergies',
+              }}
+              type="checkbox-group"
+              label={T.are_you_allergic_to}
+              options={allergies} />
           </div>
         </div>
         <div className="button-group">
           <Button onClick={goBack} disabled={submitting}>{T.previous}</Button>
-          <Button onClick={goNext} disabled={submitting}>{T.next}</Button>
+          {/* <Button onClick={goNext} disabled={submitting}>{T.next}</Button> */}
         </div>
       </div>
     );

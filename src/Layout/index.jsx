@@ -38,12 +38,14 @@ class LayoutComponent extends Component {
 
   renderContent = () => {
     const { data: { user }, children } = this.props;
-    if (user.accountType === COMPANY) {
-      const { company } = user;
-      if (company.verified) {
-        return children;
+    if (user) {
+      if (user.accountType === COMPANY) {
+        const { company } = user;
+        if (company.verified) {
+          return children;
+        }
+        return <NotVerified />;
       }
-      return <NotVerified />;
     }
     return children;
   };
@@ -63,8 +65,8 @@ class LayoutComponent extends Component {
     const width = document.body.clientWidth;
     const { sidebarOpen } = this.state;
     document.body.style.overflow = sidebarOpen && width < 600 ? 'hidden' : '';
-    return user ? (
-      <div className={`layout-wrapper ${sidebarOpen ? 'sidebarOpen' : ''}`}>
+    return (
+      <div className={`layout-wrapper ${sidebarOpen ? 'sidebarOpen' : ''} ${user ? '' : 'noSidebar'}`}>
         <div className="navigation">
           <NavBar
             onHamburgerClick={width < 600 && this.onHamburgerClick}
@@ -72,12 +74,16 @@ class LayoutComponent extends Component {
         </div>
         <div className="layout-body">
           <div className="layout-wrapper__sidebar" ref={this.sidebar}>
-            <SideBar
-              type={user.accountType}
-              onHamburgerClick={this.onHamburgerClick}
-              match={match}
-              collapsed={width > 600 && sidebarOpen}
-              history={history} />
+            {
+              user && (
+                <SideBar
+                  type={user.accountType}
+                  onHamburgerClick={this.onHamburgerClick}
+                  match={match}
+                  collapsed={width > 600 && sidebarOpen}
+                  history={history} />
+              )
+            }
           </div>
           <div className="content">
             {
@@ -97,7 +103,7 @@ class LayoutComponent extends Component {
           </div>
         </div>
       </div>
-    ) : null;
+    );
   }
 }
 

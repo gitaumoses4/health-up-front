@@ -16,7 +16,7 @@ const NotFound = props => (
       <h2>{T.sorry}</h2>
       <img src={notFound} alt="" />
       <h2>{T.not_found}</h2>
-      <Link to="/dashboard">
+      <Link to="/login">
         <Button>
           {T.home}
         </Button>

@@ -17,8 +17,10 @@ class NavBar extends Component {
 
   componentDidMount() {
     const { readResource, user: { data: { user } } } = this.props;
-    readResource('notifications')();
-    handleNotification(user);
+    if (user) {
+      readResource('notifications')();
+      handleNotification(user);
+    }
   }
 
   DropDown = ({ user }) => (

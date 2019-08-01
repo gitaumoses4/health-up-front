@@ -42,12 +42,8 @@ const BaseLoginForm = (accountType) => {
       }
       return (
         <Input
-          name="email"
-          placeholder={T.email}
-          rules={['email']}
-          messages={{
-            email: T.valid_email,
-          }}
+          name="userId"
+          placeholder={T.email_or_id}
         />
       );
     };
@@ -60,6 +56,9 @@ const BaseLoginForm = (accountType) => {
           <Input
             name="password"
             type="password"
+            info={
+              <Link to="/forgot-password">{T.forgot_password}</Link>
+            }
             placeholder={T.password}
           />
           <Button type="submit" disabled={!valid}>
