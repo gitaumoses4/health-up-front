@@ -100,7 +100,7 @@ export default {
   add: ['Add', 'اضافة '],
   joined_on: ['Joined On', 'انضم في'],
   add_employee: ['Add Employee', 'إضافة موظف'],
-  employee_info: ['Employee Information', 'معلومات الموظف'],
+  employee_info: ['User Information', 'معلومات المستخدم'],
   companies: ['Companies', 'المنشأت'],
   ambulances: ['Ambulances', 'المسعفين'],
   verified: ['Verified', 'التحقق'],

@@ -11,6 +11,10 @@ class DropDownMenu extends Component {
 
   check = React.createRef();
 
+  trigger = React.createRef();
+
+  content = React.createRef();
+
 
   componentDidMount() {
     document.addEventListener('click', this.handleOutsideClick);
@@ -37,6 +41,14 @@ class DropDownMenu extends Component {
     });
   };
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { current: currentTrigger } = this.trigger;
+    const { current: currentContent } = this.content;
+
+
+    const before = this.dropdown.current.querySelector('.dropdown-content:before');
+  }
+
 
   handleOutsideClick = (e) => {
     const { target } = e;
@@ -59,11 +71,12 @@ class DropDownMenu extends Component {
         <span
           role="presentation"
           className="trigger"
+          ref={this.trigger}
           onClick={this.toggleDropdown}>
           {children[0]}
         </span>
         {open && <span ref={this.check} />}
-        <div className={`dropdown-content ${open ? 'open' : ''}`}>
+        <div className={`dropdown-content ${open ? 'open' : ''}`} ref={this.content}>
           {children[1]}
         </div>
       </div>

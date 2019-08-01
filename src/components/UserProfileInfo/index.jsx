@@ -8,14 +8,14 @@ import Tools from '../../utils/Tools';
 import './UserProfileInfo.scss';
 import { allergies, illnesses } from '../Forms/HealthInformationForm';
 
-const Options = ({ options, value, title }) => (
+const Options = ({ options, value = {}, title }) => (
   <InfoLabel title={title}>
     {
       Object.keys(options).map(option => (
         <InfoLabel
           key={Math.random()}
           title={options[option]}
-          value={(typeof value[option]) === 'string' ? value[option] : value[option] ? T.yes : T.no}
+          value={(typeof value[option]) === 'string' ? value[option] : value[option] ? value[`${option}Info`] : T.no}
           inline />
       ))
     }
@@ -74,7 +74,10 @@ class UserProfileInfo extends Component {
       <Options value={familyHistory} options={illnesses} title={T.family_history} />
       <Options value={currentIllness} options={illnesses} title={T.current_illnesses} />
       <Options
-        value={{ ...allergiesValue, others: allergiesValue.others ? otherAllergies : T.no }}
+        value={{
+          ...allergiesValue,
+          others: allergiesValue && allergiesValue.others ? otherAllergies : T.no, 
+        }}
         options={allergies}
         title={T.are_you_allergic_to} />
     </div>

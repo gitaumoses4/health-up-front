@@ -56,6 +56,7 @@
 
     .swipeable-tabs {
       position: relative;
+      overflow: hidden;
 
       .swipeable-tab {
         width: 100%;
@@ -86,7 +87,8 @@
     }
 
     .tab-content {
-      margin: 1em 0;
+      margin: 0;
+      padding: 0;
     }
   }
 }

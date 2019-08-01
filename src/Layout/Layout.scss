@@ -29,7 +29,7 @@
   }
 }
 
-.layout-wrapper:not(.noSidebar) {
+.layout-wrapper {
   display: grid;
   grid-template-rows: auto 1fr;
 
@@ -103,7 +103,7 @@
 }
 
 @include mobile {
-  .layout-wrapper:not(.noSidebar) {
+  .layout-wrapper {
 
     .navigation, .navigation:lang(ar) {
       margin: 0;
