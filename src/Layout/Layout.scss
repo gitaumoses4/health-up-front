@@ -6,7 +6,12 @@
 
   .navigation {
     margin: 0;
+
+    &:lang(ar){
+      margin: 0;
+    }
   }
+
   .layout-body {
     .content {
       max-width: 1300px;
