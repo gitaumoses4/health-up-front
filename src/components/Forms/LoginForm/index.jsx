@@ -57,7 +57,7 @@ const BaseLoginForm = (accountType) => {
             name="password"
             type="password"
             info={
-              <Link to="/forgot-password">{T.forgot_password}</Link>
+              <Link to="/forgotPassword">{T.forgot_password}</Link>
             }
             placeholder={T.password}
           />

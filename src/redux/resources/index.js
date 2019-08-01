@@ -53,6 +53,12 @@ const resources = {
     resolveUpdate: (item, newItem) => item.id === newItem.notification.id,
     resolveSingle: data => data.notification,
   },
+  forgotPassword: {
+    endpoint: '/users/forgotPassword',
+  },
+  resetPassword: {
+    endpoint: '/users/resetPassword',
+  },
 };
 
 export default resources;

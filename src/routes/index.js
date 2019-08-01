@@ -10,6 +10,7 @@ import Home from '../views/Home';
 import Login from '../views/Login';
 import NotFound from '../components/NotFound';
 import ForgotPassword from '../views/ForgotPassword';
+import ResetPassword from '../views/ResetPassword';
 
 const hasPermissions = (history, allowedRoles, user) => {
   if (user) {
@@ -52,7 +53,8 @@ const App = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path="/forgot-password" exact component={ForgotPassword} />
+      <Route path="/forgotPassword" exact component={ForgotPassword} />
+      <Route path="/resetPassword/:token" exact component={ResetPassword} />
       <AuthenticationWrapper>
         <Switch>
           {

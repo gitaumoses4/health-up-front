@@ -8,7 +8,7 @@ import Input from '../../../utils/Forms/Input';
 import Button from '../../Button';
 import WithLoading from '../../WithLoading';
 
-class UpdatePasswordForm extends Form {
+export class UpdatePasswordForm extends Form {
   getProperties() {
     return {
       rules: {
@@ -20,6 +20,9 @@ class UpdatePasswordForm extends Form {
       onSuccess: ({ message }) => {
         toast.success(message);
         this.setState({ values: {}, valid: false });
+      },
+      onFailure: ({ message }) => {
+        toast.error(message);
       },
     };
   }
@@ -51,4 +54,4 @@ UpdatePasswordForm.propTypes = {
 
 };
 
-export default connectForm(WithLoading(UpdatePasswordForm))('updatePassword');
+export default (resource = 'updatePassword') => connectForm(WithLoading(UpdatePasswordForm, 'submitting'))(resource);

@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import Form from '../../../utils/Forms';
+import toast from 'toastr';
+import Form, { connectForm } from '../../../utils/Forms';
 import T from '../../../utils/Translation';
 import Input from '../../../utils/Forms/Input';
 import Button from '../../Button';
+import WithLoading from '../../WithLoading';
 
 class ForgotPasswordForm extends Form {
+  getProperties() {
+    return {
+      onSuccess: () => {
+        this.setState({ resetSuccess: true });
+      },
+    };
+  }
+
   renderForm() {
-    const { valid, resetSuccess = true } = this.state;
+    const { valid, resetSuccess } = this.state;
     return (
       <div className="forgot-password-form">
         {
@@ -41,4 +49,6 @@ ForgotPasswordForm.propTypes = {};
 
 ForgotPasswordForm.defaultProps = {};
 
-export default ForgotPasswordForm;
+export default connectForm(WithLoading(ForgotPasswordForm, 'submitting'))(
+  'forgotPassword',
+);

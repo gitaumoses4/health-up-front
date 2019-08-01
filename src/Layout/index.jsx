@@ -91,7 +91,13 @@ class LayoutComponent extends Component {
                 <div className="content__header">
                   <span
                     role="presentation"
-                    onClick={history.goBack}
+                    onClick={() => {
+                      if (history.length <= 1) {
+                        history.push('/login');
+                      } else {
+                        history.goBack();
+                      }
+                    }}
                   >
                     <i className="fas fa-arrow-left" />
                   </span>
