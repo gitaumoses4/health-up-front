@@ -23,6 +23,8 @@ export const allergies = {
   others: T.others_specify,
 };
 
+export const bloodGroups = ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'].sort();
+
 class HealthInformationForm extends Form {
   getProperties() {
     return {
@@ -66,12 +68,11 @@ class HealthInformationForm extends Form {
               type="select"
               label={T.blood_type}
               placeholder={T.blood_type}
-              options={[
-                { value: 'A', name: 'A' },
-                { value: 'B', name: 'B' },
-                { value: 'O', name: 'O' },
-                { value: 'AB', name: 'AB' },
-              ]}
+              options={
+                bloodGroups.map(group => ({
+                  value: group, name: group,
+                }))
+              }
             />
             <Input name="smoker" type="radio-group" label={T.are_you_a_smoker} options={{ yes: T.yes, no: T.no }} />
             <Input name="drugsUsed" type="textarea" label={T.drugs_used} />
