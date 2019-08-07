@@ -61,7 +61,18 @@ class HealthInformationForm extends Form {
       <div className="health-information-form">
         <div className="form">
           <div>
-            <Input name="bloodType" label={T.blood_type} placeholder={T.blood_type} />
+            <Input
+              name="bloodType"
+              type="select"
+              label={T.blood_type}
+              placeholder={T.blood_type}
+              options={[
+                { value: 'A', name: 'A' },
+                { value: 'B', name: 'B' },
+                { value: 'O', name: 'O' },
+                { value: 'AB', name: 'AB' },
+              ]}
+            />
             <Input name="smoker" type="radio-group" label={T.are_you_a_smoker} options={{ yes: T.yes, no: T.no }} />
             <Input name="drugsUsed" type="textarea" label={T.drugs_used} />
             <Input name="operations" type="radio-group" label={T.have_you_had_operations} options={{ yes: T.yes, no: T.no }} />

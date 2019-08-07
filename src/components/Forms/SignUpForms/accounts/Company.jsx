@@ -20,7 +20,7 @@ const Company = ({ valid, values: { noOfEmployees = 0 } }) => (
     <Input name="noOfEmployees" type="number" min="1" placeholder={T.number_of_employees} />
     <Input name="responsibleName" placeholder={T.responsible_name} />
     <div className="cost">
-      {`${T.total_cost} - ${noOfEmployees * 25} ${T.sar}`}
+      {`${T.total_cost} - ${noOfEmployees * 250} ${T.sar}`}
     </div>
     <Button type="submit" disabled={!valid}>{T.sign_up}</Button>
   </React.Fragment>

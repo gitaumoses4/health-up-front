@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './TabLayout.scss';
 
 
@@ -51,7 +52,7 @@ class TabLayout extends Component {
 
   updateTab = (props) => {
     const { currentTab } = this.state;
-    if (currentTab !== props.currentTab) {
+    if (currentTab !== props.currentTab && props.currentTab >= 0) {
       this.setState({ currentTab: +props.currentTab });
     }
   };
@@ -65,10 +66,12 @@ class TabLayout extends Component {
     if (element) {
       const { currentHeight } = this.state;
       const currentTab = element.querySelector('.swipeable-tab.current .swipeable-tab__content');
-      const height = currentTab.clientHeight;
+      if (currentTab) {
+        const height = currentTab.clientHeight;
 
-      if (height !== currentHeight || currentHeight === 2000000) {
-        this.setState({ currentHeight: height });
+        if (height !== currentHeight || currentHeight === 2000000) {
+          this.setState({ currentHeight: height });
+        }
       }
     }
   };
@@ -88,7 +91,8 @@ class TabLayout extends Component {
   };
 
   render() {
-    const { tabs, children } = this.props;
+    const { tabs, children: tabContent } = this.props;
+    const children = tabContent.constructor === Array ? tabContent : [tabContent];
     const { currentTab, currentHeight } = this.state;
     return (
       <div className="tab-layout" ref={this.tabLayout}>
@@ -125,7 +129,11 @@ class TabLayout extends Component {
 }
 
 TabLayout.propTypes = {
+  onTabChange: PropTypes.func,
+};
 
+TabLayout.defaultProps = {
+  onTabChange: () => {},
 };
 
 export default TabLayout;
