@@ -1,4 +1,4 @@
-import profile from '../../assets/images/profile.svg';
+import profile from '../../assets/images/profile_white.svg';
 import T from '../../utils/Translation';
 import health from '../../assets/images/health.svg';
 import employees from '../../assets/images/employees.svg';
