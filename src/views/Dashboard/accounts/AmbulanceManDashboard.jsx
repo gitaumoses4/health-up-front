@@ -17,6 +17,10 @@ class AmbulanceManDashboard extends Component {
     this.debouncedSearch = _.debounce(this.searchUser, 1000);
   }
 
+  componentDidMount() {
+    this.debouncedSearch('');
+  }
+
   searchUser = () => {
     const { readResource } = this.props;
     const { search } = this.state;
